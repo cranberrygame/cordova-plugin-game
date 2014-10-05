@@ -24,9 +24,9 @@ itunesconnect-Manage Your Apps-[specific app]-Manage Game Center-Enable for Sing
 
 ## How to install (crosswalk) ##
 
-![ScreenShot](example/crsswalk_APP_ID.png)
+![ScreenShot](https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/crsswalk_APP_ID.png)
 
-<a href="example/intelxdk.config.additions.xml">intelxdk.config.additions.xml</a>
+<a href="https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/intelxdk.config.additions.xml">intelxdk.config.additions.xml</a>
 
 <pre>
 [crosswalk for android, android]
