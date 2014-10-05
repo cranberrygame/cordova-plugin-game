@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.cranberrygame.phonegap.plugin.game"
+    version="1.0.50">
+	
+    <name>Phonegap game plugin</name>
+    <description>Phonegap game plugin</description>
+    <author>Sang Ki Kwon (Cranberrygame)</author>	
+    <license>MIT</license>
+    <keywords>phonegap, plugin, game</keywords>
+    <repo>https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game</repo>
+    <issue>https://github.com/floatinghotpot/com.cranberrygame.phonegap.plugin.game/issues</issue>	
+	<engines>
+	    <engine name="cordova" version=">=3.0.0" />
+	</engines>
+ 	
+    <js-module src="www/game.js">
+        <clobbers target="window.game" />
+    </js-module>
+	
+    <!-- android -->
+    <platform name="android">
+		<preference name="APP_ID" />	
+<!--
+		<dependency id="com.google.playservices" url="https://github.com/MobileChromeApps/google-play-services" commit="5d784fb083027fd2c1ef1545d8a2b0d595e4ec69" />
+-->		
+		<dependency id="com.google.playservices" version="17.0.0" />		
+		<dependency id="android.support.v4" version="1.0.0" />
+
+	    <config-file target="res/xml/config.xml" parent="/*">
+			<feature name="Game" >
+				<param name="android-package" value="com.cranberrygame.phonegap.plugin.Game"/>
+			</feature>
+        </config-file>
+		
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/app_id" />
+		</config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        </config-file>		
+	
+		<source-file src="src/android/ids.xml" target-dir="res/values" />
+		<config-file target="res/values/ids.xml" parent="/*">
+			<string name="app_id">$APP_ID</string>
+		</config-file>
+		
+		<!-- cranberrygame start: google-play-services.jar -->
+<!--		
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+		</config-file>
+-->		
+		<!-- cranberrygame end -->
+		
+		<source-file src="src/android/GameHelper.java" target-dir="src/com/google/example/games/basegameutils"/>		
+		<source-file src="src/android/GameHelperUtils.java" target-dir="src/com/google/example/games/basegameutils"/>		
+		<source-file src="src/android/Game.java" target-dir="src/com/cranberrygame/phonegap/plugin"/>
+		<!-- cranberrygame start: google-play-services.jar -->
+<!--		
+		<source-file src="src/android/google-play-services.jar" target-dir="libs" />
+		<source-file src="src/android/version.xml" target-dir="res/values" />
+-->		
+		<!-- cranberrygame end -->		
+    </platform>
+	
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+		    <feature name="Game">
+		        <param name="ios-package" value="Game" />
+		        <param name="onload" value="true" />
+		    </feature>
+        </config-file>
+               
+        <header-file src="src/ios/Game.h" compiler-flags="-fno-objc-arc" />
+        <source-file src="src/ios/Game.m" compiler-flags="-fno-objc-arc" />
+        
+        <framework src="GameKit.framework" />                	
+    </platform>	
+</plugin>

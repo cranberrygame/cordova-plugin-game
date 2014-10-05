@@ -1,0 +1,52 @@
+<html>
+<head>
+	<script type="text/javascript" src="cordova.js"></script>
+</head>
+<body>
+
+<script>
+
+document.addEventListener("deviceready", function(){
+	window.game.setUp();
+
+	//callback
+    window.game.onLoginSucceeded = function() {
+        alert('onLoginSucceeded');
+    };	
+    window.game.onLoginFailed = function() {
+        alert('onLoginFailed');
+    };
+    window.game.onSubmitScoreSucceeded = function() {
+        alert('onSubmitScoreSucceeded');
+    };	
+    window.game.onSubmitScoreFailed = function() {
+        alert('onSubmitScoreFailed');
+    };	
+    window.game.onSubmitAchievementSucceeded = function() {
+        alert('onSubmitAchievementSucceeded');
+    };	
+    window.game.onSubmitAchievementFailed = function() {
+        alert('onSubmitAchievementFailed');
+    };
+}, false);
+
+//
+var leaderboardId = "REPLACE_THIS_WITH_YOUR_LEADERBOARD_ID";
+var score = 8;
+//
+var achievementId = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID";
+var percent = 45;
+
+</script>
+
+<p><button onclick="window.game.login();">login</button></p>
+<p><button onclick="window.game.logout();">logout</button></p>
+<br>
+<p><button onclick="window.game.submitScore(leaderboardId, score);">submitScore</button></p>
+<p><button onclick="window.game.showLeaderboard(leaderboardId);">showLeaderboard</button></p>
+<br>
+<p><button onclick="window.game.submitAchievement(achievementId, percent);">submitAchievement</button></p>
+<p><button onclick="window.game.showAchievements();">showAchievements</button></p>
+
+</body>
+</html>
