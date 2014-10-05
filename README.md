@@ -26,7 +26,6 @@ itunesconnect-Manage Your Apps-[specific app]-Manage Game Center-Enable for Sing
 
 ![ScreenShot](example/crsswalk_APP_ID.png)
 
-<pre>
 <xmp>
 <!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
 <intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game" intelxdk:id="com.cranberrygame.phonegap.plugin.game">
@@ -34,6 +33,7 @@ itunesconnect-Manage Your Apps-[specific app]-Manage Game Center-Enable for Sing
 </intelxdk:plugin>
 </xmp>
 
+<pre>
 [crosswalk for android, android]
 
 //add leaderboards and achievements
