@@ -5,10 +5,10 @@
     version="1.0.50">
 	
     <name>Phonegap game plugin</name>
-    <description>Phonegap game plugin</description>
+    <description>show leaderboard and achievements (google play game and game center, SDK)</description>
     <author>Sang Ki Kwon (Cranberrygame)</author>	
     <license>MIT</license>
-    <keywords>phonegap, plugin, game</keywords>
+    <keywords>phonegap, plugin, game, google play game, game center</keywords>
     <repo>https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game</repo>
     <issue>https://github.com/floatinghotpot/com.cranberrygame.phonegap.plugin.game/issues</issue>	
 	<engines>
