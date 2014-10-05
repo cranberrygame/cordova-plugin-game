@@ -24,13 +24,15 @@ itunesconnect-Manage Your Apps-[specific app]-Manage Game Center-Enable for Sing
 
 ## How to install (crosswalk) ##
 
+![ScreenShot](example/crsswalk_APP_ID.png)
+
 <pre>
+<xmp>
 <!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
 <intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game" intelxdk:id="com.cranberrygame.phonegap.plugin.game">
 	<intelxdk:param intelxdk:name="APP_ID" intelxdk:value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
 </intelxdk:plugin>
-
-![ScreenShot](example/crsswalk_APP_ID.png)
+</xmp>
 
 [crosswalk for android, android]
 
@@ -125,7 +127,7 @@ just run
 
 ## Download construct2 plugin ##
 
-<a href="https://www.scirra.com/forum/viewtopic.php?t=109586">Scirra</a>
+<a href="https://www.scirra.com/forum/viewtopic.php?t=109586">Phonegap related plugins (+Crosswalk)</a>
 
 ## Support ##
 
