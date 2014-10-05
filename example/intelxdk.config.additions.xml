@@ -1,0 +1,3 @@
+<intelxdk:plugin intelxdk:name="googleplay" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.googleplay" intelxdk:id="com.cranberrygame.phonegap.plugin.googleplay">
+<intelxdk:param intelxdk:name="APP_ID" intelxdk:value="REPLACE_THIS_WITH_YOUR_APP_ID" />
+</intelxdk:plugin>
