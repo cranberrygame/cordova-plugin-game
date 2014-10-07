@@ -36,27 +36,39 @@
     
     //[self.commandDelegate runInBackground:^{//cranberrygame
         [[GKLocalPlayer localPlayer] setAuthenticateHandler: ^(UIViewController *viewcontroller, NSError *error) {
-            CDVPluginResult *pluginResult;
-            
+          
             //already logined
             if ([GKLocalPlayer localPlayer].authenticated) {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-                [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+				CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+				//[pr setKeepCallbackAsBool:YES];
+				[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+				//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+				//[pr setKeepCallbackAsBool:YES];
+				//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
             }
-            else if (viewcontroller) {
+            else if (viewcontroller != nil) {
                 CDVViewController *vc = (CDVViewController *)[super viewController];
                 [vc presentViewController:viewcontroller animated:YES completion:^{
                 }];
             }
             else {
                 // Called the second time with result
-                if (error == nil) {
-                    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+                if (error != nil) {					
+					//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+					//[pr setKeepCallbackAsBool:YES];
+					//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+					CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
+					//[pr setKeepCallbackAsBool:YES];
+					[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
                 }
                 else {
-                    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
+					CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+					//[pr setKeepCallbackAsBool:YES];
+					[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+					//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+					//[pr setKeepCallbackAsBool:YES];
+					//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];	
                 }
-                [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
             }
         }];
     //}];//cranberrygame
@@ -75,22 +87,29 @@
 		NSString *leaderboardId = (NSString *) [command.arguments objectAtIndex:0];
         int64_t score = [[command.arguments objectAtIndex:1] integerValue];
 		
-		__block CDVPluginResult* pluginResult = nil;
-		
 		GKScore *s = [[GKScore alloc] initWithLeaderboardIdentifier: leaderboardId];
         s.value = score;
         s.context = 0;
 			
 		[GKScore reportScores:@[s] withCompletionHandler: ^(NSError *error) {
-            if (error)
-            {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
+            if (error != nil)
+            {				
+				//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+				//[pr setKeepCallbackAsBool:YES];
+				//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+				CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
+				//[pr setKeepCallbackAsBool:YES];
+				[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
             }
             else
             {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-            }
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+				CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+				//[pr setKeepCallbackAsBool:YES];
+				[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+				//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+				//[pr setKeepCallbackAsBool:YES];
+				//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+			}
 		}];
     //}];//cranberrygame
 }
@@ -113,8 +132,6 @@
 		NSString *achievementId = (NSString *) [command.arguments objectAtIndex:0];
 		float percentFloat = [[command.arguments objectAtIndex:1] floatValue];
 		
-		__block CDVPluginResult* pluginResult = nil;
-		
 		GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier: achievementId];
 		if (achievement)
 		{
@@ -125,19 +142,23 @@
 			{
 				 if (error != nil)
 				 {
-					 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
-				 } else {
-/*					 
-					 // Achievement notification banners are broken on IOS7 so we do it manually here:
-					 if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-						 
-						 [GKNotificationBanner showBannerWithTitle:@"Achievement" message:@"Completed!" completionHandler:^{}];
-					 }
-*/					 
-					 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+					//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+					//[pr setKeepCallbackAsBool:YES];
+					//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+					CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
+					//[pr setKeepCallbackAsBool:YES];
+					[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+				} 
+				 else {
+					CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+					//[pr setKeepCallbackAsBool:YES];
+					[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+					//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+					//[pr setKeepCallbackAsBool:YES];
+					//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+					
+
 				 }
-				 [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-				 
 			}];
 		}
     //}];//cranberrygame

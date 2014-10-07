@@ -82,6 +82,7 @@ document.addEventListener("deviceready", function(){
 //
 window.game.login();
 window.game.logout();
+alert(window.game.isLoggedIn());
 //
 var leaderboardId = "REPLACE_THIS_WITH_YOUR_LEADERBOARD_ID";
 var score = 5;

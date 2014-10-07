@@ -1,12 +1,13 @@
 
 module.exports = {
-   
+	_loggedin: false,
 	setUp: function(successCallback, errorCallback) {
 		cordova.exec(successCallback, errorCallback, "Game", "setUp", []);
     },
 	login: function() {
 		var self = this;
 		cordova.exec(function (result) {
+			self._loggedin = true;
 			self.onLoginSucceeded();
 		}, 
 		function (error) {
@@ -14,8 +15,16 @@ module.exports = {
 		}, "Game", "login", []);
     },
 	logout: function(successCallback, errorCallback) {
-		cordova.exec(successCallback, errorCallback, "Game", "logout", []);
+		var self = this;
+		cordova.exec(function (result) {
+			self._loggedin = false;
+		}, 
+		function (error) {
+		}, "Game", "logout", []);
     },
+	isLoggedIn: function() {
+		return this._loggedin;
+	},
 	submitScore: function(leaderboardId, score) {
 		var self = this;
 		cordova.exec(function (result) {
