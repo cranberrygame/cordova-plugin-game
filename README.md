@@ -24,7 +24,7 @@ itunesconnect-Manage Your Apps-[specific app]-Manage Game Center-Enable for Sing
 
 ## How to install (crosswalk) ##
 
-![ScreenShot](https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/crsswalk_APP_ID.png)
+![ScreenShot](https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/crosswalk_APP_ID.png)
 
 <a href="https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/intelxdk.config.additions.xml">intelxdk.config.additions.xml</a>
 
@@ -55,6 +55,14 @@ itunesconnect-Manage Your Apps-[specific app]-Manage Game Center-Enable for Sing
 ## How to Use ##
 
 <pre>
+//
+var leaderboardId = "REPLACE_THIS_WITH_YOUR_LEADERBOARD_ID";
+var achievementId1 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID1";
+var achievementId2 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID2";
+var achievementId3 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID3";
+var achievementId4 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID4";
+
+//
 document.addEventListener("deviceready", function(){
 	window.game.setUp();
 
@@ -83,15 +91,16 @@ document.addEventListener("deviceready", function(){
 window.game.login();
 window.game.logout();
 alert(window.game.isLoggedIn());
+
 //
-var leaderboardId = "REPLACE_THIS_WITH_YOUR_LEADERBOARD_ID";
-var score = 5;
-window.game.submitScore(leaderboardId, score);
+window.game.submitScore(leaderboardId, 5);//leaderboardId, score
 window.game.showLeaderboard(leaderboardId);
+
 //
-var achievementId = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID";
-var percent = 30;
-window.game.submitAchievement(achievementId, percent);
+window.game.submitAchievement(achievementId1, 100);//achievementId, percent
+window.game.submitAchievement(achievementId2, 100);//achievementId, percent
+window.game.submitAchievement(achievementId3, 100);//achievementId, percent
+window.game.submitAchievement(achievementId4, 100);//achievementId, percent
 window.game.showAchievements();
 </pre>
 

@@ -5,7 +5,14 @@
 <body>
 
 <script>
+//
+var leaderboardId = "REPLACE_THIS_WITH_YOUR_LEADERBOARD_ID";
+var achievementId1 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID1";
+var achievementId2 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID2";
+var achievementId3 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID3";
+var achievementId4 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID4";
 
+//
 document.addEventListener("deviceready", function(){
 	window.game.setUp();
 
@@ -30,23 +37,19 @@ document.addEventListener("deviceready", function(){
     };
 }, false);
 
-//
-var leaderboardId = "REPLACE_THIS_WITH_YOUR_LEADERBOARD_ID";
-var score = 8;
-//
-var achievementId = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID";
-var percent = 45;
-
 </script>
 
 <p><button onclick="window.game.login();">login</button></p>
 <p><button onclick="window.game.logout();">logout</button></p>
 <p><button onclick="alert(window.game.isLoggedIn());">isLoggedIn</button></p>
 <br>
-<p><button onclick="window.game.submitScore(leaderboardId, score);">submitScore</button></p>
+<p><button onclick="window.game.submitScore(leaderboardId, 5);//leaderboardId, score">submitScore</button></p>
 <p><button onclick="window.game.showLeaderboard(leaderboardId);">showLeaderboard</button></p>
 <br>
-<p><button onclick="window.game.submitAchievement(achievementId, percent);">submitAchievement</button></p>
+<p><button onclick="window.game.submitAchievement(achievementId1, 100);//achievementId, percent">submitAchievement1</button></p>
+<p><button onclick="window.game.submitAchievement(achievementId2, 100);//achievementId, percent">submitAchievement2</button></p>
+<p><button onclick="window.game.submitAchievement(achievementId3, 100);//achievementId, percent">submitAchievement3</button></p>
+<p><button onclick="window.game.submitAchievement(achievementId4, 100);//achievementId, percent">submitAchievement4</button></p>
 <p><button onclick="window.game.showAchievements();">showAchievements</button></p>
 
 </body>
