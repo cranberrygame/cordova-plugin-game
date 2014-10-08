@@ -107,6 +107,7 @@ window.game.showAchievements();
 ## Example ##
 
 <a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/index.html">example/index.html</a>
+<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/crosswalk/mygame">crosswalk project example</a>
 
 ## How to test ##
 
