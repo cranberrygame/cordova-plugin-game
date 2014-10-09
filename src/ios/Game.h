@@ -26,9 +26,12 @@
 - (void)setUp:(CDVInvokedUrlCommand *)command;
 - (void)login:(CDVInvokedUrlCommand *)command;
 - (void)logout:(CDVInvokedUrlCommand *)command;
+- (void)getPlayerImage:(CDVInvokedUrlCommand *)command;
 - (void)submitScore:(CDVInvokedUrlCommand *)command;
 - (void)showLeaderboard:(CDVInvokedUrlCommand *)command;
+- (void)getPlayerScore:(CDVInvokedUrlCommand *)command;
 - (void)submitAchievement:(CDVInvokedUrlCommand *)command;
 - (void)showAchievements:(CDVInvokedUrlCommand *)command;
+- (void)resetAchievements:(CDVInvokedUrlCommand *)command;
 
 @end

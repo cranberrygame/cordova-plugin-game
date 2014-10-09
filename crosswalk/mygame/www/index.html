@@ -17,31 +17,55 @@ document.addEventListener("deviceready", function(){
 	window.game.setUp();
 
 	//callback
-    window.game.onLoginSucceeded = function() {
-        alert('onLoginSucceeded');
+	window.game.onLoginSucceeded = function(result) {
+		var playerDetail = result;
+        alert('onLoginSucceeded: ' + playerDetail['playerId'] + ' ' + playerDetail['playerDisplayName']);
     };	
     window.game.onLoginFailed = function() {
         alert('onLoginFailed');
     };
+    window.game.onGetPlayerImageSucceeded = function(result) {
+		var playerImageUrl = result;
+        alert('onGetPlayerImageSucceeded: ' + playerImageUrl);
+    };
+    window.game.onGetPlayerImageFailed = function() {
+        alert('onGetPlayerImageFailed');
+    };	
+    window.game.onGetPlayerScoreSucceeded = function(result) {
+		var playerScore = result;
+        alert('onGetPlayerScoreSucceeded: ' + playerScore);
+    };
+    window.game.onGetPlayerScoreFailed = function() {
+        alert('onGetPlayerScoreFailed');
+    };
+	//	
     window.game.onSubmitScoreSucceeded = function() {
         alert('onSubmitScoreSucceeded');
     };	
     window.game.onSubmitScoreFailed = function() {
         alert('onSubmitScoreFailed');
     };	
+	//	
     window.game.onSubmitAchievementSucceeded = function() {
         alert('onSubmitAchievementSucceeded');
     };	
     window.game.onSubmitAchievementFailed = function() {
         alert('onSubmitAchievementFailed');
     };
+    window.game.onResetAchievementsSucceeded = function() {
+        alert('onResetAchievementsSucceeded');
+    };	
+    window.game.onResetAchievementsFailed = function() {
+        alert('onResetAchievementsFailed');
+    };
 }, false);
-
 </script>
 
 <p><button onclick="window.game.login();">login</button></p>
 <p><button onclick="window.game.logout();">logout</button></p>
 <p><button onclick="alert(window.game.isLoggedIn());">isLoggedIn</button></p>
+<p><button onclick="window.game.getPlayerImage();">getPlayerImage</button></p>
+<p><button onclick="window.game.getPlayerScore(leaderboardId);">getPlayerScore</button></p>
 <br>
 <p><button onclick="window.game.submitScore(leaderboardId, 5);//leaderboardId, score">submitScore</button></p>
 <p><button onclick="window.game.showLeaderboard(leaderboardId);">showLeaderboard</button></p>
@@ -51,6 +75,7 @@ document.addEventListener("deviceready", function(){
 <p><button onclick="window.game.submitAchievement(achievementId3, 100);//achievementId, percent">submitAchievement3</button></p>
 <p><button onclick="window.game.submitAchievement(achievementId4, 100);//achievementId, percent">submitAchievement4</button></p>
 <p><button onclick="window.game.showAchievements();">showAchievements</button></p>
+<p><button onclick="window.game.resetAchievements();">resetAchievements</button></p>
 
 </body>
 </html>

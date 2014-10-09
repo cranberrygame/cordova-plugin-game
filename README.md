@@ -67,23 +67,46 @@ document.addEventListener("deviceready", function(){
 	window.game.setUp();
 
 	//callback
-    window.game.onLoginSucceeded = function() {
-        alert('onLoginSucceeded');
+	window.game.onLoginSucceeded = function(result) {
+		var playerDetail = result;
+        alert('onLoginSucceeded: ' + playerDetail['playerId'] + ' ' + playerDetail['playerDisplayName']);
     };	
     window.game.onLoginFailed = function() {
         alert('onLoginFailed');
     };
+    window.game.onGetPlayerImageSucceeded = function(result) {
+		var playerImageUrl = result;
+        alert('onGetPlayerImageSucceeded: ' + playerImageUrl);
+    };
+    window.game.onGetPlayerImageFailed = function() {
+        alert('onGetPlayerImageFailed');
+    };	
+    window.game.onGetPlayerScoreSucceeded = function(result) {
+		var playerScore = result;
+        alert('onGetPlayerScoreSucceeded: ' + playerScore);
+    };
+    window.game.onGetPlayerScoreFailed = function() {
+        alert('onGetPlayerScoreFailed');
+    };
+	//	
     window.game.onSubmitScoreSucceeded = function() {
         alert('onSubmitScoreSucceeded');
     };	
     window.game.onSubmitScoreFailed = function() {
         alert('onSubmitScoreFailed');
     };	
+	//	
     window.game.onSubmitAchievementSucceeded = function() {
         alert('onSubmitAchievementSucceeded');
     };	
     window.game.onSubmitAchievementFailed = function() {
         alert('onSubmitAchievementFailed');
+    };
+    window.game.onResetAchievementsSucceeded = function() {
+        alert('onResetAchievementsSucceeded');
+    };	
+    window.game.onResetAchievementsFailed = function() {
+        alert('onResetAchievementsFailed');
     };
 }, false);
 
@@ -91,6 +114,8 @@ document.addEventListener("deviceready", function(){
 window.game.login();
 window.game.logout();
 alert(window.game.isLoggedIn());
+window.game.getPlayerImage();
+window.game.getPlayerScore(leaderboardId);
 
 //
 window.game.submitScore(leaderboardId, 5);//leaderboardId, score
@@ -102,6 +127,7 @@ window.game.submitAchievement(achievementId2, 100);//achievementId, percent
 window.game.submitAchievement(achievementId3, 100);//achievementId, percent
 window.game.submitAchievement(achievementId4, 100);//achievementId, percent
 window.game.showAchievements();
+window.game.resetAchievements();//only supported on ios
 </pre>
 
 ## Example ##

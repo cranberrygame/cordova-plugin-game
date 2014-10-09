@@ -8,6 +8,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.JSONException;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaWebView;
@@ -28,6 +29,10 @@ import com.google.android.gms.games.achievement.Achievements;
 import com.google.android.gms.games.leaderboard.Leaderboards;
 import com.google.android.gms.common.api.*;
 import com.google.android.gms.games.GamesStatusCodes;
+import com.google.android.gms.games.leaderboard.LeaderboardScore;
+import com.google.android.gms.games.Player;
+import android.net.Uri;
+import com.google.android.gms.games.leaderboard.LeaderboardVariant;
 
 //Util
 import android.app.AlertDialog;
@@ -51,9 +56,11 @@ class Util {
 }
 
 public class Game extends CordovaPlugin implements GameHelper.GameHelperListener{
-	private String LOG_TAG = "GooglePlay";
+	private String LOG_TAG = "Game";
 	private GameHelper mHelper;
 	private CallbackContext loginCC;
+	private CallbackContext getPlayerImageCC;
+	private CallbackContext getPlayerScoreCC;
 	private CallbackContext submitScoreCC;
 	private CallbackContext submitAchievementCC;		
 		
@@ -107,6 +114,8 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 			//Activity activity=cordova.getActivity();
 			//webView
 			//				
+
+			loginCC = callbackContext;
 			
 			final CallbackContext delayedCC = callbackContext;
 			cordova.getActivity().runOnUiThread(new Runnable(){
@@ -126,8 +135,6 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 					}
 				}
 			});
-			
-			loginCC = callbackContext;
 			
 			return true;
 		}
@@ -162,7 +169,34 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 			});
 			
 			return true;
-		}		
+		}
+		else if (action.equals("getPlayerImage")) {
+			//Activity activity=cordova.getActivity();
+			//webView
+			//				
+
+			getPlayerImageCC = callbackContext;			
+			
+			final CallbackContext delayedCC = callbackContext;
+			cordova.getActivity().runOnUiThread(new Runnable(){
+				@Override
+				public void run() {
+					if (getGameHelper().isSignedIn()) {				
+						_getPlayerImage();
+					}
+					else {						
+						//PluginResult pr = new PluginResult(PluginResult.Status.OK);
+						//pr.setKeepCallback(true);
+						//delayedCC.sendPluginResult(pr);
+						PluginResult pr = new PluginResult(PluginResult.Status.ERROR, "Not logged in");
+						//pr.setKeepCallback(true);
+						delayedCC.sendPluginResult(pr);						
+					}
+				}
+			});
+			
+			return true;
+		}
 		else if (action.equals("submitScore")) {
 			//Activity activity=cordova.getActivity();
 			//webView
@@ -171,6 +205,8 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 			Log.d(LOG_TAG, String.format("%s", leaderboardId));							
 			final int score = args.getInt(1);				
 			Log.d(LOG_TAG, String.format("%d", score));				
+
+			submitScoreCC = callbackContext;
 			
 			final CallbackContext delayedCC = callbackContext;
 			cordova.getActivity().runOnUiThread(new Runnable(){
@@ -189,8 +225,6 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 					}
 				}
 			});	
-			
-			submitScoreCC = callbackContext;
 			
 			return true;
 		}		
@@ -227,7 +261,36 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 			});	
 			
 			return true;
-		}		
+		}
+		else if (action.equals("getPlayerScore")) {
+			//Activity activity=cordova.getActivity();
+			//webView
+			//				
+			final String leaderboardId = args.getString(0);				
+			Log.d(LOG_TAG, String.format("%s", leaderboardId));	
+			
+			getPlayerScoreCC = callbackContext;			
+			
+			final CallbackContext delayedCC = callbackContext;
+			cordova.getActivity().runOnUiThread(new Runnable(){
+				@Override
+				public void run() {
+					if (getGameHelper().isSignedIn()) {				
+						_getPlayerScore(leaderboardId);
+					}
+					else {						
+						//PluginResult pr = new PluginResult(PluginResult.Status.OK);
+						//pr.setKeepCallback(true);
+						//delayedCC.sendPluginResult(pr);
+						PluginResult pr = new PluginResult(PluginResult.Status.ERROR, "Not logged in");
+						//pr.setKeepCallback(true);
+						delayedCC.sendPluginResult(pr);						
+					}
+				}
+			});
+			
+			return true;
+		}
 		else if (action.equals("submitAchievement")) {
 			//Activity activity=cordova.getActivity();
 			//webView
@@ -236,6 +299,8 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 			Log.d(LOG_TAG, String.format("%s", achievementId));
 			final int percent = args.getInt(1);				
 			Log.d(LOG_TAG, String.format("%d", percent));
+
+			submitAchievementCC = callbackContext;
 			
 			final CallbackContext delayedCC = callbackContext;
 			cordova.getActivity().runOnUiThread(new Runnable(){
@@ -254,8 +319,6 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 					}						
 				}
 			});	
-			
-			submitAchievementCC = callbackContext;
 			
 			return true;
 		}		
@@ -290,7 +353,29 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 			});	
 			
 			return true;
-		}	
+		}
+		else if (action.equals("resetAchievements")) {
+			//Activity activity=cordova.getActivity();
+			//webView
+			//				
+			
+			final CallbackContext delayedCC = callbackContext;
+			cordova.getActivity().runOnUiThread(new Runnable(){
+				@Override
+				public void run() {						
+					_resetAchievements();
+					
+					PluginResult pr = new PluginResult(PluginResult.Status.OK);
+					//pr.setKeepCallback(true);
+					delayedCC.sendPluginResult(pr);
+					//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+					//pr.setKeepCallback(true);
+					//delayedCC.sendPluginResult(pr);					
+				}
+			});
+			
+			return true;
+		}		
 		
 		return false; // Returning false results in a "MethodNotFound" error.	
 	}
@@ -315,7 +400,39 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 	private void _logout(){		
 		//getGameHelper().signOut();
 		getGameHelper().onStop();
-	}	
+	}
+
+	private void _getPlayerImage() {
+		Player player = Games.Players.getCurrentPlayer(getGameHelper().getApiClient());		
+		if (player != null)
+		{
+			boolean hasH = player.hasHiResImage();
+			boolean hasI = player.hasIconImage();
+			Uri playerImageUrl = null;
+			if (hasH) {
+				playerImageUrl = player.getHiResImageUri();
+			}
+			else if (hasI) {
+				playerImageUrl = player.getIconImageUri();
+			}
+
+			PluginResult pr = new PluginResult(PluginResult.Status.OK, playerImageUrl.toString());
+			//pr.setKeepCallback(true);
+			getPlayerImageCC.sendPluginResult(pr);
+			//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+			//pr.setKeepCallback(true);
+			//getPlayerImageCC.sendPluginResult(pr);			
+		}
+		else {
+			//PluginResult pr = new PluginResult(PluginResult.Status.OK);
+			//pr.setKeepCallback(true);
+			//getPlayerImageCC.sendPluginResult(pr);
+			PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+			//pr.setKeepCallback(true);
+			getPlayerImageCC.sendPluginResult(pr);					
+		}
+	}
+	
 	private void _submitScore(String leaderboardId, int score){
 /*	
 		//https://developers.google.com/games/services/android/leaderboards
@@ -349,14 +466,14 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 					//submitScoreCC.sendPluginResult(pr);
 					PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 					//pr.setKeepCallback(true);
-					submitScoreCC.sendPluginResult(pr);
-					
+					submitScoreCC.sendPluginResult(pr);					
 				}
             }
         }
 		Games.Leaderboards.submitScoreImmediate(getGameHelper().getApiClient(), leaderboardId, score).setResultCallback(new ResultCallbackSubmitScoreResult());
 //*/
 	}	
+	
 	private void _showLeaderboard(String leaderboardId){
 		//show all leaderboards
 		//this.cordova.getActivity().startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(getGameHelper().getApiClient()), 0);
@@ -364,8 +481,51 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 		//show a specific leaderboard
 		this.cordova.getActivity().startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getGameHelper().getApiClient(), leaderboardId), 0);		
 	}
+
+	private void _getPlayerScore(String leaderboardId){
+		class ResultCallbackSubmitScoreResult implements ResultCallback<Leaderboards.LoadPlayerScoreResult> {
+            @Override
+            public void onResult(Leaderboards.LoadPlayerScoreResult result) {
+				//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/Leaderboards.LoadPlayerScoreResult.html
+                if (result.getStatus().getStatusCode() == GamesStatusCodes.STATUS_OK) {
+					//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/LeaderboardScore.html
+					LeaderboardScore ls = result.getScore();
+					long score = ls.getRawScore();
+					
+					PluginResult pr = new PluginResult(PluginResult.Status.OK, score);
+					//pr.setKeepCallback(true);
+					getPlayerScoreCC.sendPluginResult(pr);
+					//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+					//pr.setKeepCallback(true);
+					//getPlayerScoreCC.sendPluginResult(pr);
+                }
+				else {
+					//PluginResult pr = new PluginResult(PluginResult.Status.OK);
+					//pr.setKeepCallback(true);
+					//getPlayerScoreCC.sendPluginResult(pr);
+					PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+					//pr.setKeepCallback(true);
+					getPlayerScoreCC.sendPluginResult(pr);					
+				}
+            }
+        }
+		//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/Leaderboards.html
+		//span:	Time span to retrieve data for. Valid values are TIME_SPAN_DAILY, TIME_SPAN_WEEKLY, or TIME_SPAN_ALL_TIME.
+		//leaderboardCollection: The leaderboard collection to retrieve scores for. Valid values are either COLLECTION_PUBLIC or COLLECTION_SOCIAL.		
+		//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/Leaderboards.html#loadCurrentPlayerLeaderboardScore(com.google.android.gms.common.api.GoogleApiClient, java.lang.String, int, int)
+		//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/LeaderboardVariant.html#TIME_SPAN_DAILY
+		//http://stackoverflow.com/questions/23248157/how-to-get-score-from-google-play-game-services-leaderboard-of-current-player
+		Games.Leaderboards.loadCurrentPlayerLeaderboardScore(getGameHelper().getApiClient(), leaderboardId, LeaderboardVariant.TIME_SPAN_ALL_TIME, LeaderboardVariant.COLLECTION_PUBLIC).setResultCallback(new ResultCallbackSubmitScoreResult());
+	}
+	
 	private void _submitAchievement(String achievementId, int percent){
 /*	
+		//Unlocking achievements
+		//To unlock an achievement, call the unlock() method and and pass in the achievement ID.
+		//Games.Achievements.unlock(getApiClient(), "my_achievement_id");
+		//If the achievement is of the incremental type (that is, several steps are required to unlock it), call increment() instead.
+		//Games.Achievements.increment(getApiClient(), "my_incremental_achievment_id", 1);
+		//You do not need to write additional code to unlock the achievement; Play Games services automatically unlocks the achievement once it reaches its required number of steps.
 		//https://developers.google.com/games/services/android/achievements
 		//Games.Achievements.unlock(getGameHelper().getApiClient(), achievementId);
 		//
@@ -408,22 +568,47 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
         }		
 		Games.Achievements.incrementImmediate(getGameHelper().getApiClient(), achievementId, percent).setResultCallback(new ResultCallbackUpdateAchievementResult());
 //*/		
-	}	
+	}
+
 	private void _showAchievements(){
 		this.cordova.getActivity().startActivityForResult(Games.Achievements.getAchievementsIntent(getGameHelper().getApiClient()), 0);		
 	}
 
+	private void _resetAchievements(){///////////////todo
+
+	}
+	
 	//GameHelper.GameHelperListener
     @Override
     public void onSignInSucceeded() {
 		//Util.alert(cordova.getActivity(), "onSignInSucceeded");	
 		
-		PluginResult pr = new PluginResult(PluginResult.Status.OK);
+		//https://github.com/freshplanet/ANE-Google-Play-Game-Services/blob/master/android/src/com/freshplanet/googleplaygames/functions/AirGooglePlayGamesGetActivePlayerName.java
+		//https://developer.android.com/reference/com/google/android/gms/games/Games.html#Players
+		//https://developer.android.com/reference/com/google/android/gms/games/Players.html#getCurrentPlayer(com.google.android.gms.common.api.GoogleApiClient)
+		//https://developer.android.com/reference/com/google/android/gms/games/Player.html
+		Player player = Games.Players.getCurrentPlayer(getGameHelper().getApiClient());
+		JSONObject playerDetail = new JSONObject();
+		try {
+			if (player != null)
+			{
+				String playerId = player.getPlayerId();
+				String displayName = player.getDisplayName();
+				//String title = player.getTitle();
+								
+				playerDetail.put("playerId", playerId);
+				playerDetail.put("playerDisplayName", displayName);
+			}
+		}
+		catch(JSONException ex){
+		}
+		
+		PluginResult pr = new PluginResult(PluginResult.Status.OK, playerDetail);
 		//pr.setKeepCallback(true);
 		loginCC.sendPluginResult(pr);
 		//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 		//pr.setKeepCallback(true);
-		//loginCC.sendPluginResult(pr);		
+		//loginCC.sendPluginResult(pr);			
     }	
     @Override
     public void onSignInFailed() {
