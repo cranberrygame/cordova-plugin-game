@@ -145,6 +145,37 @@
     }
 }
 
+- (void)getPlayerScore:(CDVInvokedUrlCommand *)command {
+ 	NSString *leaderboardId = [command.arguments objectAtIndex:0];
+    
+	//http://stackoverflow.com/questions/21591123/how-to-get-local-player-score-from-game-center
+	GKLeaderboard *leaderboard = [[GKLeaderboard alloc] init];
+  	leaderboard.identifier = leaderboardId;
+	[leaderboard loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
+		if (error) {
+			NSLog(@"%@", error);
+			
+			//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+			//[pr setKeepCallbackAsBool:YES];
+			//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+			CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
+			//[pr setKeepCallbackAsBool:YES];
+			[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+		}
+		else if (scores) {
+			GKScore *s = leaderboard.localPlayerScore;
+			NSLog(@"Local player's score: %d", s.value);
+			
+            CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%d", s.value]];
+ 			//[pr setKeepCallbackAsBool:YES];
+			[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+			//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+			//[pr setKeepCallbackAsBool:YES];
+			//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+		}
+	}];
+}
+
 - (void)submitScore:(CDVInvokedUrlCommand *)command {
 
     //[self.commandDelegate runInBackground:^{//cranberrygame
@@ -189,37 +220,6 @@
         [vc presentViewController:self.leaderboardController animated:YES completion: ^{
         }];
     //}];//cranberrygame
-}
-
-- (void)getPlayerScore:(CDVInvokedUrlCommand *)command {///////////////todo
- 	NSString *leaderboardId = [command.arguments objectAtIndex:0];
-    
-	//http://stackoverflow.com/questions/21591123/how-to-get-local-player-score-from-game-center
-	GKLeaderboard *leaderboard = [[GKLeaderboard alloc] init];
-  	leaderboard.identifier = leaderboardId;
-	[leaderboard loadScoresWithCompletionHandler: ^(NSArray *scores, NSError *error) {
-		if (error) {
-			NSLog(@"%@", error);
-			
-			//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-			//[pr setKeepCallbackAsBool:YES];
-			//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
-			CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
-			//[pr setKeepCallbackAsBool:YES];
-			[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
-		}
-		else if (scores) {
-			GKScore *s = leaderboard.localPlayerScore;
-			NSLog(@"Local player's score: %d", s.value);
-			
-            CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%d", s.value]];
- 			//[pr setKeepCallbackAsBool:YES];
-			[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
-			//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-			//[pr setKeepCallbackAsBool:YES];
-			//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
-		}
-	}];
 }
 
 - (void)submitAchievement:(CDVInvokedUrlCommand *)command {

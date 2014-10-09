@@ -197,6 +197,35 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 			
 			return true;
 		}
+		else if (action.equals("getPlayerScore")) {
+			//Activity activity=cordova.getActivity();
+			//webView
+			//				
+			final String leaderboardId = args.getString(0);				
+			Log.d(LOG_TAG, String.format("%s", leaderboardId));	
+			
+			getPlayerScoreCC = callbackContext;			
+			
+			final CallbackContext delayedCC = callbackContext;
+			cordova.getActivity().runOnUiThread(new Runnable(){
+				@Override
+				public void run() {
+					if (getGameHelper().isSignedIn()) {				
+						_getPlayerScore(leaderboardId);
+					}
+					else {						
+						//PluginResult pr = new PluginResult(PluginResult.Status.OK);
+						//pr.setKeepCallback(true);
+						//delayedCC.sendPluginResult(pr);
+						PluginResult pr = new PluginResult(PluginResult.Status.ERROR, "Not logged in");
+						//pr.setKeepCallback(true);
+						delayedCC.sendPluginResult(pr);						
+					}
+				}
+			});
+			
+			return true;
+		}		
 		else if (action.equals("submitScore")) {
 			//Activity activity=cordova.getActivity();
 			//webView
@@ -259,35 +288,6 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 					}					
 				}
 			});	
-			
-			return true;
-		}
-		else if (action.equals("getPlayerScore")) {
-			//Activity activity=cordova.getActivity();
-			//webView
-			//				
-			final String leaderboardId = args.getString(0);				
-			Log.d(LOG_TAG, String.format("%s", leaderboardId));	
-			
-			getPlayerScoreCC = callbackContext;			
-			
-			final CallbackContext delayedCC = callbackContext;
-			cordova.getActivity().runOnUiThread(new Runnable(){
-				@Override
-				public void run() {
-					if (getGameHelper().isSignedIn()) {				
-						_getPlayerScore(leaderboardId);
-					}
-					else {						
-						//PluginResult pr = new PluginResult(PluginResult.Status.OK);
-						//pr.setKeepCallback(true);
-						//delayedCC.sendPluginResult(pr);
-						PluginResult pr = new PluginResult(PluginResult.Status.ERROR, "Not logged in");
-						//pr.setKeepCallback(true);
-						delayedCC.sendPluginResult(pr);						
-					}
-				}
-			});
 			
 			return true;
 		}

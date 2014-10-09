@@ -36,6 +36,16 @@ module.exports = {
 			self.onGetPlayerImageFailed();
 		}, "Game", "getPlayerImage", []);
 	},	
+	getPlayerScore: function(leaderboardId) {
+		var self = this;
+		cordova.exec(function (result) {
+			var playerScore = result;
+			self.onGetPlayerScoreSucceeded(playerScore);
+		}, 
+		function (error) {
+			self.onGetPlayerScoreFailed();
+		}, "Game", "getPlayerScore", [leaderboardId]);
+	},
 	submitScore: function(leaderboardId, score) {
 		var self = this;
 		cordova.exec(function (result) {
@@ -47,16 +57,6 @@ module.exports = {
 	},
 	showLeaderboard: function(leaderboardId, successCallback, errorCallback) {
 		cordova.exec(successCallback, errorCallback, "Game", "showLeaderboard", [leaderboardId]);
-	},
-	getPlayerScore: function(leaderboardId) {
-		var self = this;
-		cordova.exec(function (result) {
-			var playerScore = result;
-			self.onGetPlayerScoreSucceeded(playerScore);
-		}, 
-		function (error) {
-			self.onGetPlayerScoreFailed();
-		}, "Game", "getPlayerScore", [leaderboardId]);
 	},
 	submitAchievement: function(achievementId, percent, successCallback, errorCallback) {
 		var self = this;
@@ -83,10 +83,10 @@ module.exports = {
 	onLoginFailed: null,	
 	onGetPlayerImageSucceeded: null,
 	onGetPlayerImageFailed: null,	
-	onSubmitScoreSucceeded: null,
-	onSubmitScoreFailed: null,
     onGetPlayerScoreSucceeded: null,
     onGetPlayerScoreFailed: null,	
+	onSubmitScoreSucceeded: null,
+	onSubmitScoreFailed: null,
 	onSubmitAchievementSucceeded: null,
 	onSubmitAchievementFailed: null,
 	onResetAchievementsSucceeded: null,
