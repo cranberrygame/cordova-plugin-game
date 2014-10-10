@@ -1,20 +1,15 @@
 # Overview #
-```c
 show leaderboard and achievements (google play game and game center, SDK)
 
 [android, ios] [phonegap cli] [crosswalk for android]
 
 requires google play developer account https://play.google.com/apps/publish/
 requires apple developer account https://developer.apple.com/devcenter/ios/index.action
-```
 # Install phonegap plugin #
 
 ## Phonegap build service (config.xml) ##
-```c
 not yet supported
-```
 ## Phonegap cli ##
-```c
 //caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID
 cordova plugin add https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
 
@@ -29,7 +24,6 @@ google play developer console - Game services - [specific app] - get APP_ID (the
 [ios]
 
 itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review
-```
 ## Crosswalk ##
 ```c
 <!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
