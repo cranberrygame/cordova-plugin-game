@@ -127,7 +127,7 @@ window.game.resetAchievements();//only supported on ios
 <a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/index.html">example/index.html</a>
 <a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/crosswalk/mygame">crosswalk project example</a>
 # Test #
-[android] [crosswalk for android]
+[android] [crosswalk]
 
 upload a signed (caution: signed) release APK to either alpha (recommended) or beta.
 
