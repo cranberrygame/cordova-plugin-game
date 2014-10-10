@@ -1,7 +1,7 @@
 # Overview #
 show leaderboard and achievements (google play game and game center, SDK)
 
-[android, ios] [phonegap cli] [crosswalk for android]
+[android, ios] [phonegap cli] [crosswalk]
 
 requires google play developer account https://play.google.com/apps/publish/
 
@@ -11,13 +11,12 @@ requires apple developer account https://developer.apple.com/devcenter/ios/index
 ## Phonegap build service (config.xml) ##
 not yet supported
 ## Phonegap cli ##
-//caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID
-
+//caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID<br>
 cordova plugin add https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
 
 [android]
 
-//add leaderboards and achievements
+//add leaderboards and achievements<br>
 google play developer console - Game services - Add a new game - Enter the name of your game, choose its category, and click Continue. - ... - add leaderboards and achievements
 
 //get APP_ID
