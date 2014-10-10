@@ -127,15 +127,14 @@ window.game.resetAchievements();//only supported on ios
 <a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/index.html">example/index.html</a>
 <a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/crosswalk/mygame">crosswalk project example</a>
 # Test #
-```c
 [android] [crosswalk for android]
 
 upload a signed (caution: signed) release APK to either alpha (recommended) or beta.
 
-//test user
+//test user<br>
 google play developer console - Game services - [specific app] - test - add tester
 
-//publish your app
+//publish your app<br>
 send email with https://play.google.com/apps/testing/YOUR_PACKAGE url to test user
 
 wait until the url is available (take hours)
@@ -145,30 +144,28 @@ install app on a device from url or local signed apk with test account.
 [ios]
 
 just run
-```
 # Useful links #
-```c
-Construct 2: a games/apps maker
+Construct 2: a games/apps maker<br>
 https://www.scirra.com/
 
-Phonegap related c2 plugins (+Crosswalk)
+Phonegap related c2 plugins (+Crosswalk)<br>
 https://www.scirra.com/forum/viewtopic.php?t=109586
 
-Games/Apps with phonegap related c2 plugins (+Crosswalk)
+Games/Apps with phonegap related c2 plugins (+Crosswalk)<br>
 https://www.scirra.com/forum/viewtopic.php?f=148&t=115517
 
-This is the Google Play Game SDK screen on android. (like Game center on ios)
-Leaderboard screen capture
-https://developers.google.com/games/services/android/images/Leaderboard_Android.png
-Achievements screen capture
+This is the Google Play Game SDK screen on android. (like Game center on ios)<br>
+Leaderboard screen capture<br>
+https://developers.google.com/games/services/android/images/Leaderboard_Android.png<br>
+Achievements screen capture<br>
 https://developers.google.com/games/services/android/images/Achievements_Android.png
 
-Bombardment - Battleship Duell (SDK version Example)
+Bombardment - Battleship Duell (SDK version Example)<br>
 https://play.google.com/store/apps/details?id=com.burpssgames.bombardment_free
 
-Google Play Games - Leaderboard & Achievements
+Google Play Games - Leaderboard & Achievements<br>
 https://www.scirra.com/tutorials/1010/google-play-games-leaderboard-achievements
 
-Play Games Services Managment Tools
+Play Games Services Managment Tools<br>
 https://github.com/playgameservices/management-tools
 ```
