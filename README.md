@@ -8,9 +8,7 @@ requires google play developer account https://play.google.com/apps/publish/
 requires apple developer account https://developer.apple.com/devcenter/ios/index.action
 ```
 # Install phonegap plugin #
-```c
 
-```
 ## Phonegap build service (config.xml) ##
 ```c
 
