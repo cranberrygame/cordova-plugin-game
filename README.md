@@ -8,7 +8,9 @@ requires apple developer account https://developer.apple.com/devcenter/ios/index
 # Install phonegap plugin #
 
 ## Phonegap build service (config.xml) ##
+```c
 not yet supported
+```
 ## Phonegap cli ##
 ```c
 //caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID<br>
