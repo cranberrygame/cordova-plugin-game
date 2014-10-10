@@ -11,12 +11,12 @@ requires apple developer account https://developer.apple.com/devcenter/ios/index
 
 ## Phonegap build service (config.xml) ##
 ```c
-
+not yet supported
 ```
 ## Phonegap cli ##
 ```c
 //caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID
-cordova plugin add https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game#3550fc6472ba3657cbf83a8cc744a3071dfbb479 --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
+cordova plugin add https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
 
 [android]
 
@@ -53,34 +53,84 @@ itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable 
 ```
 # API #
 ```javascript
-//actions
-Login
-Logout
-Submit score
-Show leaderboard
-Get player score
-Submit achievement
-Show achievements
-Reset achievements (only supported on ios)
+//
+var leaderboardId = "REPLACE_THIS_WITH_YOUR_LEADERBOARD_ID";
+var achievementId1 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID1";
+var achievementId2 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID2";
+var achievementId3 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID3";
+var achievementId4 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID4";
 
-//events
-On login succeeded
-On login failed
-On submit score succeeded
-On submit score failed
-On get player score succeeded
-On get player score failed
-On submit achievement succeeded
-On submit achievement failed
-On reset achievements succeeded
-On reset achievements failed
+//
+document.addEventListener("deviceready", function(){
+    window.game.setUp();
 
-//conditions
-Is logged in
+    //callback
+    window.game.onLoginSucceeded = function(result) {
+        var playerDetail = result;
+        alert('onLoginSucceeded: ' + playerDetail['playerId'] + ' ' + playerDetail['playerDisplayName']);
+    };  
+    window.game.onLoginFailed = function() {
+        alert('onLoginFailed');
+    };
+    window.game.onGetPlayerImageSucceeded = function(result) {
+        var playerImageUrl = result;
+        alert('onGetPlayerImageSucceeded: ' + playerImageUrl);
+    };
+    window.game.onGetPlayerImageFailed = function() {
+        alert('onGetPlayerImageFailed');
+    };  
+    window.game.onGetPlayerScoreSucceeded = function(result) {
+        var playerScore = result;
+        alert('onGetPlayerScoreSucceeded: ' + playerScore);
+    };
+    window.game.onGetPlayerScoreFailed = function() {
+        alert('onGetPlayerScoreFailed');
+    };
+    //  
+    window.game.onSubmitScoreSucceeded = function() {
+        alert('onSubmitScoreSucceeded');
+    };  
+    window.game.onSubmitScoreFailed = function() {
+        alert('onSubmitScoreFailed');
+    };  
+    //  
+    window.game.onSubmitAchievementSucceeded = function() {
+        alert('onSubmitAchievementSucceeded');
+    };  
+    window.game.onSubmitAchievementFailed = function() {
+        alert('onSubmitAchievementFailed');
+    };
+    window.game.onResetAchievementsSucceeded = function() {
+        alert('onResetAchievementsSucceeded');
+    };  
+    window.game.onResetAchievementsFailed = function() {
+        alert('onResetAchievementsFailed');
+    };
+}, false);
+
+//
+window.game.login();
+window.game.logout();
+alert(window.game.isLoggedIn());
+window.game.getPlayerImage();
+window.game.getPlayerScore(leaderboardId);
+
+//
+window.game.submitScore(leaderboardId, 5);//leaderboardId, score
+window.game.showLeaderboard(leaderboardId);
+
+//
+window.game.submitAchievement(achievementId1, 100);//achievementId, percent
+window.game.submitAchievement(achievementId2, 100);//achievementId, percent
+window.game.submitAchievement(achievementId3, 100);//achievementId, percent
+window.game.submitAchievement(achievementId4, 100);//achievementId, percent
+window.game.showAchievements();
+window.game.resetAchievements();//only supported on ios
 ```
 # Examples #
 ```c
-example capx are included in doc folder
+<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/index.html">example/index.html</a>
+<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/crosswalk/mygame">crosswalk project example</a>
 ```
 # Test #
 ```c
