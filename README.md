@@ -1,12 +1,12 @@
 # Overview #
-'''c
+```c
 show leaderboard and achievements (google play game and game center, SDK)
 
 [android, ios] [phonegap cli] [crosswalk for android]
 
 requires google play developer account https://play.google.com/apps/publish/
 requires apple developer account https://developer.apple.com/devcenter/ios/index.action
-'''
+```
 # Install phonegap plugin #
 '''c
 
