@@ -128,10 +128,8 @@ window.game.showAchievements();
 window.game.resetAchievements();//only supported on ios
 ```
 # Examples #
-```c
 <a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/index.html">example/index.html</a>
 <a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/crosswalk/mygame">crosswalk project example</a>
-```
 # Test #
 ```c
 [android] [crosswalk for android]
