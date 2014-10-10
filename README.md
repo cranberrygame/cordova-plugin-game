@@ -7,7 +7,7 @@ requires google play developer account https://play.google.com/apps/publish/<br>
 requires apple developer account https://developer.apple.com/devcenter/ios/index.action
 # Install phonegap plugin #
 
-## Phonegap build service (config.xml) ##
+## Phonegap build service (construct2 automatically add this tag to config.xml) ##
 ```c
 not yet supported
 ```
