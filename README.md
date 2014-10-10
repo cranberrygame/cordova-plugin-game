@@ -10,9 +10,10 @@ requires apple developer account https://developer.apple.com/devcenter/ios/index
 ## Phonegap build service (config.xml) ##
 not yet supported
 ## Phonegap cli ##
+```c
 //caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID<br>
 cordova plugin add https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
-
+```
 [android]
 
 //add leaderboards and achievements<br>
