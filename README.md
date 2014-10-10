@@ -3,8 +3,7 @@ show leaderboard and achievements (google play game and game center, SDK)
 
 [android, ios] [phonegap cli] [crosswalk]
 
-requires google play developer account https://play.google.com/apps/publish/
-
+requires google play developer account https://play.google.com/apps/publish/<br>
 requires apple developer account https://developer.apple.com/devcenter/ios/index.action
 # Install phonegap plugin #
 
@@ -19,7 +18,7 @@ cordova plugin add https://github.com/cranberrygame/com.cranberrygame.phonegap.p
 //add leaderboards and achievements<br>
 google play developer console - Game services - Add a new game - Enter the name of your game, choose its category, and click Continue. - ... - add leaderboards and achievements
 
-//get APP_ID
+//get APP_ID<br>
 google play developer console - Game services - [specific app] - get APP_ID (the number that appears beside the game name in the header of the Developer Console, e.g. "My Super Game - 12345678",. The APP_ID in this case is 12345678.)
 
 [ios]
@@ -31,21 +30,23 @@ itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable 
 <intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game#3550fc6472ba3657cbf83a8cc744a3071dfbb479" intelxdk:id="com.cranberrygame.phonegap.plugin.game">
 	<intelxdk:param intelxdk:name="APP_ID" intelxdk:value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
 </intelxdk:plugin>
+```
+![ScreenShot](https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/crosswalk_APP_ID.png)
 
-See crosswalk_APP_ID.png
+<a href="https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/intelxdk.config.additions.xml">intelxdk.config.additions.xml</a>
 
 [android] [crosswalk]
 
-//add leaderboards and achievements
+//add leaderboards and achievements<br>
 google play developer console - Game services - Add a new game - Enter the name of your game, choose its category, and click Continue. - ... - add leaderboards and achievements
 
-//get APP_ID
+//get APP_ID<br>
 google play developer console - Game services - [specific app] - get APP_ID (the number that appears beside the game name in the header of the Developer Console, e.g. "My Super Game - 12345678",. The APP_ID in this case is 12345678.)
 
 [ios]
 
 itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review
-```
+
 # API #
 ```javascript
 //
