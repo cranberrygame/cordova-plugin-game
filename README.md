@@ -14,7 +14,7 @@ not yet supported
 ## Phonegap cli ##
 ```c
 //caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID<br>
-cordova plugin add https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
+cordova plugin add com.cranberrygame.phonegap.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
 ```
 [android]
 
@@ -30,7 +30,7 @@ itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable 
 ## Crosswalk ##
 ```c
 <!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
-<intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game#3550fc6472ba3657cbf83a8cc744a3071dfbb479" intelxdk:id="com.cranberrygame.phonegap.plugin.game">
+<intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game" intelxdk:id="com.cranberrygame.phonegap.plugin.game">
 	<intelxdk:param intelxdk:name="APP_ID" intelxdk:value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
 </intelxdk:plugin>
 ```
