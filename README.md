@@ -8,15 +8,15 @@ requires google play developer account https://play.google.com/apps/publish/
 requires apple developer account https://developer.apple.com/devcenter/ios/index.action
 ```
 # Install phonegap plugin #
-'''c
+```c
 
-'''
+```
 ## Phonegap build service (config.xml) ##
-'''c
+```c
 
-'''
+```
 ## Phonegap cli ##
-'''c
+```c
 //caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID
 cordova plugin add https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game#3550fc6472ba3657cbf83a8cc744a3071dfbb479 --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
 
@@ -31,9 +31,9 @@ google play developer console - Game services - [specific app] - get APP_ID (the
 [ios]
 
 itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review
-'''
+```
 ## Crosswalk ##
-'''c
+```c
 <!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
 <intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game#3550fc6472ba3657cbf83a8cc744a3071dfbb479" intelxdk:id="com.cranberrygame.phonegap.plugin.game">
 	<intelxdk:param intelxdk:name="APP_ID" intelxdk:value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
@@ -52,9 +52,9 @@ google play developer console - Game services - [specific app] - get APP_ID (the
 [ios]
 
 itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review
-'''
+```
 # API #
-'''javascript
+```javascript
 //actions
 Login
 Logout
@@ -79,13 +79,13 @@ On reset achievements failed
 
 //conditions
 Is logged in
-'''
+```
 # Examples #
-'''c
+```c
 example capx are included in doc folder
-'''
+```
 # Test #
-'''c
+```c
 [android] [crosswalk for android]
 
 upload a signed (caution: signed) release APK to either alpha (recommended) or beta.
@@ -103,9 +103,9 @@ install app on a device from url or local signed apk with test account.
 [ios]
 
 just run
-'''
+```
 # Useful links #
-'''c
+```c
 Construct 2: a games/apps maker
 https://www.scirra.com/
 
@@ -129,4 +129,4 @@ https://www.scirra.com/tutorials/1010/google-play-games-leaderboard-achievements
 
 Play Games Services Managment Tools
 https://github.com/playgameservices/management-tools
-'''
+```
