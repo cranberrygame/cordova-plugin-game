@@ -1,13 +1,24 @@
-## Prerequisite ##
+# Overview #
+'''c
+show leaderboard and achievements (google play game and game center, SDK)
 
-<pre>
-</pre>
+[android, ios] [phonegap cli] [crosswalk for android]
 
-## How to Install ##
+requires google play developer account https://play.google.com/apps/publish/
+requires apple developer account https://developer.apple.com/devcenter/ios/index.action
+'''
+# Install phonegap plugin #
+'''c
 
-<pre>
+'''
+## Phonegap build service (config.xml) ##
+'''c
+
+'''
+## Phonegap cli ##
+'''c
 //caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID
-cordova plugin add https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
+cordova plugin add https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game#3550fc6472ba3657cbf83a8cc744a3071dfbb479 --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
 
 [android]
 
@@ -19,17 +30,18 @@ google play developer console - Game services - [specific app] - get APP_ID (the
 
 [ios]
 
-itunesconnect-Manage Your Apps-[specific app]-Manage Game Center-Enable for Single Game-Add Leaderboard-Leaderboard ID-don't need to wait for review
-</pre>
+itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review
+'''
+## Crosswalk ##
+'''c
+<!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
+<intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game#3550fc6472ba3657cbf83a8cc744a3071dfbb479" intelxdk:id="com.cranberrygame.phonegap.plugin.game">
+	<intelxdk:param intelxdk:name="APP_ID" intelxdk:value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
+</intelxdk:plugin>
 
-## How to install (crosswalk) ##
+See crosswalk_APP_ID.png
 
-![ScreenShot](https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/crosswalk_APP_ID.png)
-
-<a href="https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/intelxdk.config.additions.xml">intelxdk.config.additions.xml</a>
-
-<pre>
-[crosswalk for android, android]
+[android] [crosswalk]
 
 //add leaderboards and achievements
 google play developer console - Game services - Add a new game - Enter the name of your game, choose its category, and click Continue. - ... - add leaderboards and achievements
@@ -39,105 +51,41 @@ google play developer console - Game services - [specific app] - get APP_ID (the
 
 [ios]
 
-itunesconnect-Manage Your Apps-[specific app]-Manage Game Center-Enable for Single Game-Add Leaderboard-Leaderboard ID-don't need to wait for review
-</pre>
+itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review
+'''
+# API #
+'''javascript
+//actions
+Login
+Logout
+Submit score
+Show leaderboard
+Get player score
+Submit achievement
+Show achievements
+Reset achievements (only supported on ios)
 
-## Change log ##
+//events
+On login succeeded
+On login failed
+On submit score succeeded
+On submit score failed
+On get player score succeeded
+On get player score failed
+On submit achievement succeeded
+On submit achievement failed
+On reset achievements succeeded
+On reset achievements failed
 
-<pre>
-</pre>
-
-## To-Do ##
-
-<pre>
-</pre>	
-
-## How to Use ##
-
-<pre>
-//
-var leaderboardId = "REPLACE_THIS_WITH_YOUR_LEADERBOARD_ID";
-var achievementId1 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID1";
-var achievementId2 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID2";
-var achievementId3 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID3";
-var achievementId4 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID4";
-
-//
-document.addEventListener("deviceready", function(){
-	window.game.setUp();
-
-	//callback
-	window.game.onLoginSucceeded = function(result) {
-		var playerDetail = result;
-        alert('onLoginSucceeded: ' + playerDetail['playerId'] + ' ' + playerDetail['playerDisplayName']);
-    };	
-    window.game.onLoginFailed = function() {
-        alert('onLoginFailed');
-    };
-    window.game.onGetPlayerImageSucceeded = function(result) {
-		var playerImageUrl = result;
-        alert('onGetPlayerImageSucceeded: ' + playerImageUrl);
-    };
-    window.game.onGetPlayerImageFailed = function() {
-        alert('onGetPlayerImageFailed');
-    };	
-    window.game.onGetPlayerScoreSucceeded = function(result) {
-		var playerScore = result;
-        alert('onGetPlayerScoreSucceeded: ' + playerScore);
-    };
-    window.game.onGetPlayerScoreFailed = function() {
-        alert('onGetPlayerScoreFailed');
-    };
-	//	
-    window.game.onSubmitScoreSucceeded = function() {
-        alert('onSubmitScoreSucceeded');
-    };	
-    window.game.onSubmitScoreFailed = function() {
-        alert('onSubmitScoreFailed');
-    };	
-	//	
-    window.game.onSubmitAchievementSucceeded = function() {
-        alert('onSubmitAchievementSucceeded');
-    };	
-    window.game.onSubmitAchievementFailed = function() {
-        alert('onSubmitAchievementFailed');
-    };
-    window.game.onResetAchievementsSucceeded = function() {
-        alert('onResetAchievementsSucceeded');
-    };	
-    window.game.onResetAchievementsFailed = function() {
-        alert('onResetAchievementsFailed');
-    };
-}, false);
-
-//
-window.game.login();
-window.game.logout();
-alert(window.game.isLoggedIn());
-window.game.getPlayerImage();
-window.game.getPlayerScore(leaderboardId);
-
-//
-window.game.submitScore(leaderboardId, 5);//leaderboardId, score
-window.game.showLeaderboard(leaderboardId);
-
-//
-window.game.submitAchievement(achievementId1, 100);//achievementId, percent
-window.game.submitAchievement(achievementId2, 100);//achievementId, percent
-window.game.submitAchievement(achievementId3, 100);//achievementId, percent
-window.game.submitAchievement(achievementId4, 100);//achievementId, percent
-window.game.showAchievements();
-window.game.resetAchievements();//only supported on ios
-</pre>
-
-## Example ##
-
-<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/index.html">example/index.html</a>
-<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/crosswalk/mygame">crosswalk project example</a>
-
-## How to test ##
-
-<pre>
+//conditions
+Is logged in
+'''
+# Examples #
+'''c
+example capx are included in doc folder
+'''
+# Test #
+'''c
 [android] [crosswalk for android]
 
 upload a signed (caution: signed) release APK to either alpha (recommended) or beta.
@@ -155,14 +103,30 @@ install app on a device from url or local signed apk with test account.
 [ios]
 
 just run
-</pre>
+'''
+# Useful links #
+'''c
+Construct 2: a games/apps maker
+https://www.scirra.com/
 
-## Download construct2 plugin ##
+Phonegap related c2 plugins (+Crosswalk)
+https://www.scirra.com/forum/viewtopic.php?t=109586
 
-<a href="https://www.scirra.com/forum/viewtopic.php?t=109586">Phonegap related plugins (+Crosswalk)</a>
+Games/Apps with phonegap related c2 plugins (+Crosswalk)
+https://www.scirra.com/forum/viewtopic.php?f=148&t=115517
 
-## Support ##
+This is the Google Play Game SDK screen on android. (like Game center on ios)
+Leaderboard screen capture
+https://developers.google.com/games/services/android/images/Leaderboard_Android.png
+Achievements screen capture
+https://developers.google.com/games/services/android/images/Achievements_Android.png
 
-This is 100% Free.<br>
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=F9MJ2UY9EKXRN&lc=KR&item_name=Phonegap%20game%20plugin%20donation&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted">You can support maintenance by donation</a>
+Bombardment - Battleship Duell (SDK version Example)
+https://play.google.com/store/apps/details?id=com.burpssgames.bombardment_free
 
+Google Play Games - Leaderboard & Achievements
+https://www.scirra.com/tutorials/1010/google-play-games-leaderboard-achievements
+
+Play Games Services Managment Tools
+https://github.com/playgameservices/management-tools
+'''
