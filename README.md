@@ -148,15 +148,6 @@ install app on a device from url or local signed apk with test account.
 
 just run
 # Useful links #
-Construct 2: a games/apps maker<br>
-https://www.scirra.com/
-
-Phonegap related c2 plugins (+Crosswalk)<br>
-https://www.scirra.com/forum/viewtopic.php?t=109586
-
-Games/Apps made with phonegap related c2 plugins (+Crosswalk)<br>
-https://www.scirra.com/forum/viewtopic.php?t=115517
-
 This is the Google Play Game SDK screen on android. (like Game center on ios)<br>
 Leaderboard screen capture<br>
 https://developers.google.com/games/services/android/images/Leaderboard_Android.png<br>
@@ -171,4 +162,14 @@ https://www.scirra.com/tutorials/1010/google-play-games-leaderboard-achievements
 
 Play Games Services Managment Tools<br>
 https://github.com/playgameservices/management-tools
+
+Phonegap related c2 plugins (+Crosswalk)<br>
+https://www.scirra.com/forum/viewtopic.php?t=109586
+
+Games/Apps made with phonegap related c2 plugins (+Crosswalk)<br>
+https://www.scirra.com/forum/viewtopic.php?t=115517
+
+Construct 2: an easy html5 games/apps maker<br>
+https://www.scirra.com/
+
 ```
