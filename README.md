@@ -93,11 +93,19 @@ document.addEventListener("deviceready", function(){
         alert('onSubmitScoreFailed');
     };  
     //  
+<<<<<<< HEAD
     window.game.onUnlockAchievementSucceeded = function() {
         alert('onUnlockAchievementSucceeded');
     };  
     window.game.onUnlockAchievementFailed = function() {
         alert('onUnlockAchievementFailed');
+=======
+    window.game.onSubmitAchievementSucceeded = function() {
+        alert('onSubmitAchievementSucceeded');
+    };  
+    window.game.onSubmitAchievementFailed = function() {
+        alert('onSubmitAchievementFailed');
+>>>>>>> origin/master
     };
     window.game.onResetAchievementsSucceeded = function() {
         alert('onResetAchievementsSucceeded');
@@ -172,4 +180,8 @@ https://www.scirra.com/forum/viewtopic.php?t=115517
 Construct 2: an easy html5 games/apps maker<br>
 https://www.scirra.com/
 
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> origin/master
