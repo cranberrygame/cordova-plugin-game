@@ -1,21 +1,28 @@
 
 module.exports = {
 	_loggedin: false,
-	setUp: function(successCallback, errorCallback) {
-		cordova.exec(successCallback, errorCallback, "Game", "setUp", []);
+	tag: '',
+	setUp: function() {
+		cordova.exec(
+		function (result) {
+		}, 
+		function (error) {
+		}, "Game", "setUp", []);
     },
 	login: function() {
 		var self = this;
 		cordova.exec(function (result) {
 			var playerDetail = result;
 			self._loggedin = true;
-			self.onLoginSucceeded(playerDetail);
+			if (self.onLoginSucceeded)
+				self.onLoginSucceeded(playerDetail);
 		}, 
 		function (error) {
-			self.onLoginFailed();
+			if (self.onLoginFailed)			
+				self.onLoginFailed();
 		}, "Game", "login", []);
     },
-	logout: function(successCallback, errorCallback) {
+	logout: function() {
 		var self = this;
 		cordova.exec(function (result) {
 			self._loggedin = false;
@@ -30,53 +37,77 @@ module.exports = {
 		var self = this;
 		cordova.exec(function (result) {
 			var playerImageUrl = result;
-			self.onGetPlayerImageSucceeded(playerImageUrl);
+			if (self.onGetPlayerImageSucceeded)			
+				self.onGetPlayerImageSucceeded(playerImageUrl);
 		}, 
 		function (error) {
-			self.onGetPlayerImageFailed();
+			if (self.onGetPlayerImageFailed)			
+				self.onGetPlayerImageFailed();
 		}, "Game", "getPlayerImage", []);
 	},	
-	getPlayerScore: function(leaderboardId) {
+	getPlayerScore: function(leaderboardId, tag) {
 		var self = this;
 		cordova.exec(function (result) {
 			var playerScore = result;
-			self.onGetPlayerScoreSucceeded(playerScore);
+			self.tag = tag;
+			if (self.onGetPlayerScoreSucceeded)
+				self.onGetPlayerScoreSucceeded(playerScore);
 		}, 
 		function (error) {
-			self.onGetPlayerScoreFailed();
+			self.tag = tag;
+			if (self.onGetPlayerScoreFailed)			
+				self.onGetPlayerScoreFailed();
 		}, "Game", "getPlayerScore", [leaderboardId]);
 	},
-	submitScore: function(leaderboardId, score) {
+	submitScore: function(leaderboardId, score, tag) {
 		var self = this;
 		cordova.exec(function (result) {
-			self.onSubmitScoreSucceeded();
+			self.tag = tag;
+			if (self.onSubmitScoreSucceeded)			
+				self.onSubmitScoreSucceeded();
 		}, 
 		function (error) {
-			self.onSubmitScoreFailed();
+			self.tag = tag;
+			if (self.onSubmitScoreFailed)			
+				self.onSubmitScoreFailed();
 		}, "Game", "submitScore", [leaderboardId, score]);
 	},
-	showLeaderboard: function(leaderboardId, successCallback, errorCallback) {
-		cordova.exec(successCallback, errorCallback, "Game", "showLeaderboard", [leaderboardId]);
-	},
-	submitAchievement: function(achievementId, percent, successCallback, errorCallback) {
-		var self = this;
-		cordova.exec(function (result) {
-			self.onSubmitAchievementSucceeded();
+	showLeaderboard: function(leaderboardId) {
+		cordova.exec(
+		function (result) {
 		}, 
 		function (error) {
-			self.onSubmitAchievementFailed();
-		}, "Game", "submitAchievement", [achievementId, percent]);
+		}, "Game", "showLeaderboard", [leaderboardId]);
 	},
-	showAchievements: function(successCallback, errorCallback) {
-		cordova.exec(successCallback, errorCallback, "Game", "showAchievements", []);
+	unlockAchievement: function(achievementId, tag) {
+		var self = this;
+		cordova.exec(function (result) {
+			self.tag = tag;
+			if (self.onUnlockAchievementSucceeded)			
+				self.onUnlockAchievementSucceeded();
+		}, 
+		function (error) {
+			self.tag = tag;
+			if (self.onUnlockAchievementFailed)			
+				self.onUnlockAchievementFailed();
+		}, "Game", "unlockAchievement", [achievementId]);
+	},
+	showAchievements: function() {
+		cordova.exec(
+		function (result) {
+		}, 
+		function (error) {
+		}, "Game", "showAchievements", []);
 	},
 	resetAchievements: function() {
 		var self = this;
 		cordova.exec(function (result) {
-			self.onResetAchievementsSucceeded();
+			if (self.onResetAchievementsSucceeded)			
+				self.onResetAchievementsSucceeded();
 		}, 
 		function (error) {
-			self.onResetAchievementsFailed();
+			if (self.onResetAchievementsFailed)			
+				self.onResetAchievementsFailed();
 		}, "Game", "resetAchievements", []);
 	},	
 	onLoginSucceeded: null,
@@ -87,8 +118,8 @@ module.exports = {
     onGetPlayerScoreFailed: null,	
 	onSubmitScoreSucceeded: null,
 	onSubmitScoreFailed: null,
-	onSubmitAchievementSucceeded: null,
-	onSubmitAchievementFailed: null,
+	onUnlockAchievementSucceeded: null,
+	onUnlockAchievementFailed: null,
 	onResetAchievementsSucceeded: null,
 	onResetAchievementsFailed: null
 };

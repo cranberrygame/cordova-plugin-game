@@ -291,14 +291,12 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 			
 			return true;
 		}
-		else if (action.equals("submitAchievement")) {
+		else if (action.equals("unlockAchievement")) {
 			//Activity activity=cordova.getActivity();
 			//webView
 			//
 			final String achievementId = args.getString(0);				
 			Log.d(LOG_TAG, String.format("%s", achievementId));
-			final int percent = args.getInt(1);				
-			Log.d(LOG_TAG, String.format("%d", percent));
 
 			submitAchievementCC = callbackContext;
 			
@@ -307,7 +305,7 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 				@Override
 				public void run() {
 					if (getGameHelper().isSignedIn()) {
-						_submitAchievement(achievementId, percent);
+						_unlockAchievement(achievementId);
 					}
 					else {
 						//PluginResult pr = new PluginResult(PluginResult.Status.OK);
@@ -433,6 +431,42 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 		}
 	}
 	
+	private void _getPlayerScore(String leaderboardId){
+		class ResultCallbackSubmitScoreResult implements ResultCallback<Leaderboards.LoadPlayerScoreResult> {
+            @Override
+            public void onResult(Leaderboards.LoadPlayerScoreResult result) {
+				//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/Leaderboards.LoadPlayerScoreResult.html
+                if (result.getStatus().getStatusCode() == GamesStatusCodes.STATUS_OK) {
+					//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/LeaderboardScore.html
+					LeaderboardScore ls = result.getScore();
+					long score = ls.getRawScore();
+					
+					PluginResult pr = new PluginResult(PluginResult.Status.OK, score);
+					//pr.setKeepCallback(true);
+					getPlayerScoreCC.sendPluginResult(pr);
+					//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+					//pr.setKeepCallback(true);
+					//getPlayerScoreCC.sendPluginResult(pr);
+                }
+				else {
+					//PluginResult pr = new PluginResult(PluginResult.Status.OK);
+					//pr.setKeepCallback(true);
+					//getPlayerScoreCC.sendPluginResult(pr);
+					PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+					//pr.setKeepCallback(true);
+					getPlayerScoreCC.sendPluginResult(pr);					
+				}
+            }
+        }
+		//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/Leaderboards.html
+		//span:	Time span to retrieve data for. Valid values are TIME_SPAN_DAILY, TIME_SPAN_WEEKLY, or TIME_SPAN_ALL_TIME.
+		//leaderboardCollection: The leaderboard collection to retrieve scores for. Valid values are either COLLECTION_PUBLIC or COLLECTION_SOCIAL.		
+		//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/Leaderboards.html#loadCurrentPlayerLeaderboardScore(com.google.android.gms.common.api.GoogleApiClient, java.lang.String, int, int)
+		//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/LeaderboardVariant.html#TIME_SPAN_DAILY
+		//http://stackoverflow.com/questions/23248157/how-to-get-score-from-google-play-game-services-leaderboard-of-current-player
+		Games.Leaderboards.loadCurrentPlayerLeaderboardScore(getGameHelper().getApiClient(), leaderboardId, LeaderboardVariant.TIME_SPAN_ALL_TIME, LeaderboardVariant.COLLECTION_PUBLIC).setResultCallback(new ResultCallbackSubmitScoreResult());
+	}
+	
 	private void _submitScore(String leaderboardId, int score){
 /*	
 		//https://developers.google.com/games/services/android/leaderboards
@@ -482,60 +516,23 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 		this.cordova.getActivity().startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getGameHelper().getApiClient(), leaderboardId), 0);		
 	}
 
-	private void _getPlayerScore(String leaderboardId){
-		class ResultCallbackSubmitScoreResult implements ResultCallback<Leaderboards.LoadPlayerScoreResult> {
-            @Override
-            public void onResult(Leaderboards.LoadPlayerScoreResult result) {
-				//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/Leaderboards.LoadPlayerScoreResult.html
-                if (result.getStatus().getStatusCode() == GamesStatusCodes.STATUS_OK) {
-					//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/LeaderboardScore.html
-					LeaderboardScore ls = result.getScore();
-					long score = ls.getRawScore();
-					
-					PluginResult pr = new PluginResult(PluginResult.Status.OK, score);
-					//pr.setKeepCallback(true);
-					getPlayerScoreCC.sendPluginResult(pr);
-					//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-					//pr.setKeepCallback(true);
-					//getPlayerScoreCC.sendPluginResult(pr);
-                }
-				else {
-					//PluginResult pr = new PluginResult(PluginResult.Status.OK);
-					//pr.setKeepCallback(true);
-					//getPlayerScoreCC.sendPluginResult(pr);
-					PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
-					//pr.setKeepCallback(true);
-					getPlayerScoreCC.sendPluginResult(pr);					
-				}
-            }
-        }
-		//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/Leaderboards.html
-		//span:	Time span to retrieve data for. Valid values are TIME_SPAN_DAILY, TIME_SPAN_WEEKLY, or TIME_SPAN_ALL_TIME.
-		//leaderboardCollection: The leaderboard collection to retrieve scores for. Valid values are either COLLECTION_PUBLIC or COLLECTION_SOCIAL.		
-		//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/Leaderboards.html#loadCurrentPlayerLeaderboardScore(com.google.android.gms.common.api.GoogleApiClient, java.lang.String, int, int)
-		//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/LeaderboardVariant.html#TIME_SPAN_DAILY
-		//http://stackoverflow.com/questions/23248157/how-to-get-score-from-google-play-game-services-leaderboard-of-current-player
-		Games.Leaderboards.loadCurrentPlayerLeaderboardScore(getGameHelper().getApiClient(), leaderboardId, LeaderboardVariant.TIME_SPAN_ALL_TIME, LeaderboardVariant.COLLECTION_PUBLIC).setResultCallback(new ResultCallbackSubmitScoreResult());
-	}
-	
-	private void _submitAchievement(String achievementId, int percent){
+	private void _unlockAchievement(String achievementId){
 /*	
 		//Unlocking achievements
 		//To unlock an achievement, call the unlock() method and and pass in the achievement ID.
 		//Games.Achievements.unlock(getApiClient(), "my_achievement_id");
 		//If the achievement is of the incremental type (that is, several steps are required to unlock it), call increment() instead.
-		//Games.Achievements.increment(getApiClient(), "my_incremental_achievment_id", 1);
+		//Games.Achievements.increment(getApiClient(), "my_incremental_achievment_id", 10000);
 		//You do not need to write additional code to unlock the achievement; Play Games services automatically unlocks the achievement once it reaches its required number of steps.
 		//https://developers.google.com/games/services/android/achievements
-		//Games.Achievements.unlock(getGameHelper().getApiClient(), achievementId);
-		//
-		Games.Achievements.increment(getGameHelper().getApiClient(), achievementId, percent);		
+		Games.Achievements.unlock(getGameHelper().getApiClient(), achievementId);
 */
 ///*
 		//https://developer.android.com/reference/gms-packages.html
 		//https://developer.android.com/reference/com/google/android/gms/games/achievement/package-summary.html
 		//https://developer.android.com/reference/com/google/android/gms/games/achievement/Achievements.html
 		//https://developer.android.com/reference/com/google/android/gms/games/achievement/Achievements.html#incrementImmediate(com.google.android.gms.common.api.GoogleApiClient, java.lang.String, int)
+		//https://developer.android.com/reference/com/google/android/gms/games/achievement/Achievements.html#unlockImmediate(com.google.android.gms.common.api.GoogleApiClient, java.lang.String)
 		class ResultCallbackUpdateAchievementResult implements ResultCallback<Achievements.UpdateAchievementResult> {
             @Override
             public void onResult(Achievements.UpdateAchievementResult result) {			
@@ -566,10 +563,10 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 				}
             }
         }		
-		Games.Achievements.incrementImmediate(getGameHelper().getApiClient(), achievementId, percent).setResultCallback(new ResultCallbackUpdateAchievementResult());
+		Games.Achievements.unlockImmediate(getGameHelper().getApiClient(), achievementId).setResultCallback(new ResultCallbackUpdateAchievementResult());
 //*/		
 	}
-
+	
 	private void _showAchievements(){
 		this.cordova.getActivity().startActivityForResult(Games.Achievements.getAchievementsIntent(getGameHelper().getApiClient()), 0);		
 	}

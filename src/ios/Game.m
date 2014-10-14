@@ -222,16 +222,14 @@
     //}];//cranberrygame
 }
 
-- (void)submitAchievement:(CDVInvokedUrlCommand *)command {
+- (void)unlockAchievement:(CDVInvokedUrlCommand *)command {
     //[self.commandDelegate runInBackground:^{//cranberrygame
 		NSString *achievementId = [command.arguments objectAtIndex:0];
-		NSString *percent = [command.arguments objectAtIndex:1];
-		float percentFloat = [percent floatValue];
 				
 		GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier: achievementId];
 		if (achievement)
 		{
-			achievement.percentComplete = percentFloat;
+			achievement.percentComplete = 100;
 			
 			[achievement reportAchievementWithCompletionHandler: ^(NSError *error)
 			{
@@ -271,7 +269,7 @@
     //}];//cranberrygame
 }
 
-- (void) resetAchievements:(CDVInvokedUrlCommand*)command;///////////////todo
+- (void) resetAchievements:(CDVInvokedUrlCommand*)command;
 {
     [GKAchievement resetAchievementsWithCompletionHandler: ^(NSError *error)
     {

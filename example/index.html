@@ -46,11 +46,11 @@ document.addEventListener("deviceready", function(){
         alert('onSubmitScoreFailed');
     };	
 	//	
-    window.game.onSubmitAchievementSucceeded = function() {
-        alert('onSubmitAchievementSucceeded');
-    };	
-    window.game.onSubmitAchievementFailed = function() {
-        alert('onSubmitAchievementFailed');
+    window.game.onUnlockAchievementSucceeded = function() {
+        alert('onUnlockAchievementSucceeded');
+    };  
+    window.game.onUnlockAchievementFailed = function() {
+        alert('onUnlockAchievementFailed');
     };
     window.game.onResetAchievementsSucceeded = function() {
         alert('onResetAchievementsSucceeded');
@@ -70,10 +70,10 @@ document.addEventListener("deviceready", function(){
 <p><button onclick="window.game.submitScore(leaderboardId, 5);//leaderboardId, score">submitScore</button></p>
 <p><button onclick="window.game.showLeaderboard(leaderboardId);">showLeaderboard</button></p>
 <br>
-<p><button onclick="window.game.submitAchievement(achievementId1, 100);//achievementId, percent">submitAchievement1</button></p>
-<p><button onclick="window.game.submitAchievement(achievementId2, 100);//achievementId, percent">submitAchievement2</button></p>
-<p><button onclick="window.game.submitAchievement(achievementId3, 100);//achievementId, percent">submitAchievement3</button></p>
-<p><button onclick="window.game.submitAchievement(achievementId4, 100);//achievementId, percent">submitAchievement4</button></p>
+<p><button onclick="window.game.unlockAchievement(achievementId1);">unlockAchievement1</button></p>
+<p><button onclick="window.game.unlockAchievement(achievementId2);">unlockAchievement2</button></p>
+<p><button onclick="window.game.unlockAchievement(achievementId3);">unlockAchievement3</button></p>
+<p><button onclick="window.game.unlockAchievement(achievementId4);">unlockAchievement4</button></p>
 <p><button onclick="window.game.showAchievements();">showAchievements</button></p>
 <p><button onclick="window.game.resetAchievements();">resetAchievements</button></p>
 
