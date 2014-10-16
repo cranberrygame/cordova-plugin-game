@@ -62,7 +62,7 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 	private CallbackContext getPlayerImageCC;
 	private CallbackContext getPlayerScoreCC;
 	private CallbackContext submitScoreCC;
-	private CallbackContext submitAchievementCC;		
+	private CallbackContext unlockAchievementCC;		
 		
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
@@ -298,7 +298,7 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 			final String achievementId = args.getString(0);				
 			Log.d(LOG_TAG, String.format("%s", achievementId));
 
-			submitAchievementCC = callbackContext;
+			unlockAchievementCC = callbackContext;
 			
 			final CallbackContext delayedCC = callbackContext;
 			cordova.getActivity().runOnUiThread(new Runnable(){
@@ -545,10 +545,10 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 
 					PluginResult pr = new PluginResult(PluginResult.Status.OK);
 					//pr.setKeepCallback(true);
-					submitAchievementCC.sendPluginResult(pr);
+					unlockAchievementCC.sendPluginResult(pr);
 					//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 					//pr.setKeepCallback(true);
-					//submitAchievementCC.sendPluginResult(pr);
+					//unlockAchievementCC.sendPluginResult(pr);
                 }
 				else{
 					//Log.d(LOG_TAG, String.format("%d", result.getStatus().getStatusCode()));
@@ -556,10 +556,10 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 					
 					//PluginResult pr = new PluginResult(PluginResult.Status.OK);
 					//pr.setKeepCallback(true);
-					//submitAchievementCC.sendPluginResult(pr);
+					//unlockAchievementCC.sendPluginResult(pr);
 					PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
 					//pr.setKeepCallback(true);
-					submitAchievementCC.sendPluginResult(pr);					
+					unlockAchievementCC.sendPluginResult(pr);					
 				}
             }
         }		
