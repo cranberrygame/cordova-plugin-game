@@ -9,15 +9,17 @@ module.exports = {
 		function (error) {
 		}, "Game", "setUp", []);
     },
-	login: function() {
+	login: function(tag) {
 		var self = this;
 		cordova.exec(function (result) {
 			var playerDetail = result;
 			self._loggedin = true;
+			self.tag = tag;			
 			if (self.onLoginSucceeded)
 				self.onLoginSucceeded(playerDetail);
 		}, 
 		function (error) {
+			self.tag = tag;		
 			if (self.onLoginFailed)			
 				self.onLoginFailed();
 		}, "Game", "login", []);
