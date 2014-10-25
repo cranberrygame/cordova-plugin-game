@@ -21,12 +21,12 @@ cordova plugin add com.cranberrygame.phonegap.plugin.game --variable APP_ID="YOU
 //add leaderboards and achievements<br>
 google play developer console - Game services - Add a new game - Enter the name of your game, choose its category, and click Continue. - ... - add leaderboards and achievements
 
-//get APP_ID<br>
-google play developer console - Game services - [specific app] - get APP_ID (the number that appears beside the game name in the header of the Developer Console, e.g. "My Super Game - 12345678",. The APP_ID in this case is 12345678.)
+//get YOUR_GOOGLE_PLAY_GAME_APP_ID<br>
+google play developer console - Game services - [specific app] - get YOUR_GOOGLE_PLAY_GAME_APP_ID (the number that appears beside the game name in the header of the Developer Console, e.g. "My Super Game - 12345678",. The YOUR_GOOGLE_PLAY_GAME_APP_ID in this case is 12345678.)
 
 [ios]
 
-itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review
+itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review to test
 ## Crosswalk ##
 ```c
 <!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
@@ -43,12 +43,12 @@ itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable 
 //add leaderboards and achievements<br>
 google play developer console - Game services - Add a new game - Enter the name of your game, choose its category, and click Continue. - ... - add leaderboards and achievements
 
-//get APP_ID<br>
-google play developer console - Game services - [specific app] - get APP_ID (the number that appears beside the game name in the header of the Developer Console, e.g. "My Super Game - 12345678",. The APP_ID in this case is 12345678.)
+//get YOUR_GOOGLE_PLAY_GAME_APP_ID<br>
+google play developer console - Game services - [specific app] - get YOUR_GOOGLE_PLAY_GAME_APP_ID (the number that appears beside the game name in the header of the Developer Console, e.g. "My Super Game - 12345678",. The YOUR_GOOGLE_PLAY_GAME_APP_ID in this case is 12345678.)
 
 [ios]
 
-itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review
+itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review to test
 
 # API #
 ```javascript
