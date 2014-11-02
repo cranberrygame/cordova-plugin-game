@@ -52,6 +52,12 @@ document.addEventListener("deviceready", function(){
     window.game.onUnlockAchievementFailed = function() {
         alert('onUnlockAchievementFailed');
     };
+    window.game.onIncrementAchievementSucceeded = function() {
+        alert('onIncrementAchievementSucceeded');
+    };  
+    window.game.onIncrementAchievementFailed = function() {
+        alert('onIncrementAchievementFailed');
+    };
     window.game.onResetAchievementsSucceeded = function() {
         alert('onResetAchievementsSucceeded');
     };	
@@ -74,6 +80,10 @@ document.addEventListener("deviceready", function(){
 <p><button onclick="window.game.unlockAchievement(achievementId2);">unlockAchievement2</button></p>
 <p><button onclick="window.game.unlockAchievement(achievementId3);">unlockAchievement3</button></p>
 <p><button onclick="window.game.unlockAchievement(achievementId4);">unlockAchievement4</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId1, 2); //achievementId, incrementalStepOrCurrentPercent: Incremental step (android) or current percent (ios) for incremental achievement.">incrementAchievement1</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId2, 2);">incrementAchievement2</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId3, 2);">incrementAchievement3</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId4, 2);">incrementAchievement4</button></p>
 <p><button onclick="window.game.showAchievements();">showAchievements</button></p>
 <p><button onclick="window.game.resetAchievements();">resetAchievements</button></p>
 

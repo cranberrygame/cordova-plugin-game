@@ -61,47 +61,53 @@ var achievementId4 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID4";
 
 //
 document.addEventListener("deviceready", function(){
-    window.game.setUp();
+	window.game.setUp();
 
-    //callback
-    window.game.onLoginSucceeded = function(result) {
-        var playerDetail = result;
+	//callback
+	window.game.onLoginSucceeded = function(result) {
+		var playerDetail = result;
         alert('onLoginSucceeded: ' + playerDetail['playerId'] + ' ' + playerDetail['playerDisplayName']);
-    };  
+    };	
     window.game.onLoginFailed = function() {
         alert('onLoginFailed');
     };
     window.game.onGetPlayerImageSucceeded = function(result) {
-        var playerImageUrl = result;
+		var playerImageUrl = result;
         alert('onGetPlayerImageSucceeded: ' + playerImageUrl);
     };
     window.game.onGetPlayerImageFailed = function() {
         alert('onGetPlayerImageFailed');
-    };  
+    };	
     window.game.onGetPlayerScoreSucceeded = function(result) {
-        var playerScore = result;
+		var playerScore = result;
         alert('onGetPlayerScoreSucceeded: ' + playerScore);
     };
     window.game.onGetPlayerScoreFailed = function() {
         alert('onGetPlayerScoreFailed');
     };
-    //  
+	//	
     window.game.onSubmitScoreSucceeded = function() {
         alert('onSubmitScoreSucceeded');
-    };  
+    };	
     window.game.onSubmitScoreFailed = function() {
         alert('onSubmitScoreFailed');
-    };  
-    //  
+    };	
+	//	
     window.game.onUnlockAchievementSucceeded = function() {
         alert('onUnlockAchievementSucceeded');
     };  
     window.game.onUnlockAchievementFailed = function() {
         alert('onUnlockAchievementFailed');
     };
+    window.game.onIncrementAchievementSucceeded = function() {
+        alert('onIncrementAchievementSucceeded');
+    };  
+    window.game.onIncrementAchievementFailed = function() {
+        alert('onIncrementAchievementFailed');
+    };
     window.game.onResetAchievementsSucceeded = function() {
         alert('onResetAchievementsSucceeded');
-    };  
+    };	
     window.game.onResetAchievementsFailed = function() {
         alert('onResetAchievementsFailed');
     };
@@ -123,6 +129,10 @@ window.game.unlockAchievement(achievementId1);
 window.game.unlockAchievement(achievementId2);
 window.game.unlockAchievement(achievementId3);
 window.game.unlockAchievement(achievementId4);
+window.game.incrementAchievement(achievementId1, 2); //achievementId, incrementalStepOrCurrentPercent: Incremental step (android) or current percent (ios) for incremental achievement.
+window.game.incrementAchievement(achievementId2, 2);
+window.game.incrementAchievement(achievementId3, 2);
+window.game.incrementAchievement(achievementId4, 2);
 window.game.showAchievements();
 window.game.resetAchievements();//only supported on ios
 ```

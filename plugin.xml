@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="com.cranberrygame.phonegap.plugin.game"
-    version="1.0.68">
+    version="1.0.71">
 	
     <name>Phonegap game plugin</name>
     <description>show leaderboard and achievements (google play game and game center, SDK)</description>
@@ -10,7 +10,7 @@
     <license>MIT</license>
     <keywords>phonegap, plugin, game, google play game, game center</keywords>
     <repo>https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game</repo>
-    <issue>https://github.com/floatinghotpot/com.cranberrygame.phonegap.plugin.game/issues</issue>	
+    <issue>https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/issues</issue>	
 	<engines>
 	    <engine name="cordova" version=">=3.0.0" />
 	</engines>

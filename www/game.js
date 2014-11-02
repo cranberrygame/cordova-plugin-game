@@ -94,6 +94,19 @@ module.exports = {
 				self.onUnlockAchievementFailed();
 		}, "Game", "unlockAchievement", [achievementId]);
 	},
+	incrementAchievement: function(achievementId, incrementalStepOrCurrentPercent, tag) {
+		var self = this;
+		cordova.exec(function (result) {
+			self.tag = tag;
+			if (self.onIncrementAchievementSucceeded)			
+				self.onIncrementAchievementSucceeded();
+		}, 
+		function (error) {
+			self.tag = tag;
+			if (self.onIncrementAchievementFailed)			
+				self.onIncrementAchievementFailed();
+		}, "Game", "incrementAchievement", [achievementId, incrementalStepOrCurrentPercent]);
+	},	
 	showAchievements: function() {
 		cordova.exec(
 		function (result) {
@@ -122,6 +135,8 @@ module.exports = {
 	onSubmitScoreFailed: null,
 	onUnlockAchievementSucceeded: null,
 	onUnlockAchievementFailed: null,
+	onIncrementAchievementSucceeded: null,
+	onIncrementAchievementFailed: null,
 	onResetAchievementsSucceeded: null,
 	onResetAchievementsFailed: null
 };

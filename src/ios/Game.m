@@ -257,6 +257,43 @@
     //}];//cranberrygame
 }
 
+- (void)incrementAchievement:(CDVInvokedUrlCommand *)command {
+    //[self.commandDelegate runInBackground:^{//cranberrygame
+		NSString *achievementId = [command.arguments objectAtIndex:0];
+		NSString *stepsOrPercent = [command.arguments objectAtIndex:1];
+		float stepsOrPercentFloat = [stepsOrPercent floatValue];
+				
+		GKAchievement *achievement = [[GKAchievement alloc] initWithIdentifier: achievementId];
+		if (achievement)
+		{
+			achievement.percentComplete = stepsOrPercentFloat;
+			
+			[achievement reportAchievementWithCompletionHandler: ^(NSError *error)
+			{
+				 if (error != nil)
+				 {
+					//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+					//[pr setKeepCallbackAsBool:YES];
+					//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+					CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
+					//[pr setKeepCallbackAsBool:YES];
+					[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+				} 
+				 else {
+					CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+					//[pr setKeepCallbackAsBool:YES];
+					[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+					//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+					//[pr setKeepCallbackAsBool:YES];
+					//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+					
+
+				 }
+			}];
+		}
+    //}];//cranberrygame
+}
+
 - (void)showAchievements:(CDVInvokedUrlCommand *)command {//cranberrygame
     //[self.commandDelegate runInBackground:^{
         if ( self.achievementsController == nil ) {

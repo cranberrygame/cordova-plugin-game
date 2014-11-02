@@ -63,7 +63,8 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 	private CallbackContext getPlayerScoreCC;
 	private CallbackContext submitScoreCC;
 	private CallbackContext unlockAchievementCC;		
-		
+	private CallbackContext incrementAchievementCC;
+	
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
 		
@@ -306,6 +307,37 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 				public void run() {
 					if (getGameHelper().isSignedIn()) {
 						_unlockAchievement(achievementId);
+					}
+					else {
+						//PluginResult pr = new PluginResult(PluginResult.Status.OK);
+						//pr.setKeepCallback(true);
+						//delayedCC.sendPluginResult(pr);
+						PluginResult pr = new PluginResult(PluginResult.Status.ERROR, "Not logged in");
+						//pr.setKeepCallback(true);
+						delayedCC.sendPluginResult(pr);	
+					}						
+				}
+			});	
+			
+			return true;
+		}
+		else if (action.equals("incrementAchievement")) {
+			//Activity activity=cordova.getActivity();
+			//webView
+			//
+			final String achievementId = args.getString(0);				
+			Log.d(LOG_TAG, String.format("%s", achievementId));
+			final int stepsOrPercent = args.getInt(1);				
+			Log.d(LOG_TAG, String.format("%d", stepsOrPercent));
+
+			incrementAchievementCC = callbackContext;
+			
+			final CallbackContext delayedCC = callbackContext;
+			cordova.getActivity().runOnUiThread(new Runnable(){
+				@Override
+				public void run() {
+					if (getGameHelper().isSignedIn()) {
+						_incrementAchievement(achievementId, stepsOrPercent);
 					}
 					else {
 						//PluginResult pr = new PluginResult(PluginResult.Status.OK);
@@ -564,6 +596,58 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
             }
         }		
 		Games.Achievements.unlockImmediate(getGameHelper().getApiClient(), achievementId).setResultCallback(new ResultCallbackUpdateAchievementResult());
+//*/		
+	}
+	
+	private void _incrementAchievement(String achievementId, int stepsOrPercent){
+/*	
+		//Unlocking achievements
+		//To unlock an achievement, call the unlock() method and and pass in the achievement ID.
+		//Games.Achievements.unlock(getApiClient(), "my_achievement_id");
+		//If the achievement is of the incremental type (that is, several steps are required to unlock it), call increment() instead.
+		//Games.Achievements.increment(getApiClient(), "my_incremental_achievment_id", 1);
+		//You do not need to write additional code to unlock the achievement; Play Games services automatically unlocks the achievement once it reaches its required number of steps.
+		//https://developers.google.com/games/services/android/achievements
+		//Games.Achievements.unlock(getGameHelper().getApiClient(), achievementId);
+		//
+		Games.Achievements.increment(getGameHelper().getApiClient(), achievementId, stepsOrPercent);		
+*/
+///*
+		//https://developer.android.com/reference/gms-packages.html
+		//https://developer.android.com/reference/com/google/android/gms/games/achievement/package-summary.html
+		//https://developer.android.com/reference/com/google/android/gms/games/achievement/Achievements.html
+		//https://developer.android.com/reference/com/google/android/gms/games/achievement/Achievements.html#incrementImmediate(com.google.android.gms.common.api.GoogleApiClient, java.lang.String, int)
+		class ResultCallbackUpdateAchievementResult implements ResultCallback<Achievements.UpdateAchievementResult> {
+            @Override
+            public void onResult(Achievements.UpdateAchievementResult result) {			
+				//https://developer.android.com/reference/com/google/android/gms/games/achievement/Achievements.UpdateAchievementResult.html
+                if (result.getStatus().getStatusCode() == GamesStatusCodes.STATUS_OK) {
+                    // data sent successfully to server.
+                    // display toast.
+					//Log.d(LOG_TAG, String.format("%d", result.getStatus().getStatusCode()));
+					//Util.alert(cordova.getActivity(), String.format("%d", result.getStatus().getStatusCode()));					
+
+					PluginResult pr = new PluginResult(PluginResult.Status.OK);
+					//pr.setKeepCallback(true);
+					incrementAchievementCC.sendPluginResult(pr);
+					//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+					//pr.setKeepCallback(true);
+					//incrementAchievementCC.sendPluginResult(pr);
+                }
+				else{
+					//Log.d(LOG_TAG, String.format("%d", result.getStatus().getStatusCode()));
+					//Util.alert(cordova.getActivity(), String.format("%d", result.getStatus().getStatusCode()));
+					
+					//PluginResult pr = new PluginResult(PluginResult.Status.OK);
+					//pr.setKeepCallback(true);
+					//incrementAchievementCC.sendPluginResult(pr);
+					PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+					//pr.setKeepCallback(true);
+					incrementAchievementCC.sendPluginResult(pr);					
+				}
+            }
+        }		
+		Games.Achievements.incrementImmediate(getGameHelper().getApiClient(), achievementId, stepsOrPercent).setResultCallback(new ResultCallbackUpdateAchievementResult());
 //*/		
 	}
 	
