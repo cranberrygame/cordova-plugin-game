@@ -164,9 +164,9 @@
 		}
 		else if (scores) {
 			GKScore *s = leaderboard.localPlayerScore;
-			NSLog(@"Local player's score: %d", s.value);
+			NSLog(@"Local player's score: %lld", s.value);
 			
-            CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%d", s.value]];
+            CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%lld", s.value]];
  			//[pr setKeepCallbackAsBool:YES];
 			[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
 			//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
@@ -334,18 +334,18 @@
 - (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController {
 /*
     CDVViewController *vc = (CDVViewController *)[super viewController];
-    [vc dismissModalViewControllerAnimated:YES];
+    [vc dismissViewControllerAnimated:YES completion:nil];
 */
-    [viewController dismissModalViewControllerAnimated:YES];
+	[viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 //GKAchievementViewControllerDelegate
 - (void)achievementViewControllerDidFinish:(GKAchievementViewController *)viewController {
 /*
     CDVViewController* vc = (CDVViewController *)[super viewController];
-    [vc dismissModalViewControllerAnimated:YES];
+    [vc dismissViewControllerAnimated:YES completion:nil];
 */
-    [viewController dismissModalViewControllerAnimated:YES];
+    [viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)dealloc {
