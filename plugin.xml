@@ -4,7 +4,7 @@
     id="com.cranberrygame.phonegap.plugin.game"
     version="1.0.73">
 	
-    <name>Phonegap game plugin</name>
+    <name>Phonegap Game plugin</name>
     <description>show leaderboard and achievements (google play game and game center, SDK)</description>
     <author>Sang Ki Kwon (Cranberrygame)</author>	
     <license>MIT</license>
@@ -14,7 +14,7 @@
 	<engines>
 	    <engine name="cordova" version=">=3.0.0" />
 	</engines>
- 	
+ 		
     <js-module src="www/game.js">
         <clobbers target="window.game" />
     </js-module>
@@ -23,9 +23,9 @@
     <platform name="android">
 		<preference name="APP_ID" />	
 <!--
-		<dependency id="com.google.playservices" url="https://github.com/MobileChromeApps/google-play-services" commit="5d784fb083027fd2c1ef1545d8a2b0d595e4ec69" />
+		<dependency id="com.google.playservices" url="https://github.com/MobileChromeApps/google-play-services" commit="00f511a8ce332d4586f067240460bfe978ace2ae" />
 -->		
-		<dependency id="com.google.playservices" version="17.0.0" />		
+		<dependency id="com.google.playservices@19.0.0" />		
 		<dependency id="android.support.v4" version="1.0.0" />
 
 	    <config-file target="res/xml/config.xml" parent="/*">
