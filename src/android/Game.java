@@ -471,7 +471,9 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
                 if (result.getStatus().getStatusCode() == GamesStatusCodes.STATUS_OK) {
 					//https://developer.android.com/reference/com/google/android/gms/games/leaderboard/LeaderboardScore.html
 					LeaderboardScore ls = result.getScore();
-					long score = ls.getRawScore();
+					long score = 0;
+					if (ls != null)
+						score = ls.getRawScore();
 					
 					PluginResult pr = new PluginResult(PluginResult.Status.OK, score);
 					//pr.setKeepCallback(true);
