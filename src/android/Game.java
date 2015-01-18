@@ -445,6 +445,16 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 			else if (hasI) {
 				playerImageUrl = player.getIconImageUri();
 			}
+			else {
+				//PluginResult pr = new PluginResult(PluginResult.Status.OK);
+				//pr.setKeepCallback(true);
+				//getPlayerImageCC.sendPluginResult(pr);
+				PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+				//pr.setKeepCallback(true);
+				getPlayerImageCC.sendPluginResult(pr);	
+			
+				return;
+			}
 
 			PluginResult pr = new PluginResult(PluginResult.Status.OK, playerImageUrl.toString());
 			//pr.setKeepCallback(true);

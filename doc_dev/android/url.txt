@@ -1,0 +1,9 @@
+
+Google Play game services - Android Samples
+https://github.com/playgameservices/android-basic-samples
+
+https://github.com/playgameservices/android-basic-samples/tree/master/BasicSamples/TypeANumber
+
+Getting Started for Android Game Development
+https://developers.google.com/games/services/
+

@@ -1,0 +1,91 @@
+<html>
+<head>
+	<script type="text/javascript" src="cordova.js"></script>
+</head>
+<body>
+
+<script>
+//
+var leaderboardId = "CgkIhoe5-vweEAIQAQ";
+var achievementId1 = "CgkIhoe5-vweEAIQAw";
+var achievementId2 = "CgkIhoe5-vweEAIQAw";
+var achievementId3 = "CgkIhoe5-vweEAIQAw";
+var achievementId4 = "CgkIhoe5-vweEAIQAw";
+
+//
+document.addEventListener("deviceready", function(){
+	window.game.setUp();
+
+	//callback
+	window.game.onLoginSucceeded = function(result) {
+		var playerDetail = result;
+        alert('onLoginSucceeded: ' + playerDetail['playerId'] + ' ' + playerDetail['playerDisplayName']);
+    };	
+    window.game.onLoginFailed = function() {
+        alert('onLoginFailed');
+    };
+    window.game.onGetPlayerImageSucceeded = function(result) {
+		var playerImageUrl = result;
+        alert('onGetPlayerImageSucceeded: ' + playerImageUrl);
+    };
+    window.game.onGetPlayerImageFailed = function() {
+        alert('onGetPlayerImageFailed');
+    };	
+    window.game.onGetPlayerScoreSucceeded = function(result) {
+		var playerScore = result;
+        alert('onGetPlayerScoreSucceeded: ' + playerScore);
+    };
+    window.game.onGetPlayerScoreFailed = function() {
+        alert('onGetPlayerScoreFailed');
+    };
+	//	
+    window.game.onSubmitScoreSucceeded = function() {
+        alert('onSubmitScoreSucceeded');
+    };	
+    window.game.onSubmitScoreFailed = function() {
+        alert('onSubmitScoreFailed');
+    };	
+	//	
+    window.game.onUnlockAchievementSucceeded = function() {
+        alert('onUnlockAchievementSucceeded');
+    };  
+    window.game.onUnlockAchievementFailed = function() {
+        alert('onUnlockAchievementFailed');
+    };
+    window.game.onIncrementAchievementSucceeded = function() {
+        alert('onIncrementAchievementSucceeded');
+    };  
+    window.game.onIncrementAchievementFailed = function() {
+        alert('onIncrementAchievementFailed');
+    };	
+    window.game.onResetAchievementsSucceeded = function() {
+        alert('onResetAchievementsSucceeded');
+    };	
+    window.game.onResetAchievementsFailed = function() {
+        alert('onResetAchievementsFailed');
+    };
+}, false);
+</script>
+
+<p><button onclick="window.game.login();">login</button></p>
+<p><button onclick="window.game.logout();">logout</button></p>
+<p><button onclick="alert(window.game.isLoggedIn());">isLoggedIn</button></p>
+<p><button onclick="window.game.getPlayerImage();">getPlayerImage</button></p>
+<p><button onclick="window.game.getPlayerScore(leaderboardId);">getPlayerScore</button></p>
+<br>
+<p><button onclick="window.game.submitScore(leaderboardId, 5);//leaderboardId, score">submitScore</button></p>
+<p><button onclick="window.game.showLeaderboard(leaderboardId);">showLeaderboard</button></p>
+<br>
+<p><button onclick="window.game.unlockAchievement(achievementId1);">unlockAchievement1</button></p>
+<p><button onclick="window.game.unlockAchievement(achievementId2);">unlockAchievement2</button></p>
+<p><button onclick="window.game.unlockAchievement(achievementId3);">unlockAchievement3</button></p>
+<p><button onclick="window.game.unlockAchievement(achievementId4);">unlockAchievement4</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId1, 2); //achievementId, stepsOrPercent: Number of steps to increment the achievement by (android: 2 - 10000) or current percent (ios: 0 - 100) for incremental achievement.">incrementAchievement1</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId2, 2); //achievementId, stepsOrPercent: Number of steps to increment the achievement by (android: 2 - 10000) or current percent (ios: 0 - 100) for incremental achievement.">incrementAchievement2</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId3, 2); //achievementId, stepsOrPercent: Number of steps to increment the achievement by (android: 2 - 10000) or current percent (ios: 0 - 100) for incremental achievement.">incrementAchievement3</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId4, 2); //achievementId, stepsOrPercent: Number of steps to increment the achievement by (android: 2 - 10000) or current percent (ios: 0 - 100) for incremental achievement.">incrementAchievement4</button></p>
+<p><button onclick="window.game.showAchievements();">showAchievements</button></p>
+<p><button onclick="window.game.resetAchievements();">resetAchievements</button></p>
+
+</body>
+</html>

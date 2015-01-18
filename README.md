@@ -5,28 +5,22 @@ show leaderboard and achievements (google play game and game center, SDK)
 
 requires google play developer account https://play.google.com/apps/publish/<br>
 requires apple developer account https://developer.apple.com/devcenter/ios/index.action
-# Install phonegap plugin #
-
-## Phonegap build service (construct2 automatically add this tag to config.xml) ##
+# Server setting #
 ```c
-not yet supported
-```
-## Phonegap cli ##
-```c
-//caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID
-cordova plugin add com.cranberrygame.phonegap.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
-```
-[android]
+[android] [crosswalk]
 
-//add leaderboards and achievements<br>
+//add leaderboards and achievements
 google play developer console - Game services - Add a new game - Enter the name of your game, choose its category, and click Continue. - ... - add leaderboards and achievements
 
-//get YOUR_GOOGLE_PLAY_GAME_APP_ID<br>
+//get YOUR_GOOGLE_PLAY_GAME_APP_ID
 google play developer console - Game services - [specific app] - get YOUR_GOOGLE_PLAY_GAME_APP_ID (the number that appears beside the game name in the header of the Developer Console, e.g. "My Super Game - 12345678",. The YOUR_GOOGLE_PLAY_GAME_APP_ID in this case is 12345678.)
 
 [ios]
 
 itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review to test
+```
+# Install phonegap plugin #
+
 ## Crosswalk ##
 ```c
 <!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
@@ -37,19 +31,15 @@ itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable 
 ![ScreenShot](https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/crosswalk_APP_ID.png)
 
 <a href="https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/intelxdk.config.additions.xml">intelxdk.config.additions.xml</a>
-
-[android] [crosswalk]
-
-//add leaderboards and achievements<br>
-google play developer console - Game services - Add a new game - Enter the name of your game, choose its category, and click Continue. - ... - add leaderboards and achievements
-
-//get YOUR_GOOGLE_PLAY_GAME_APP_ID<br>
-google play developer console - Game services - [specific app] - get YOUR_GOOGLE_PLAY_GAME_APP_ID (the number that appears beside the game name in the header of the Developer Console, e.g. "My Super Game - 12345678",. The YOUR_GOOGLE_PLAY_GAME_APP_ID in this case is 12345678.)
-
-[ios]
-
-itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review to test
-
+## Phonegap cli ##
+```c
+//caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID
+cordova plugin add com.cranberrygame.phonegap.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
+```
+## Phonegap build service (construct2 automatically add this tag to config.xml) ##
+```c
+not yet supported
+```
 # API #
 ```javascript
 //
@@ -157,6 +147,12 @@ install app on a device from url or local signed apk with test account.
 [ios]
 
 just run
+# How to build crosswalk and fix build error #
+
+See https://dl.dropboxusercontent.com/u/186681453/howto/how_to_build_crosswalk_and_fix_build_error/index.html
+# Free advertising for games/apps made with crosswalk related c2 plugins (+Phonegap) #
+
+Reply this post, then I'll add your games/apps to the list: https://www.scirra.com/forum/viewtopic.php?t=115517
 # Useful links #
 This is the Google Play Game SDK screen on android. (like Game center on ios)<br>
 Leaderboard screen capture<br>
@@ -173,13 +169,6 @@ https://www.scirra.com/tutorials/1010/google-play-games-leaderboard-achievements
 Play Games Services Managment Tools<br>
 https://github.com/playgameservices/management-tools
 
-Phonegap related c2 plugins (+Crosswalk)<br>
+Crosswalk related c2 plugins (+Phonegap)<br>
 https://www.scirra.com/forum/viewtopic.php?t=109586
-
-Games/Apps made with phonegap related c2 plugins (+Crosswalk)<br>
-https://www.scirra.com/forum/viewtopic.php?t=115517
-
-Construct 2: an easy html5 games/apps maker<br>
-https://www.scirra.com/
-
-```
+# Credits #
