@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="com.cranberrygame.phonegap.plugin.game"
-    version="1.0.76">
+    id="com.cranberrygame.cordova.plugin.game"
+    version="1.0.85">
 	
-    <name>Phonegap Game plugin</name>
+    <name>Cordova Game plugin</name>
     <description>show leaderboard and achievements (google play game and game center, SDK)</description>
     <author>Sang Ki Kwon (Cranberrygame)</author>	
     <license>MIT</license>
-    <keywords>phonegap, plugin, game, google play game, game center</keywords>
-    <repo>https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game</repo>
-    <issue>https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/issues</issue>	
+    <keywords>cordova,plugin,game,google play game,game center</keywords>
+    <repo>https://github.com/cranberrygame/cordova-plugin-game</repo>
+    <issue>https://github.com/cranberrygame/cordova-plugin-game/issues</issue>	
 	<engines>
 	    <engine name="cordova" version=">=3.0.0" />
 	</engines>
@@ -30,7 +30,7 @@
 
 	    <config-file target="res/xml/config.xml" parent="/*">
 			<feature name="Game" >
-				<param name="android-package" value="com.cranberrygame.phonegap.plugin.Game"/>
+				<param name="android-package" value="com.cranberrygame.cordova.plugin.game.Game"/>
 			</feature>
         </config-file>
 		
@@ -58,7 +58,7 @@
 		
 		<source-file src="src/android/GameHelper.java" target-dir="src/com/google/example/games/basegameutils"/>		
 		<source-file src="src/android/GameHelperUtils.java" target-dir="src/com/google/example/games/basegameutils"/>		
-		<source-file src="src/android/Game.java" target-dir="src/com/cranberrygame/phonegap/plugin"/>
+		<source-file src="src/android/Game.java" target-dir="src/com/cranberrygame/cordova/plugin/game"/>
 		<!-- cranberrygame start: google-play-services.jar -->
 <!--		
 		<source-file src="src/android/google-play-services.jar" target-dir="libs" />

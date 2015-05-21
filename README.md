@@ -1,44 +1,206 @@
+Cordova Game plugin
+====================
+
 # Overview #
-show leaderboard and achievements (google play game and game center, SDK)
+Show leaderboard and achievements (google play game and game center, SDK)
  
-[android, ios] [phonegap cli] [crosswalk]
+[android, ios] [cordova cli] [xdk]
 
 requires google play developer account https://play.google.com/apps/publish/<br>
 requires apple developer account https://developer.apple.com/devcenter/ios/index.action
-# Server setting #
+
+This is open source cordova plugin.
+
+You can see Plugins For Cordova in one page: http://cranberrygame.github.io?referrer=github
+
 ```c
-[android] [crosswalk]
+cf)
 
-//add leaderboards and achievements
-google play developer console - Game services - Add a new game - Enter the name of your game, choose its category, and click Continue. - ... - add leaderboards and achievements
-
-//get YOUR_GOOGLE_PLAY_GAME_APP_ID
-google play developer console - Game services - [specific app] - get YOUR_GOOGLE_PLAY_GAME_APP_ID (the number that appears beside the game name in the header of the Developer Console, e.g. "My Super Game - 12345678",. The YOUR_GOOGLE_PLAY_GAME_APP_ID in this case is 12345678.)
-
-[ios]
-
-itunesconnect - Manage Your Apps - [specific app] - Manage Game Center - Enable for Single Game - Add Leaderboard - Leaderboard ID - don't need to wait for review to test
+Leaderboard game: Best score game
+	Limited life
+		ex) 1, 3
+	Limited time
+		ex) 30 seconds
+	Time is score
+	
+Achievement
+	Score
+		ex)	Achievement1 (Score 10)
+			Achievement2 (Score 30)
+			Achievement3 (Score 60)
+			Achievement4 (Score 100)
+			Achievement5 (Score 150)
+	Level
+		ex)	Achievement1 (Level 1)
+			Achievement2 (Level 2)
+			Achievement3 (Level 4)
+			Achievement4 (Level 6)
+			Achievement5 (Level 8)
+			Achievement6 (Level 10)
+	Category
+		ex)	Achievement1 (Number)
+			Achievement1 (Fruit)
+			Achievement1 (Color)
+			Achievement1 (Other)
+			Achievement1 (Challenge (Limited time))
 ```
-# Install phonegap plugin #
+# Change log #
+```c
+```
+# Install plugin #
 
-## Crosswalk ##
+## Cordova cli ##
+```c
+//caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID ex) 1064334934918
+cordova plugin add com.cranberrygame.cordova.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
+```
+## Xdk ##
+<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/xdk_APP_ID.png"><br>
+"https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/intelxdk.config.additions.xml
 ```c
 <!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
 <intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game" intelxdk:id="com.cranberrygame.phonegap.plugin.game">
-	<intelxdk:param intelxdk:name="APP_ID" intelxdk:value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
+    <intelxdk:param intelxdk:name="APP_ID" intelxdk:value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
 </intelxdk:plugin>
 ```
-![ScreenShot](https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/crosswalk_APP_ID.png)
-
-<a href="https://raw.githubusercontent.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/master/example/intelxdk.config.additions.xml">intelxdk.config.additions.xml</a>
-## Phonegap cli ##
+## Phonegap build service (config.xml) ##
 ```c
-//caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID
-cordova plugin add com.cranberrygame.phonegap.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
+<gap:plugin name="com.cranberrygame.cordova.plugin.game" source="plugins.cordova.io" >
+    <param name="APP_ID" value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
+</gap:plugin>
 ```
-## Phonegap build service (construct2 automatically add this tag to config.xml) ##
+
+## Construct2 ##
+Download construct2 plugin: https://dl.dropboxusercontent.com/u/186681453/pluginsforcordova/game/construct2.html
+<br>
+Now all the native plugins are installed automatically: https://plus.google.com/102658703990850475314/posts/XS5jjEApJYV
+# Server setting #
+
+<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/1_YOUR_GOOGLE_PLAY_GAME_APP_ID.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/2_YOUR_GOOGLE_PLAY_GAME_APP_ID.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/3.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/4.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/5.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/6_if_Signing_certificate_fingerprint_(SHA1)_is_blank.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/7.png"><br>
+<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/8.png"><br>
+
 ```c
-not yet supported
+[android]
+
+//(See 1.png 2.png 3.png 4.png 5.png 6.png 7.png 8.png 9.png)
+
+//add game
+google play developer console - Game services - Add a new game - Enter the name of your game: Test App, Category: Puzzle
+
+//get YOUR_GOOGLE_PLAY_GAME_APP_ID
+google play developer console - Game services - [specific app] - get YOUR_GOOGLE_PLAY_GAME_APP_ID (the number that appears beside the game name in the header of the Developer Console, e.g. "Test App - 12345678",. The YOUR_GOOGLE_PLAY_GAME_APP_ID in this case is 12345678.)
+
+//link app
+google play developer console - Game services - [specific app] - Linked App - Android - Save and continue - Authorize your app now - Continue - Create Client (if Signing certificate fingerprint (SHA1) is blank, do it after publishing app in alpha, beta, or normal (after publishing, it will be filled automatically))
+
+//add leaderboard, get YOUR_GOOGLE_PLAY_GAME_LEADERBOARD_ID
+google play developer console - Game services - [specific app] - leaderboard - Add leaderboard - Name: Leaderboard - get YOUR_GOOGLE_PLAY_GAME_LEADERBOARD_ID
+ 
+//add achievements (must minimum 5 achievements), get YOUR_GOOGLE_PLAY_GAME_ACHIEVEMENT_ID1, YOUR_GOOGLE_PLAY_GAME_ACHIEVEMENT_ID2, YOUR_GOOGLE_PLAY_GAME_ACHIEVEMENT_ID3, YOUR_GOOGLE_PLAY_GAME_ACHIEVEMENT_ID4, YOUR_GOOGLE_PLAY_GAME_ACHIEVEMENT_ID5
+google play developer console - Game services - [specific app] - achievement - Add achievement - Name: Achievement1 (Score 10), Description: Achievement1 (Score 10) - get YOUR_GOOGLE_PLAY_GAME_ACHIEVEMENT_ID1
+google play developer console - Game services - [specific app] - achievement - Add achievement - Name: Achievement2 (Score 30), Description: Achievement2 (Score 30) - get YOUR_GOOGLE_PLAY_GAME_ACHIEVEMENT_ID2
+google play developer console - Game services - [specific app] - achievement - Add achievement - Name: Achievement3 (Score 60), Description: Achievement3 (Score 60) - get YOUR_GOOGLE_PLAY_GAME_ACHIEVEMENT_ID3
+google play developer console - Game services - [specific app] - achievement - Add achievement - Name: Achievement4 (Score 100), Description: Achievement4 (Score 100) - get YOUR_GOOGLE_PLAY_GAME_ACHIEVEMENT_ID4
+google play developer console - Game services - [specific app] - achievement - Add achievement - Name: Achievement5 (Score 150), Description: Achievement5 (Score 150) - get YOUR_GOOGLE_PLAY_GAME_ACHIEVEMENT_ID5
+
+//publish game
+google play developer console - Game services - [specific app] - prepare test - publish game
+
+[ios]
+
+itunesconnect - 나의 App - [specific app] - Game Center - Enable for Single Game
+
+//leaderboard
+itunesconnect - 나의 App - [specific app] - Game Center - Add Leaderboard -
+단일 순위표 - 
+순위표 세트 식별 정보: testapp_leaderboard - 
+순위표 ID: testapp_leaderboard -
+점수 형식 유형: Integer -
+점수 제출 유형: 가장 높은 점수
+정렬 순서: 높은 점수순 -
+Add Language -
+언어: English -
+이름: Leaderboard -
+점수 형식: Integer (100,000,122) -
+Save
+
+//achievement1
+itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
+목표 달성 식별 정보: testapp_achievement1
+목표 달성 ID: testapp_achievement1
+점수 값: 25 (max 100)
+숨김: No
+여러 번 달성 가능: No
+언어 추가 - 
+언어: English 
+제목: Achievement1 (Score 10)
+사전 획득한 목표 달성 설명: Achievement1 (Score 10)
+획득한 목표 달성 설명: Achievement1 (Score 10)
+이미지: 512x512 png
+
+//achievement2
+itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
+목표 달성 식별 정보: testapp_achievement2
+목표 달성 ID: testapp_achievement2
+점수 값: 50 (max 100)
+숨김: No
+여러 번 달성 가능: No
+언어 추가 - 
+언어: English 
+제목: Achievement2 (Score 30)
+사전 획득한 목표 달성 설명: Achievement2 (Score 30)
+획득한 목표 달성 설명: Achievement2 (Score 30)
+이미지: 512x512 png
+
+//achievement3
+itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
+목표 달성 식별 정보: testapp_achievement3
+목표 달성 ID: testapp_achievement3
+점수 값: 75 (max 100)
+숨김: No
+여러 번 달성 가능: No
+언어 추가 - 
+언어: English 
+제목: Achievement3 (Score 60)
+사전 획득한 목표 달성 설명: Achievement3 (Score 60)
+획득한 목표 달성 설명: Achievement3 (Score 60)
+이미지: 512x512 png
+
+//achievement4
+itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
+목표 달성 식별 정보: testapp_achievement4
+목표 달성 ID: testapp_achievement4
+점수 값: 100 (max 100)
+숨김: No
+여러 번 달성 가능: No
+언어 추가 - 
+언어: English 
+제목: Achievement4 (Score 100)
+사전 획득한 목표 달성 설명: Achievement4 (Score 100)
+획득한 목표 달성 설명: Achievement4 (Score 100)
+이미지: 512x512 png
+
+//achievement5
+itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
+목표 달성 식별 정보: testapp_achievement5
+목표 달성 ID: testapp_achievement5
+점수 값: (leave blank, max 100)
+숨김: No
+여러 번 달성 가능: No
+언어 추가 - 
+언어: English 
+제목: Achievement5 (Score 150)
+사전 획득한 목표 달성 설명: Achievement5 (Score 150)
+획득한 목표 달성 설명: Achievement5 (Score 150)
+이미지: 512x512 png
+
+can test before publish
 ```
 # API #
 ```javascript
@@ -129,31 +291,48 @@ window.game.resetAchievements();//only supported on ios
 # Examples #
 <a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/index.html">example/index.html</a><br>
 <a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/crosswalk/mygame">crosswalk project example</a>
+
 # Test #
-[android] [crosswalk]
 
-upload a signed (caution: signed) release APK to either alpha (recommended) or beta.
+```c
+[android] [xdk]
 
-//test user<br>
-google play developer console - Game services - [specific app] - test - add tester
+//publish as alpha test (recommend) or beta test instead of production.
+google play developer console - [specific app] - APK - Alpha test - Upload as alpha test - Drag and drop apk and publish now as alpha test.
 
-//publish your app<br>
-send email with https://play.google.com/apps/testing/YOUR_PACKAGE url to test user
+//add test user for game
+google play developer console - Game services - [specific game] - test - add tester (google play account)
 
-wait until the url is available (take hours)
+//add test community for alpha test or beta test download
+google play developer console - 
+All applications - 
+[specific app] - 
+APK -
+Alpha testers - 
+Manage list of testers - 
+Add Google groups or Google+ community: https://plus.google.com/communities/xxx (if you want make Google+ Community, go to this: https://plus.google.com/communities) -
+Add - 
+Let test user download and install apk from this url: https://play.google.com/apps/testing/YOUR_PACKAGE (invite test user in your Google+ community, wait until this url is available, take hours)
 
-install app on a device from url or local signed apk with test account.
+[ios]
+
+iphone - Setting - Game Center - activate sand box mode - login with sand box account in the app
+```
+
+[![](http://img.youtube.com/vi/xXrVb8E8gMM/0.jpg)](https://www.youtube.com/watch?v=xXrVb8E8gMM&feature=youtu.be "Youtube")
+
+You can also run following test apk.
+https://dl.dropboxusercontent.com/u/186681453/pluginsforcordova/game/apk.html
 
 [ios]
 
 just run
-# How to build crosswalk and fix build error #
 
-See https://dl.dropboxusercontent.com/u/186681453/howto/how_to_build_crosswalk_and_fix_build_error/index.html
-# Free advertising for games/apps made with crosswalk related c2 plugins (+Phonegap) #
-
-Reply this post, then I'll add your games/apps to the list: https://www.scirra.com/forum/viewtopic.php?t=115517
 # Useful links #
+
+Plugins For Cordova<br>
+http://cranberrygame.github.io?referrer=github
+
 This is the Google Play Game SDK screen on android. (like Game center on ios)<br>
 Leaderboard screen capture<br>
 https://developers.google.com/games/services/android/images/Leaderboard_Android.png<br>
@@ -169,6 +348,4 @@ https://www.scirra.com/tutorials/1010/google-play-games-leaderboard-achievements
 Play Games Services Managment Tools<br>
 https://github.com/playgameservices/management-tools
 
-Crosswalk related c2 plugins (+Phonegap)<br>
-https://www.scirra.com/forum/viewtopic.php?t=109586
 # Credits #

@@ -2,14 +2,14 @@
 module.exports = {
 	_loggedin: false,
 	tag: '',
-	setUp: function() {
+	setUp: function () {
 		cordova.exec(
 		function (result) {
 		}, 
 		function (error) {
 		}, "Game", "setUp", []);
     },
-	login: function(tag) {
+	login: function (tag) {
 		var self = this;
 		cordova.exec(function (result) {
 			var playerDetail = result;
@@ -24,7 +24,7 @@ module.exports = {
 				self.onLoginFailed();
 		}, "Game", "login", []);
     },
-	logout: function() {
+	logout: function () {
 		var self = this;
 		cordova.exec(function (result) {
 			self._loggedin = false;
@@ -32,10 +32,10 @@ module.exports = {
 		function (error) {
 		}, "Game", "logout", []);
     },
-	isLoggedIn: function() {
+	isLoggedIn: function () {
 		return this._loggedin;
 	},
-	getPlayerImage: function() {
+	getPlayerImage: function () {
 		var self = this;
 		cordova.exec(function (result) {
 			var playerImageUrl = result;
@@ -47,7 +47,7 @@ module.exports = {
 				self.onGetPlayerImageFailed();
 		}, "Game", "getPlayerImage", []);
 	},	
-	getPlayerScore: function(leaderboardId, tag) {
+	getPlayerScore: function (leaderboardId, tag) {
 		var self = this;
 		cordova.exec(function (result) {
 			var playerScore = result;
@@ -61,7 +61,7 @@ module.exports = {
 				self.onGetPlayerScoreFailed();
 		}, "Game", "getPlayerScore", [leaderboardId]);
 	},
-	submitScore: function(leaderboardId, score, tag) {
+	submitScore: function (leaderboardId, score, tag) {
 		var self = this;
 		cordova.exec(function (result) {
 			self.tag = tag;
@@ -74,14 +74,14 @@ module.exports = {
 				self.onSubmitScoreFailed();
 		}, "Game", "submitScore", [leaderboardId, score]);
 	},
-	showLeaderboard: function(leaderboardId) {
+	showLeaderboard: function (leaderboardId) {
 		cordova.exec(
 		function (result) {
 		}, 
 		function (error) {
 		}, "Game", "showLeaderboard", [leaderboardId]);
 	},
-	unlockAchievement: function(achievementId, tag) {
+	unlockAchievement: function (achievementId, tag) {
 		var self = this;
 		cordova.exec(function (result) {
 			self.tag = tag;
@@ -94,7 +94,7 @@ module.exports = {
 				self.onUnlockAchievementFailed();
 		}, "Game", "unlockAchievement", [achievementId]);
 	},
-	incrementAchievement: function(achievementId, incrementalStepOrCurrentPercent, tag) {
+	incrementAchievement: function (achievementId, incrementalStepOrCurrentPercent, tag) {
 		var self = this;
 		cordova.exec(function (result) {
 			self.tag = tag;
@@ -107,14 +107,14 @@ module.exports = {
 				self.onIncrementAchievementFailed();
 		}, "Game", "incrementAchievement", [achievementId, incrementalStepOrCurrentPercent]);
 	},	
-	showAchievements: function() {
+	showAchievements: function () {
 		cordova.exec(
 		function (result) {
 		}, 
 		function (error) {
 		}, "Game", "showAchievements", []);
 	},
-	resetAchievements: function() {
+	resetAchievements: function () {
 		var self = this;
 		cordova.exec(function (result) {
 			if (self.onResetAchievementsSucceeded)			
