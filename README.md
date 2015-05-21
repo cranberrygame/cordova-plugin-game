@@ -56,10 +56,10 @@ cordova plugin add com.cranberrygame.cordova.plugin.game --variable APP_ID="YOUR
 ```
 ## Xdk ##
 <img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/xdk_APP_ID.png"><br>
-"https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/intelxdk.config.additions.xml
+https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/intelxdk.config.additions.xml
 ```c
 <!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
-<intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game" intelxdk:id="com.cranberrygame.phonegap.plugin.game">
+<intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.game" intelxdk:id="com.cranberrygame.cordova.plugin.game">
     <intelxdk:param intelxdk:name="APP_ID" intelxdk:value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
 </intelxdk:plugin>
 ```
@@ -87,8 +87,6 @@ Now all the native plugins are installed automatically: https://plus.google.com/
 
 ```c
 [android]
-
-//(See 1.png 2.png 3.png 4.png 5.png 6.png 7.png 8.png 9.png)
 
 //add game
 google play developer console - Game services - Add a new game - Enter the name of your game: Test App, Category: Puzzle
@@ -318,15 +316,6 @@ Let test user download and install apk from this url: https://play.google.com/ap
 
 iphone - Setting - Game Center - activate sand box mode - login with sand box account in the app
 ```
-
-[![](http://img.youtube.com/vi/xXrVb8E8gMM/0.jpg)](https://www.youtube.com/watch?v=xXrVb8E8gMM&feature=youtu.be "Youtube")
-
-You can also run following test apk.
-https://dl.dropboxusercontent.com/u/186681453/pluginsforcordova/game/apk.html
-
-[ios]
-
-just run
 
 # Useful links #
 
