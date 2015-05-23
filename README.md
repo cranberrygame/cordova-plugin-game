@@ -51,6 +51,8 @@ Achievement
 
 ## Cordova cli ##
 ```c
+https://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface - npm install -g cordova@4.1.2
+
 //caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID ex) 1064334934918
 cordova plugin add com.cranberrygame.cordova.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
 ```
@@ -58,13 +60,21 @@ cordova plugin add com.cranberrygame.cordova.plugin.game --variable APP_ID="YOUR
 <img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/xdk_APP_ID.png"><br>
 https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/intelxdk.config.additions.xml
 ```c
+https://software.intel.com/en-us/intel-xdk - Download XDK - XDK PORJECTS - [specific project] - CORDOVA 3.X HYBRID MOBILE APP SETTINGS - PLUGINS - Third Party Plugins - Add a Third Party Plugin - Get Plugin from the Web -
+
 <!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
 <intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.game" intelxdk:id="com.cranberrygame.cordova.plugin.game">
     <intelxdk:param intelxdk:name="APP_ID" intelxdk:value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
 </intelxdk:plugin>
 ```
+
+## Cocoon ##
+https://cocoon.io - Create project - [specific project] - Setting - Plugins - Search - cranberrygame - game
+
 ## Phonegap build service (config.xml) ##
 ```c
+https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
+
 <gap:plugin name="com.cranberrygame.cordova.plugin.game" source="plugins.cordova.io" >
     <param name="APP_ID" value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
 </gap:plugin>
