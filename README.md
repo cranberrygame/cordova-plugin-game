@@ -6,8 +6,8 @@ Show leaderboard and achievements (google play game and game center, SDK)
  
 [android, ios] [cordova cli] [xdk]
 
-requires google play developer account https://play.google.com/apps/publish/<br>
-requires apple developer account https://developer.apple.com/devcenter/ios/index.action
+Requires google play developer account https://play.google.com/apps/publish/<br>
+Requires apple developer account https://developer.apple.com/devcenter/ios/index.action
 
 This is open source cordova plugin.
 
@@ -50,30 +50,30 @@ Achievement
 # Install plugin #
 
 ## Cordova cli ##
-https://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface - npm install -g cordova@4.1.2
+https://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-Line%20Interface - npm install -g cordova@5.0.0
 ```c
-//caution: replace YOUR_GOOGLE_PLAY_GAME_APP_ID ex) 1064334934918
-cordova plugin add com.cranberrygame.cordova.plugin.game --variable APP_ID="YOUR_GOOGLE_PLAY_GAME_APP_ID"
+//caution: replace 1064334934918 with your google play game app id
+cordova plugin add cordova-plugin-game --variable APP_ID="1064334934918"
 ```
 ## Xdk ##
-<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/xdk_APP_ID.png"><br>
+//caution: replace 1064334934918 with your google play game app id
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/xdk_APP_ID.png"><br>
 https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/intelxdk.config.additions.xml
-https://software.intel.com/en-us/intel-xdk - Download XDK - XDK PORJECTS - [specific project] - CORDOVA 3.X HYBRID MOBILE APP SETTINGS - PLUGINS - Third Party Plugins - Add a Third Party Plugin - Get Plugin from the Web -
 ```c
-<!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
-<intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.game" intelxdk:id="com.cranberrygame.cordova.plugin.game">
-    <intelxdk:param intelxdk:name="APP_ID" intelxdk:value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
-</intelxdk:plugin>
 ```
 
 ## Cocoon ##
-https://cocoon.io - Create project - [specific project] - Setting - Plugins - Search - cranberrygame - game
+https://cocoon.io - Create project - [specific project] - Setting - Plugins - Custom - Git Url: https://github.com/cranberrygame/cordova-plugin-game.git - INSTALL - Save<br>
+//caution: replace 1064334934918 with your google play game app id<br>
+https://cocoon.io - Create project - [specific project] - Setting - Plugins - Installed - Git Url https://github.com/cranberrygame/cordova-plugin-game.git - ADD PARAMETER - Name: APP_ID Value: 1064334934918 - Save<br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/cocoon_APP_ID"><br>
 
 ## Phonegap build service (config.xml) ##
 https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file including config.xml
 ```c
-<gap:plugin name="com.cranberrygame.cordova.plugin.game" source="plugins.cordova.io" >
-    <param name="APP_ID" value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
+//caution: replace 1064334934918 with your google play game app id
+<gap:plugin name="cordova-plugin-game" source="npm" >
+    <param name="APP_ID" value="1064334934918" />
 </gap:plugin>
 ```
 
@@ -83,14 +83,14 @@ Download construct2 plugin: https://dl.dropboxusercontent.com/u/186681453/plugin
 Now all the native plugins are installed automatically: https://plus.google.com/102658703990850475314/posts/XS5jjEApJYV
 # Server setting #
 
-<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/1_YOUR_GOOGLE_PLAY_GAME_APP_ID.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/2_YOUR_GOOGLE_PLAY_GAME_APP_ID.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/3.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/4.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/5.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/6_if_Signing_certificate_fingerprint_(SHA1)_is_blank.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/7.png"><br>
-<img src="https://github.com/cranberrygame/cordova-plugin-game/blob/master/doc/8.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/1_YOUR_GOOGLE_PLAY_GAME_APP_ID.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/2_YOUR_GOOGLE_PLAY_GAME_APP_ID.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/3.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/4.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/5.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/6_if_Signing_certificate_fingerprint_(SHA1)_is_blank.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/7.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/8.png"><br>
 
 ```c
 [android]
@@ -294,8 +294,7 @@ window.game.showAchievements();
 window.game.resetAchievements();//only supported on ios
 ```
 # Examples #
-<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/index.html">example/index.html</a><br>
-<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/crosswalk/mygame">crosswalk project example</a>
+<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/index.html">example/index.html</a>
 
 # Test #
 
@@ -328,20 +327,5 @@ iphone - Setting - Game Center - activate sand box mode - login with sand box ac
 
 Plugins For Cordova<br>
 http://cranberrygame.github.io?referrer=github
-
-This is the Google Play Game SDK screen on android. (like Game center on ios)<br>
-Leaderboard screen capture<br>
-https://developers.google.com/games/services/android/images/Leaderboard_Android.png<br>
-Achievements screen capture<br>
-https://developers.google.com/games/services/android/images/Achievements_Android.png
-
-Bombardment - Battleship Duell (SDK version Example)<br>
-https://play.google.com/store/apps/details?id=com.burpssgames.bombardment_free
-
-Google Play Games - Leaderboard & Achievements<br>
-https://www.scirra.com/tutorials/1010/google-play-games-leaderboard-achievements
-
-Play Games Services Managment Tools<br>
-https://github.com/playgameservices/management-tools
 
 # Credits #

@@ -1,0 +1,38 @@
+{
+  "name": "cordova-plugin-game",
+  "version": "1.0.99",
+  "description": "show leaderboard and achievements (google play game and game center, SDK)",
+  "cordova": {
+    "id": "cordova-plugin-game",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cranberrygame/cordova-plugin-game.git"
+  },
+  "keywords": [
+    "cordova",
+    "plugin",
+    "game",
+    "google play game",
+    "game center",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "cranberrygame",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cranberrygame/cordova-plugin-game/issues"
+  },
+  "homepage": "https://github.com/cranberrygame/cordova-plugin-game#readme"
+}

@@ -1,4 +1,3 @@
-<!-- caution: copy this to intelxdk.config.additions.xml and replace YOUR_GOOGLE_PLAY_GAME_APP_ID -->
-<intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/com.cranberrygame.cordova.plugin.game" intelxdk:id="com.cranberrygame.cordova.plugin.game">
-	<intelxdk:param intelxdk:name="APP_ID" intelxdk:value="YOUR_GOOGLE_PLAY_GAME_APP_ID" />
+<intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/cordova-plugin-game" intelxdk:id="cordova-plugin-game">
+	<intelxdk:param intelxdk:name="APP_ID" intelxdk:value="1064334934918" />
 </intelxdk:plugin>
