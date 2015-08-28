@@ -79,23 +79,22 @@ https://build.phonegap.com/ - Apps - [specific project] - Update code - Zip file
 ```
 
 ## Construct2 ##
-Download construct2 plugin: https://dl.dropboxusercontent.com/u/186681453/pluginsforcordova/game/construct2.html
+Download construct2 plugin: http://www.paywithapost.de/pay?id=4ef3f2be-26e8-4a04-b826-6680db13a8c8
 <br>
 Now all the native plugins are installed automatically: https://plus.google.com/102658703990850475314/posts/XS5jjEApJYV
 # Server setting #
 
+## android (Google Play Game) ##
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/1_YOUR_GOOGLE_PLAY_GAME_APP_ID.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/2_YOUR_GOOGLE_PLAY_GAME_APP_ID.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/3.png"><br>
+If you migrate android app from one build system to another build system (e.g from xdk to cocoon), link Android step ~ again.<br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/4.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/5.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/6_if_Signing_certificate_fingerprint_(SHA1)_is_blank.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/7.png"><br>
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/8.png"><br>
-
 ```c
-[android]
-
 //add game
 google play developer console - Game services - Add a new game - Enter the name of your game: Test App, Category: Puzzle
 
@@ -117,9 +116,9 @@ google play developer console - Game services - [specific app] - achievement - A
 
 //publish game
 google play developer console - Game services - [specific app] - prepare test - publish game
-
-[ios]
-
+```
+## ios (Game Center) ##
+```c
 itunesconnect - 나의 App - [specific app] - Game Center - Enable for Single Game
 
 //leaderboard
@@ -140,7 +139,7 @@ Save
 itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
 목표 달성 식별 정보: testapp_achievement1
 목표 달성 ID: testapp_achievement1
-점수 값: 25 (max 100)
+점수 값: 20 (max 100)
 숨김: No
 여러 번 달성 가능: No
 언어 추가 - 
@@ -154,7 +153,7 @@ itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가
 itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
 목표 달성 식별 정보: testapp_achievement2
 목표 달성 ID: testapp_achievement2
-점수 값: 50 (max 100)
+점수 값: 40 (max 100)
 숨김: No
 여러 번 달성 가능: No
 언어 추가 - 
@@ -168,7 +167,7 @@ itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가
 itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
 목표 달성 식별 정보: testapp_achievement3
 목표 달성 ID: testapp_achievement3
-점수 값: 75 (max 100)
+점수 값: 60 (max 100)
 숨김: No
 여러 번 달성 가능: No
 언어 추가 - 
@@ -182,7 +181,7 @@ itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가
 itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
 목표 달성 식별 정보: testapp_achievement4
 목표 달성 ID: testapp_achievement4
-점수 값: 100 (max 100)
+점수 값: 80 (max 100)
 숨김: No
 여러 번 달성 가능: No
 언어 추가 - 
@@ -196,7 +195,7 @@ itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가
 itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
 목표 달성 식별 정보: testapp_achievement5
 목표 달성 ID: testapp_achievement5
-점수 값: (leave blank, max 100)
+점수 값: 100 (leave blank, max 100)
 숨김: No
 여러 번 달성 가능: No
 언어 추가 - 
@@ -295,13 +294,13 @@ window.game.showAchievements();
 window.game.resetAchievements();//only supported on ios
 ```
 # Examples #
-<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/index.html">example/index.html</a>
+<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/basic/index.html">example/index.html</a>
 
 # Test #
 
-```c
-[android] [xdk]
+## android (Google Play Game) ##
 
+```c
 //publish as alpha test (recommend) or beta test instead of production.
 google play developer console - [specific app] - APK - Alpha test - Upload as alpha test - Drag and drop apk and publish now as alpha test.
 
@@ -318,10 +317,20 @@ Manage list of testers -
 Add Google groups or Google+ community: https://plus.google.com/communities/xxx (if you want make Google+ Community, go to this: https://plus.google.com/communities) -
 Add - 
 Let test user download and install apk from this url: https://play.google.com/apps/testing/YOUR_PACKAGE (invite test user in your Google+ community, wait until this url is available, take hours)
+```
 
-[ios]
+## ios (Game Center) ##
 
-iphone - Setting - Game Center - activate sand box mode - login with sand box account in the app
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/iossandbox1.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/iossandbox2.png"><br>
+<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/iossandbox3.png">
+
+```c
+//itunes connect sand box (Caution!)
+itunes connect - User and role - Sand box test - add tester (not real email but faked email)
+
+//iphone sand box (Caution!)
+iphone - Setting - Game Center - activate sand box mode - login with itunes connect sand box account in the app 
 ```
 
 # Useful links #

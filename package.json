@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-game",
-  "version": "1.0.101",
+  "version": "1.0.103",
   "description": "show leaderboard and achievements (google play game and game center, SDK)",
   "cordova": {
     "id": "cordova-plugin-game",

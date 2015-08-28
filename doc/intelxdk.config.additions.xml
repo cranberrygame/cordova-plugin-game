@@ -1,3 +1,3 @@
-<intelxdk:plugin intelxdk:name="game" intelxdk:value="https://github.com/cranberrygame/cordova-plugin-game" intelxdk:id="cordova-plugin-game">
+<intelxdk:plugin intelxdk:name="cordova-plugin-game" intelxdk:value="https://github.com/cranberrygame/cordova-plugin-game" intelxdk:id="cordova-plugin-game">
 	<intelxdk:param intelxdk:name="APP_ID" intelxdk:value="1064334934918" />
 </intelxdk:plugin>

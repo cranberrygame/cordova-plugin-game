@@ -36,7 +36,7 @@
     
     //[self.commandDelegate runInBackground:^{//cranberrygame
         [[GKLocalPlayer localPlayer] setAuthenticateHandler: ^(UIViewController *viewcontroller, NSError *error) {
-          
+/*
             //already logged in
             if ([GKLocalPlayer localPlayer].authenticated) {
 			
@@ -87,6 +87,79 @@
 					//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];	
                 }
             }
+ */
+///*
+            //It turns out that you need to go to Settings>Game Center and manually enable Sandbox.
+            //http://stackoverflow.com/questions/25916055/application-is-not-recognized-by-game-center-after-building-with-xcode-6-0-1
+            if (viewcontroller != nil) {
+                
+                //UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"1" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                //[alert1 show];
+                
+                CDVViewController *vc = (CDVViewController *)[super viewController];
+                [vc presentViewController:viewcontroller animated:YES completion:^{
+                }];
+            }
+            else {
+                //already logged in
+                if ([GKLocalPlayer localPlayer].authenticated) {
+                    
+                    //UIAlertView *alert2 = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"2" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    //[alert2 show];
+                    
+                    NSString *playerID = [GKLocalPlayer localPlayer].playerID;
+                    NSString *displayName = [GKLocalPlayer localPlayer].displayName;
+                    
+                    NSDictionary* playerDetail = @{
+                                                   @"playerId":playerID,
+                                                   @"playerDisplayName":displayName
+                                                   };
+                    
+                    CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:playerDetail];
+                    //[pr setKeepCallbackAsBool:YES];
+                    [self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+                    //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+                    //[pr setKeepCallbackAsBool:YES];
+                    //[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+                }
+                else {
+                    
+                    //UIAlertView *alert3 = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"3" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    //[alert3 show];
+                    
+                    // Called the second time with result
+                    if (error != nil) {
+                        
+                        UIAlertView *alert4 = [[UIAlertView alloc] initWithTitle:@"Alert" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                        [alert4 show];
+                        
+                        
+                        //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+                        //[pr setKeepCallbackAsBool:YES];
+                        //[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+                        CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
+                        //[pr setKeepCallbackAsBool:YES];
+                        [self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+                    }
+                    else {
+                        NSString *playerID = [GKLocalPlayer localPlayer].playerID;
+                        NSString *displayName = [GKLocalPlayer localPlayer].displayName;
+                        
+                        NSDictionary* playerDetail = @{
+                                                       @"playerId":playerID,
+                                                       @"playerDisplayName":displayName
+                                                       };
+                        
+                        CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:playerDetail];
+                        //[pr setKeepCallbackAsBool:YES];
+                        [self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+                        //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+                        //[pr setKeepCallbackAsBool:YES];
+                        //[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+                    }
+                }
+            }
+//*/
         }];
     //}];//cranberrygame
 }
