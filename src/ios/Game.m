@@ -87,7 +87,7 @@
 					//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];	
                 }
             }
- */
+*/
 ///*
             //It turns out that you need to go to Settings>Game Center and manually enable Sandbox.
             //http://stackoverflow.com/questions/25916055/application-is-not-recognized-by-game-center-after-building-with-xcode-6-0-1
@@ -283,6 +283,8 @@
 }
 
 - (void)showLeaderboard:(CDVInvokedUrlCommand *)command {
+/*
+    //runtime error
     //[self.commandDelegate runInBackground:^{//cranberrygame
         if ( self.leaderboardController == nil ) {
             self.leaderboardController = [[GKLeaderboardViewController alloc] init];
@@ -293,6 +295,29 @@
         [vc presentViewController:self.leaderboardController animated:YES completion: ^{
         }];
     //}];//cranberrygame
+*/
+///*
+    //https://github.com/leecrossley/cordova-plugin-game-center/blob/master/src/ios/GameCenter.m
+    NSString *leaderboardId = (NSString *) [command.arguments objectAtIndex:0];
+    
+    GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+    if (gameCenterController != nil)
+    {
+        gameCenterController.gameCenterDelegate = self;
+        
+        if (leaderboardId.length > 0)
+        {
+            gameCenterController.leaderboardIdentifier = leaderboardId;
+        }
+
+        gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        
+        [self.viewController presentViewController:gameCenterController animated:YES completion:nil];
+    }
+    else
+    {
+    }
+//*/
 }
 
 - (void)unlockAchievement:(CDVInvokedUrlCommand *)command {
@@ -419,6 +444,12 @@
     [vc dismissViewControllerAnimated:YES completion:nil];
 */
     [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+//GKGameCenterControllerDelegate
+- (void) gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)dealloc {
