@@ -13,6 +13,8 @@ var achievementId3 = " CgkI2O2VnNMUEAIQBA";
 var achievementId4 = " CgkI2O2VnNMUEAIQAg";
 var achievementId5 = " CgkI2O2VnNMUEAIQBQ";
 
+var tag = "";
+
 //
 document.addEventListener("deviceready", function(){
 	window.game.setUp();
@@ -21,23 +23,29 @@ document.addEventListener("deviceready", function(){
 	window.game.onLoginSucceeded = function(result) {
 		var playerDetail = result;
         alert('onLoginSucceeded: ' + playerDetail['playerId'] + ' ' + playerDetail['playerDisplayName']);
+		alert(window.game.tag);
     };	
     window.game.onLoginFailed = function() {
         alert('onLoginFailed');
+		alert(window.game.tag);
     };
     window.game.onGetPlayerImageSucceeded = function(result) {
 		var playerImageUrl = result;
         alert('onGetPlayerImageSucceeded: ' + playerImageUrl);
+		alert(window.game.tag);
     };
     window.game.onGetPlayerImageFailed = function() {
         alert('onGetPlayerImageFailed');
+		alert(window.game.tag);
     };	
     window.game.onGetPlayerScoreSucceeded = function(result) {
 		var playerScore = result;
         alert('onGetPlayerScoreSucceeded: ' + playerScore);
+		alert(window.game.tag);
     };
     window.game.onGetPlayerScoreFailed = function() {
         alert('onGetPlayerScoreFailed');
+		alert(window.game.tag);
     };
 	//	
     window.game.onSubmitScoreSucceeded = function() {
@@ -45,48 +53,53 @@ document.addEventListener("deviceready", function(){
     };	
     window.game.onSubmitScoreFailed = function() {
         alert('onSubmitScoreFailed');
+		alert(window.game.tag);
     };	
 	//	
     window.game.onUnlockAchievementSucceeded = function() {
         alert('onUnlockAchievementSucceeded');
+		alert(window.game.tag);
     };  
     window.game.onUnlockAchievementFailed = function() {
         alert('onUnlockAchievementFailed');
+		alert(window.game.tag);
     };
     window.game.onIncrementAchievementSucceeded = function() {
         alert('onIncrementAchievementSucceeded');
+		alert(window.game.tag);
     };  
     window.game.onIncrementAchievementFailed = function() {
         alert('onIncrementAchievementFailed');
+		alert(window.game.tag);
     };
     window.game.onResetAchievementsSucceeded = function() {
         alert('onResetAchievementsSucceeded');
+		alert(window.game.tag);
     };	
     window.game.onResetAchievementsFailed = function() {
         alert('onResetAchievementsFailed');
+		alert(window.game.tag);
     };
 }, false);
 </script>
 
-<p><button onclick="window.game.login();">login</button></p>
+<p><button onclick="window.game.login(tag);">login</button></p>
 <p><button onclick="window.game.logout();">logout</button></p>
 <p><button onclick="alert(window.game.isLoggedIn());">isLoggedIn</button></p>
 <p><button onclick="window.game.getPlayerImage();">getPlayerImage</button></p>
-<p><button onclick="window.game.getPlayerScore(leaderboardId);">getPlayerScore</button></p>
+<p><button onclick="window.game.getPlayerScore(leaderboardId, tag);">getPlayerScore</button></p>
 <br>
-<p><button onclick="window.game.submitScore(leaderboardId, 5);//leaderboardId, score">submitScore</button></p>
+<p><button onclick="window.game.submitScore(leaderboardId, 5, tag);//leaderboardId, score">submitScore</button></p>
 <p><button onclick="window.game.showLeaderboard(leaderboardId);">showLeaderboard</button></p>
 <br>
-<p><button onclick="window.game.unlockAchievement(achievementId1);">unlockAchievement1</button></p>
-<p><button onclick="window.game.unlockAchievement(achievementId2);">unlockAchievement2</button></p>
-<p><button onclick="window.game.unlockAchievement(achievementId3);">unlockAchievement3</button></p>
-<p><button onclick="window.game.unlockAchievement(achievementId4);">unlockAchievement4</button></p>
-<p><button onclick="window.game.unlockAchievement(achievementId5);">unlockAchievement5</button></p>
-<p><button onclick="window.game.incrementAchievement(achievementId1, 2); //achievementId, incrementalStepOrCurrentPercent: Incremental step (android) or current percent (ios) for incremental achievement.">incrementAchievement1</button></p>
-<p><button onclick="window.game.incrementAchievement(achievementId2, 2);">incrementAchievement2</button></p>
-<p><button onclick="window.game.incrementAchievement(achievementId3, 2);">incrementAchievement3</button></p>
-<p><button onclick="window.game.incrementAchievement(achievementId4, 2);">incrementAchievement4</button></p>
-<p><button onclick="window.game.incrementAchievement(achievementId5, 2);">incrementAchievement5</button></p>
+<p><button onclick="window.game.unlockAchievement(achievementId1, tag);">unlockAchievement1</button></p>
+<p><button onclick="window.game.unlockAchievement(achievementId2, tag);">unlockAchievement2</button></p>
+<p><button onclick="window.game.unlockAchievement(achievementId3, tag);">unlockAchievement3</button></p>
+<p><button onclick="window.game.unlockAchievement(achievementId4, tag);">unlockAchievement4</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId1, 2, tag); //achievementId, incrementalStepOrCurrentPercent: Incremental step (android) or current percent (ios) for incremental achievement.">incrementAchievement1</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId2, 2, tag);">incrementAchievement2</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId3, 2, tag);">incrementAchievement3</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId4, 2, tag);">incrementAchievement4</button></p>
 <p><button onclick="window.game.showAchievements();">showAchievements</button></p>
 <p><button onclick="window.game.resetAchievements();">resetAchievements</button></p>
 

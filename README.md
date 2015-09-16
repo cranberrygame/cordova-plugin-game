@@ -4,7 +4,7 @@ Cordova Game plugin
 # Overview #
 Show leaderboard and achievements (google play game and game center, SDK)
  
-[android, ios] [cordova cli] [xdk]
+[android, ios] [cordova cli] [xdk] [phonegap build service]
 
 Requires google play developer account https://play.google.com/apps/publish/<br>
 Requires apple developer account https://developer.apple.com/devcenter/ios/index.action
@@ -215,6 +215,7 @@ var achievementId1 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID1";
 var achievementId2 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID2";
 var achievementId3 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID3";
 var achievementId4 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID4";
+var achievementId5 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID5";
 
 //
 document.addEventListener("deviceready", function(){
@@ -286,15 +287,18 @@ window.game.unlockAchievement(achievementId1);
 window.game.unlockAchievement(achievementId2);
 window.game.unlockAchievement(achievementId3);
 window.game.unlockAchievement(achievementId4);
+window.game.unlockAchievement(achievementId5);
 window.game.incrementAchievement(achievementId1, 2); //achievementId, incrementalStepOrCurrentPercent: Incremental step (android) or current percent (ios) for incremental achievement.
 window.game.incrementAchievement(achievementId2, 2);
 window.game.incrementAchievement(achievementId3, 2);
 window.game.incrementAchievement(achievementId4, 2);
+window.game.incrementAchievement(achievementId5, 2);
 window.game.showAchievements();
 window.game.resetAchievements();//only supported on ios
 ```
 # Examples #
 <a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/basic/index.html">example/index.html</a>
+<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/basic_tag/index.html">example_tag/index.html</a>
 
 # Test #
 
@@ -319,6 +323,14 @@ Add -
 Let test user download and install apk from this url: https://play.google.com/apps/testing/YOUR_PACKAGE (invite test user in your Google+ community, wait until this url is available, take hours)
 ```
 
+```c
+Clear the default account so that a different account can be signed in without having to clear app data:
+1.android
+Setting - Account - Google - Logout with previous google account and login with other google account
+2.ios
+Setting - Game Center - Logout with previous ios account and login with other ios account
+```
+
 ## ios (Game Center) ##
 
 <img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/iossandbox1.png"><br>
@@ -335,7 +347,7 @@ iphone - Setting - Game Center - activate sand box mode - login with itunes conn
 
 # Useful links #
 
-Plugins For Cordova<br>
+Cordova Plugins<br>
 http://cranberrygame.github.io?referrer=github
 
 # Credits #
