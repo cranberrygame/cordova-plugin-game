@@ -13,7 +13,8 @@ var achievementId3 = " CgkI2O2VnNMUEAIQBA";
 var achievementId4 = " CgkI2O2VnNMUEAIQAg";
 var achievementId5 = " CgkI2O2VnNMUEAIQBQ";
 
-var tag = "";
+var tag = "tag1";
+//var tag = "tag2";
 
 //
 document.addEventListener("deviceready", function(){
@@ -96,10 +97,12 @@ document.addEventListener("deviceready", function(){
 <p><button onclick="window.game.unlockAchievement(achievementId2, tag);">unlockAchievement2</button></p>
 <p><button onclick="window.game.unlockAchievement(achievementId3, tag);">unlockAchievement3</button></p>
 <p><button onclick="window.game.unlockAchievement(achievementId4, tag);">unlockAchievement4</button></p>
+<p><button onclick="window.game.unlockAchievement(achievementId5, tag);">unlockAchievement5</button></p>
 <p><button onclick="window.game.incrementAchievement(achievementId1, 2, tag); //achievementId, incrementalStepOrCurrentPercent: Incremental step (android) or current percent (ios) for incremental achievement.">incrementAchievement1</button></p>
 <p><button onclick="window.game.incrementAchievement(achievementId2, 2, tag);">incrementAchievement2</button></p>
 <p><button onclick="window.game.incrementAchievement(achievementId3, 2, tag);">incrementAchievement3</button></p>
 <p><button onclick="window.game.incrementAchievement(achievementId4, 2, tag);">incrementAchievement4</button></p>
+<p><button onclick="window.game.incrementAchievement(achievementId5, 2, tag);">incrementAchievement5</button></p>
 <p><button onclick="window.game.showAchievements();">showAchievements</button></p>
 <p><button onclick="window.game.resetAchievements();">resetAchievements</button></p>
 
