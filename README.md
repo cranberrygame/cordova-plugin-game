@@ -297,7 +297,7 @@ window.game.showAchievements();
 window.game.resetAchievements();//only supported on ios
 ```
 # Examples #
-<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/basic/index.html">example/index.html</a>
+<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/basic/index.html">example/index.html</a><br>
 <a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/basic_tag/index.html">example_tag/index.html</a>
 
 # Test #
