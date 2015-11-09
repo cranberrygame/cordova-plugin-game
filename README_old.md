@@ -4,7 +4,7 @@ Cordova Game plugin
 # Overview #
 Show leaderboard and achievements (google play game and game center, SDK)
  
-[android, ios] [cordova cli] [xdk] [phonegap build service]
+[android, ios] [cordova cli] [xdk]
 
 Requires google play developer account https://play.google.com/apps/publish/<br>
 Requires apple developer account https://developer.apple.com/devcenter/ios/index.action
@@ -139,7 +139,7 @@ Save
 itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
 목표 달성 식별 정보: testapp_achievement1
 목표 달성 ID: testapp_achievement1
-점수 값: 20 (max 100)
+점수 값: 25 (max 100)
 숨김: No
 여러 번 달성 가능: No
 언어 추가 - 
@@ -153,7 +153,7 @@ itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가
 itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
 목표 달성 식별 정보: testapp_achievement2
 목표 달성 ID: testapp_achievement2
-점수 값: 40 (max 100)
+점수 값: 50 (max 100)
 숨김: No
 여러 번 달성 가능: No
 언어 추가 - 
@@ -167,7 +167,7 @@ itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가
 itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
 목표 달성 식별 정보: testapp_achievement3
 목표 달성 ID: testapp_achievement3
-점수 값: 60 (max 100)
+점수 값: 75 (max 100)
 숨김: No
 여러 번 달성 가능: No
 언어 추가 - 
@@ -181,7 +181,7 @@ itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가
 itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
 목표 달성 식별 정보: testapp_achievement4
 목표 달성 ID: testapp_achievement4
-점수 값: 80 (max 100)
+점수 값: 100 (max 100)
 숨김: No
 여러 번 달성 가능: No
 언어 추가 - 
@@ -195,7 +195,7 @@ itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가
 itunesconnect - 나의 App - [specific app] - Game Center - 목표 달성 추가 -
 목표 달성 식별 정보: testapp_achievement5
 목표 달성 ID: testapp_achievement5
-점수 값: 100 (leave blank, max 100)
+점수 값: (leave blank, max 100)
 숨김: No
 여러 번 달성 가능: No
 언어 추가 - 
@@ -215,7 +215,6 @@ var achievementId1 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID1";
 var achievementId2 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID2";
 var achievementId3 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID3";
 var achievementId4 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID4";
-var achievementId5 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID5";
 
 //
 document.addEventListener("deviceready", function(){
@@ -287,24 +286,21 @@ window.game.unlockAchievement(achievementId1);
 window.game.unlockAchievement(achievementId2);
 window.game.unlockAchievement(achievementId3);
 window.game.unlockAchievement(achievementId4);
-window.game.unlockAchievement(achievementId5);
 window.game.incrementAchievement(achievementId1, 2); //achievementId, incrementalStepOrCurrentPercent: Incremental step (android) or current percent (ios) for incremental achievement.
 window.game.incrementAchievement(achievementId2, 2);
 window.game.incrementAchievement(achievementId3, 2);
 window.game.incrementAchievement(achievementId4, 2);
-window.game.incrementAchievement(achievementId5, 2);
 window.game.showAchievements();
 window.game.resetAchievements();//only supported on ios
 ```
 # Examples #
-<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/basic/index.html">example/index.html</a><br>
-<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/basic_tag/index.html">example_tag/index.html</a>
+<a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/basic/index.html">example/index.html</a>
 
 # Test #
 
-## android (Google Play Game) ##
-
 ```c
+[android] [xdk]
+
 //publish as alpha test (recommend) or beta test instead of production.
 google play developer console - [specific app] - APK - Alpha test - Upload as alpha test - Drag and drop apk and publish now as alpha test.
 
@@ -321,41 +317,15 @@ Manage list of testers -
 Add Google groups or Google+ community: https://plus.google.com/communities/xxx (if you want make Google+ Community, go to this: https://plus.google.com/communities) -
 Add - 
 Let test user download and install apk from this url: https://play.google.com/apps/testing/YOUR_PACKAGE (invite test user in your Google+ community, wait until this url is available, take hours)
-```
 
-```c
-Clear the default account so that a different account can be signed in without having to clear app data:
-1.android
-Setting - Account - Google - Logout with previous google account and login with other google account
-2.ios
-Setting - Game Center - Logout with previous ios account and login with other ios account
-```
+[ios]
 
-## ios (Game Center) ##
-
-<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/iossandbox1.png"><br>
-<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/iossandbox2.png"><br>
-<img src="https://raw.githubusercontent.com/cranberrygame/cordova-plugin-game/master/doc/iossandbox3.png">
-
-```c
-//itunes connect sand box (Caution!)
-itunes connect - User and role - Sand box test - add tester (not real email but faked email)
-
-//iphone sand box (Caution!)
-//The requested operation could not be completed because the application is not recognized by Game Center.
-iphone - Setting - Game Center - activate sand box mode - login with itunes connect sand box account in the app 
-```
-
-```c
-the requested operation has been canceled or disabled by the user
-Reenabling GameCenter after user-cancelled 3 times (iOS7 only)
-iphone - Setting - General - Reset - Reset All Settings
-http://stackoverflow.com/questions/18927723/reenabling-gamecenter-after-user-cancelled-3-times-ios7-only
+iphone - Setting - Game Center - activate sand box mode - login with sand box account in the app
 ```
 
 # Useful links #
 
-Cordova Plugins<br>
+Plugins For Cordova<br>
 http://cranberrygame.github.io?referrer=github
 
 # Credits #
