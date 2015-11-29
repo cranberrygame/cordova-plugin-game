@@ -35,32 +35,6 @@ module.exports = {
 	isLoggedIn: function () {
 		return this._loggedin;
 	},
-	getPlayerImage: function () {
-		var self = this;
-		cordova.exec(function (result) {
-			var playerImageUrl = result;
-			if (self.onGetPlayerImageSucceeded)			
-				self.onGetPlayerImageSucceeded(playerImageUrl);
-		}, 
-		function (error) {
-			if (self.onGetPlayerImageFailed)			
-				self.onGetPlayerImageFailed();
-		}, "Game", "getPlayerImage", []);
-	},	
-	getPlayerScore: function (leaderboardId, tag) {
-		var self = this;
-		cordova.exec(function (result) {
-			var playerScore = result;
-			self.tag = tag;
-			if (self.onGetPlayerScoreSucceeded)
-				self.onGetPlayerScoreSucceeded(playerScore);
-		}, 
-		function (error) {
-			self.tag = tag;
-			if (self.onGetPlayerScoreFailed)			
-				self.onGetPlayerScoreFailed();
-		}, "Game", "getPlayerScore", [leaderboardId]);
-	},
 	submitScore: function (leaderboardId, score, tag) {
 		var self = this;
 		cordova.exec(function (result) {
@@ -80,6 +54,20 @@ module.exports = {
 		}, 
 		function (error) {
 		}, "Game", "showLeaderboard", [leaderboardId]);
+	},
+	getPlayerScore: function (leaderboardId, tag) {
+		var self = this;
+		cordova.exec(function (result) {
+			var playerScore = result;
+			self.tag = tag;
+			if (self.onGetPlayerScoreSucceeded)
+				self.onGetPlayerScoreSucceeded(playerScore);
+		}, 
+		function (error) {
+			self.tag = tag;
+			if (self.onGetPlayerScoreFailed)			
+				self.onGetPlayerScoreFailed();
+		}, "Game", "getPlayerScore", [leaderboardId]);
 	},
 	unlockAchievement: function (achievementId, tag) {
 		var self = this;
@@ -125,18 +113,30 @@ module.exports = {
 				self.onResetAchievementsFailed();
 		}, "Game", "resetAchievements", []);
 	},	
+	getPlayerImage: function () {
+		var self = this;
+		cordova.exec(function (result) {
+			var playerImageUrl = result;
+			if (self.onGetPlayerImageSucceeded)			
+				self.onGetPlayerImageSucceeded(playerImageUrl);
+		}, 
+		function (error) {
+			if (self.onGetPlayerImageFailed)			
+				self.onGetPlayerImageFailed();
+		}, "Game", "getPlayerImage", []);
+	},	
 	onLoginSucceeded: null,
 	onLoginFailed: null,	
-	onGetPlayerImageSucceeded: null,
-	onGetPlayerImageFailed: null,	
-    onGetPlayerScoreSucceeded: null,
-    onGetPlayerScoreFailed: null,	
 	onSubmitScoreSucceeded: null,
 	onSubmitScoreFailed: null,
+    onGetPlayerScoreSucceeded: null,
+    onGetPlayerScoreFailed: null,	
 	onUnlockAchievementSucceeded: null,
 	onUnlockAchievementFailed: null,
 	onIncrementAchievementSucceeded: null,
 	onIncrementAchievementFailed: null,
 	onResetAchievementsSucceeded: null,
-	onResetAchievementsFailed: null
+	onResetAchievementsFailed: null,
+	onGetPlayerImageSucceeded: null,
+	onGetPlayerImageFailed: null
 };

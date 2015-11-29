@@ -30,13 +30,12 @@ document.addEventListener("deviceready", function(){
         alert('onLoginFailed');
 		alert(window.game.tag);
     };
-    window.game.onGetPlayerImageSucceeded = function(result) {
-		var playerImageUrl = result;
-        alert('onGetPlayerImageSucceeded: ' + playerImageUrl);
-		alert(window.game.tag);
-    };
-    window.game.onGetPlayerImageFailed = function() {
-        alert('onGetPlayerImageFailed');
+	//	
+    window.game.onSubmitScoreSucceeded = function() {
+        alert('onSubmitScoreSucceeded');
+    };	
+    window.game.onSubmitScoreFailed = function() {
+        alert('onSubmitScoreFailed');
 		alert(window.game.tag);
     };	
     window.game.onGetPlayerScoreSucceeded = function(result) {
@@ -48,14 +47,6 @@ document.addEventListener("deviceready", function(){
         alert('onGetPlayerScoreFailed');
 		alert(window.game.tag);
     };
-	//	
-    window.game.onSubmitScoreSucceeded = function() {
-        alert('onSubmitScoreSucceeded');
-    };	
-    window.game.onSubmitScoreFailed = function() {
-        alert('onSubmitScoreFailed');
-		alert(window.game.tag);
-    };	
 	//	
     window.game.onUnlockAchievementSucceeded = function() {
         alert('onUnlockAchievementSucceeded');
@@ -81,17 +72,26 @@ document.addEventListener("deviceready", function(){
         alert('onResetAchievementsFailed');
 		alert(window.game.tag);
     };
+	//
+    window.game.onGetPlayerImageSucceeded = function(result) {
+		var playerImageUrl = result;
+        alert('onGetPlayerImageSucceeded: ' + playerImageUrl);
+		alert(window.game.tag);
+    };
+    window.game.onGetPlayerImageFailed = function() {
+        alert('onGetPlayerImageFailed');
+		alert(window.game.tag);
+    };	
 }, false);
 </script>
 
 <p><button onclick="window.game.login(tag);">login</button></p>
 <p><button onclick="window.game.logout();">logout</button></p>
 <p><button onclick="alert(window.game.isLoggedIn());">isLoggedIn</button></p>
-<p><button onclick="window.game.getPlayerImage();">getPlayerImage</button></p>
-<p><button onclick="window.game.getPlayerScore(leaderboardId, tag);">getPlayerScore</button></p>
 <br>
 <p><button onclick="window.game.submitScore(leaderboardId, 5, tag);//leaderboardId, score">submitScore</button></p>
 <p><button onclick="window.game.showLeaderboard(leaderboardId);">showLeaderboard</button></p>
+<p><button onclick="window.game.getPlayerScore(leaderboardId, tag);">getPlayerScore</button></p>
 <br>
 <p><button onclick="window.game.unlockAchievement(achievementId1, tag);">unlockAchievement1</button></p>
 <p><button onclick="window.game.unlockAchievement(achievementId2, tag);">unlockAchievement2</button></p>
@@ -105,6 +105,8 @@ document.addEventListener("deviceready", function(){
 <p><button onclick="window.game.incrementAchievement(achievementId5, 2, tag);">incrementAchievement5</button></p>
 <p><button onclick="window.game.showAchievements();">showAchievements</button></p>
 <p><button onclick="window.game.resetAchievements();">resetAchievements</button></p>
+<br>
+<p><button onclick="window.game.getPlayerImage();">getPlayerImage</button></p>
 
 </body>
 </html>

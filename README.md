@@ -229,26 +229,19 @@ document.addEventListener("deviceready", function(){
     window.game.onLoginFailed = function() {
         alert('onLoginFailed');
     };
-    window.game.onGetPlayerImageSucceeded = function(result) {
-		var playerImageUrl = result;
-        alert('onGetPlayerImageSucceeded: ' + playerImageUrl);
-    };
-    window.game.onGetPlayerImageFailed = function() {
-        alert('onGetPlayerImageFailed');
-    };	
-    window.game.onGetPlayerScoreSucceeded = function(result) {
-		var playerScore = result;
-        alert('onGetPlayerScoreSucceeded: ' + playerScore);
-    };
-    window.game.onGetPlayerScoreFailed = function() {
-        alert('onGetPlayerScoreFailed');
-    };
 	//	
     window.game.onSubmitScoreSucceeded = function() {
         alert('onSubmitScoreSucceeded');
     };	
     window.game.onSubmitScoreFailed = function() {
         alert('onSubmitScoreFailed');
+    };
+    window.game.onGetPlayerScoreSucceeded = function(result) {
+		var playerScore = result;
+        alert('onGetPlayerScoreSucceeded: ' + playerScore);
+    };
+    window.game.onGetPlayerScoreFailed = function() {
+        alert('onGetPlayerScoreFailed');
     };	
 	//	
     window.game.onUnlockAchievementSucceeded = function() {
@@ -269,18 +262,25 @@ document.addEventListener("deviceready", function(){
     window.game.onResetAchievementsFailed = function() {
         alert('onResetAchievementsFailed');
     };
+	//
+    window.game.onGetPlayerImageSucceeded = function(result) {
+		var playerImageUrl = result;
+        alert('onGetPlayerImageSucceeded: ' + playerImageUrl);
+    };
+    window.game.onGetPlayerImageFailed = function() {
+        alert('onGetPlayerImageFailed');
+    };		
 }, false);
 
 //
 window.game.login();
 window.game.logout();
 alert(window.game.isLoggedIn());
-window.game.getPlayerImage();
-window.game.getPlayerScore(leaderboardId);
 
 //
 window.game.submitScore(leaderboardId, 5);//leaderboardId, score
 window.game.showLeaderboard(leaderboardId);
+window.game.getPlayerScore(leaderboardId);
 
 //
 window.game.unlockAchievement(achievementId1);
@@ -295,6 +295,10 @@ window.game.incrementAchievement(achievementId4, 2);
 window.game.incrementAchievement(achievementId5, 2);
 window.game.showAchievements();
 window.game.resetAchievements();//only supported on ios
+
+//
+window.game.getPlayerImage();
+
 ```
 # Examples #
 <a href="https://github.com/cranberrygame/com.cranberrygame.phonegap.plugin.game/blob/master/example/basic/index.html">example/index.html</a><br>
