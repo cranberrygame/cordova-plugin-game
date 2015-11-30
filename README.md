@@ -216,6 +216,32 @@ var achievementId2 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID2";
 var achievementId3 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID3";
 var achievementId4 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID4";
 var achievementId5 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID5";
+/*
+var leaderboardId;
+var achievementId1;
+var achievementId2;
+var achievementId3;
+var achievementId4;
+var achievementId5;
+//android
+if (navigator.userAgent.match(/Android/i)) {
+	leaderboardId = "REPLACE_THIS_WITH_YOUR_LEADERBOARD_ID";
+	achievementId1 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID1";
+	achievementId2 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID2";
+	achievementId3 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID3";
+	achievementId4 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID4";
+	achievementId5 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID5";
+}
+//ios
+else if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+	leaderboardId = "REPLACE_THIS_WITH_YOUR_LEADERBOARD_ID";
+	achievementId1 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID1";
+	achievementId2 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID2";
+	achievementId3 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID3";
+	achievementId4 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID4";
+	achievementId5 = "REPLACE_THIS_WITH_YOUR_ACHIEVEMENT_ID5";
+}
+*/
 
 //
 document.addEventListener("deviceready", function(){
