@@ -46,6 +46,8 @@ Achievement
 ```
 # Change log #
 ```c
+	1.0.109
+		Fixed crash issue when show leaderbord after logout.
 ```
 # Install plugin #
 
