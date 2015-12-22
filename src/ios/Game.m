@@ -320,6 +320,21 @@
 //*/
 }
 
+- (void)showLeaderboards:(CDVInvokedUrlCommand *)command {
+    GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+    if (gameCenterController != nil)
+    {
+        gameCenterController.gameCenterDelegate = self;
+        
+        gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        
+        [self.viewController presentViewController:gameCenterController animated:YES completion:nil];
+    }
+    else
+    {
+    }
+}
+
 - (void)unlockAchievement:(CDVInvokedUrlCommand *)command {
     //[self.commandDelegate runInBackground:^{//cranberrygame
 		NSString *achievementId = [command.arguments objectAtIndex:0];

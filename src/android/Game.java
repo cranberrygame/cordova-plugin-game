@@ -292,6 +292,38 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 			
 			return true;
 		}
+		else if (action.equals("showLeaderboards")) {
+			//Activity activity=cordova.getActivity();
+			//webView
+			//
+			
+			final CallbackContext delayedCC = callbackContext;
+			cordova.getActivity().runOnUiThread(new Runnable(){
+				@Override
+				public void run() {
+					if (getGameHelper().isSignedIn()) {
+						_showLeaderboards();
+						
+						PluginResult pr = new PluginResult(PluginResult.Status.OK);
+						//pr.setKeepCallback(true);
+						delayedCC.sendPluginResult(pr);
+						//PluginResult pr = new PluginResult(PluginResult.Status.ERROR);
+						//pr.setKeepCallback(true);
+						//delayedCC.sendPluginResult(pr);						
+					}
+					else {						
+						//PluginResult pr = new PluginResult(PluginResult.Status.OK);
+						//pr.setKeepCallback(true);
+						//delayedCC.sendPluginResult(pr);
+						PluginResult pr = new PluginResult(PluginResult.Status.ERROR, "Not logged in");
+						//pr.setKeepCallback(true);
+						delayedCC.sendPluginResult(pr);						
+					}					
+				}
+			});	
+			
+			return true;
+		}		
 		else if (action.equals("unlockAchievement")) {
 			//Activity activity=cordova.getActivity();
 			//webView
@@ -554,9 +586,6 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 	
 	private void _showLeaderboard(String leaderboardId){
 		try {
-			//show all leaderboards
-			//this.cordova.getActivity().startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(getGameHelper().getApiClient()), 0);
-			//this.cordova.getActivity().startActivityFor(Games.Leaderboards.getAllLeaderboardsIntent(getGameHelper().getApiClient()));		
 			//show a specific leaderboard
 			this.cordova.getActivity().startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getGameHelper().getApiClient(), leaderboardId), 0);
 		}
@@ -565,6 +594,17 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 		}
 	}
 
+	private void _showLeaderboards(){
+		try {
+			//show all leaderboards
+			this.cordova.getActivity().startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(getGameHelper().getApiClient()), 0);
+			//this.cordova.getActivity().startActivityFor(Games.Leaderboards.getAllLeaderboardsIntent(getGameHelper().getApiClient()));		
+		}
+		catch(SecurityException ex) {
+			Log.d(LOG_TAG, String.format("%s", ex.getMessage()));	
+		}
+	}
+	
 	private void _unlockAchievement(String achievementId){
 /*	
 		//Unlocking achievements
@@ -724,5 +764,217 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		getGameHelper().onActivityResult(requestCode, resultCode, intent);
-	}	
+	}
+
+/*
+	//javascript
+	getPlayerImage: function (cb) {
+		var self = this;
+		//cordova.exec(function (result) {
+		//	var playerImageUrl = result;
+		//	if (self.onGetPlayerImageSucceeded)			
+		//		self.onGetPlayerImageSucceeded(playerImageUrl);
+		//}, 
+		//function (error) {
+		//	if (self.onGetPlayerImageFailed)			
+		//		self.onGetPlayerImageFailed();
+		//}, "Game", "getPlayerImage", []);
+		
+        this.gapi.client.request({
+          path : "/games/v1/players/me",
+          callback : function(result) {
+            var er = result && !result.error ? success(result) : null;
+            cb(er, result.error);
+          }
+        });		
+	},
+	
+	//java
+    @SuppressWarnings("unused")
+    public void request(CordovaArgs args, final CallbackContext ctx) throws JSONException {
+
+        JSONObject params = args.getJSONObject(0);
+        String path = params.getString("path");
+        JSONObject requestParams = params.optJSONObject("params");
+        String method = params.optString("method");
+        if (method == null || method.length() == 0) {
+            method = "GET";
+        }
+        HashMap<String, String> headers = null;
+        JSONObject obj = params.optJSONObject("headers");
+        if (obj != null) {
+            headers = new HashMap<String, String>();
+            Iterator<String> keys = obj.keys();
+            while (keys.hasNext()) {
+                String key = keys.next();
+                headers.put(key, obj.get(key).toString());
+            }
+        }
+
+        byte[] body = null;
+        try
+        {
+            JSONObject bodyJSON = params.optJSONObject("body");
+            if (bodyJSON != null) {
+                body = bodyJSON.toString().getBytes("utf-8");
+            }
+            else {
+                String bodyString = params.optString("body");
+                if (bodyString != null && bodyString.length() > 0) {
+                    body = bodyString.getBytes("utf-8");
+                }
+            }
+        }
+        catch (UnsupportedEncodingException e)
+        {
+            e.printStackTrace();
+        }
+
+        request_inner(path, method, requestParams, body, headers, new GPGService.RequestCallback() {
+            @Override
+            public void onComplete(JSONObject responseJSON, GPGService.Error error) {
+
+                JSONObject data = new JSONObject();
+                try
+                {
+                    if (responseJSON != null) {
+                        data.put("response", responseJSON);
+                    }
+                    if (error != null) {
+                        data.put("error", new JSONObject(error.toMap()));
+                    }
+
+                }
+                catch (JSONException ex) {
+                    ex.printStackTrace();
+                }
+                ctx.sendPluginResult(new PluginResult(PluginResult.Status.OK, data));
+            }
+        });
+    }
+	
+    public void request_inner(String path,final String method,  JSONObject params, final byte[] body, final Map<String, String> headers, final RequestCallback callback) throws JSONException {
+
+        if (!this.client.isConnected()) {
+
+            if (callback != null) {
+                callback.onComplete(null, new Error("User is not logged into Google Play Game Services", 0));
+            }
+            return;
+        }
+
+
+        if (path.startsWith("/")) {
+            path = "https://www.googleapis.com" + path;
+        }
+
+        if (params != null) {
+            String query = "";
+            Iterator<String> it = params.keys();
+            while (it.hasNext()) {
+                if (query.length() == 0)
+                    query+="&";
+                String key = it.next();
+                query+= key + "=" + params.get(key).toString();
+            }
+            path+= "?" + query;
+        }
+
+        final String absolutePath = path;
+
+        AsyncTask<Void, Void, Object> task = new AsyncTask<Void, Void, Object>() {
+
+            @Override
+            protected Object doInBackground(Void... params) {
+                HttpURLConnection connection = null;
+
+                try {
+                    URL url = new URL(absolutePath);
+                    connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestProperty("Authorization", "Bearer " + GPGService.this.authToken);
+                    connection.setRequestMethod(method);
+
+                    if (headers != null) {
+                        for (String key : headers.keySet())
+                        {
+                            connection.setRequestProperty(key, headers.get(key));
+                        }
+                    }
+
+                    if (body != null)
+                    {
+                        connection.setFixedLengthStreamingMode(body.length);
+                        connection.setDoOutput(true);
+                        if (connection.getRequestProperty("Content-Type") == null)
+                            connection.setRequestProperty("Content-Type",  "text/plain;charset=UTF-8");
+
+                        connection.setRequestProperty("Content-Length", Integer.toString(body.length));
+                        OutputStream output = null;
+                        try
+                        {
+                            output = connection.getOutputStream();
+                            output.write(body);
+                        }
+                        finally
+                        {
+                            if (output != null) {
+                                output.close();
+                            }
+                        }
+                    }
+
+                    int statusCode = connection.getResponseCode();
+                    InputStream inputStream;
+                    if (statusCode >= 200 && statusCode < 300) {
+                        inputStream = connection.getInputStream();
+                    } else {
+                        inputStream = connection.getErrorStream();
+                    }
+
+                    String content = convertStreamToString(inputStream);
+
+                    JSONObject result = new JSONObject(content);
+                    return result;
+                }
+                catch (Exception e) {
+                    return new Error(e.getLocalizedMessage(), 0);
+                }
+                finally {
+                    if (connection != null) {
+                        connection.disconnect();
+                    }
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Object info) {
+                if (callback == null) {
+                    return;
+                }
+                if (info == null) {
+                    callback.onComplete(null, null);
+                }
+                else if (info instanceof Error) {
+                    callback.onComplete(null, (Error)info);
+                }
+                else {
+                    callback.onComplete((JSONObject)info, null);
+                }
+            }
+
+        };
+
+        if (this.executor != null) {
+            task.executeOnExecutor(executor);
+        }
+        else  {
+            task.execute();
+        }
+    }
+	
+    static String convertStreamToString(java.io.InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }	
+*/	
 }

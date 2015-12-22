@@ -48,6 +48,8 @@ Achievement
 ```c
 	1.0.109
 		Fixed crash issue when show leaderbord after logout.
+	1.0.112
+		Added show leaderboards method.
 ```
 # Install plugin #
 
@@ -308,6 +310,7 @@ alert(window.game.isLoggedIn());
 //
 window.game.submitScore(leaderboardId, 5);//leaderboardId, score
 window.game.showLeaderboard(leaderboardId);
+window.game.showLeaderboards();
 window.game.getPlayerScore(leaderboardId);
 
 //

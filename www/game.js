@@ -55,6 +55,13 @@ module.exports = {
 		function (error) {
 		}, "Game", "showLeaderboard", [leaderboardId]);
 	},
+	showLeaderboards: function () {
+		cordova.exec(
+		function (result) {
+		}, 
+		function (error) {
+		}, "Game", "showLeaderboards", []);
+	},
 	getPlayerScore: function (leaderboardId, tag) {
 		var self = this;
 		cordova.exec(function (result) {
