@@ -11,7 +11,7 @@ Requires apple developer account https://developer.apple.com/devcenter/ios/index
 
 This is open source cordova plugin.
 
-You can see Plugins For Cordova in one page: http://cranberrygame.github.io?referrer=github
+You can see Cordova Plugins in one page: http://cranberrygame.github.io?referrer=github
 
 ```c
 cf)
@@ -50,6 +50,8 @@ Achievement
 		Fixed crash issue when show leaderbord after logout.
 	1.0.112
 		Added show leaderboards method.
+	1.0.113
+		Fixed crash issue when submit score after logout.
 ```
 # Install plugin #
 
