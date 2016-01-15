@@ -124,12 +124,15 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 				public void run() {	
 					
 					if (getGameHelper().isSignedIn()) {
+/*					
 						//PluginResult pr = new PluginResult(PluginResult.Status.OK);
 						//pr.setKeepCallback(true);
 						//delayedCC.sendPluginResult(pr);
 						PluginResult pr = new PluginResult(PluginResult.Status.ERROR, "Already logged in");
 						//pr.setKeepCallback(true);
 						delayedCC.sendPluginResult(pr);
+*/
+						onSignInSucceeded();						
 					}
 					else {
 						_login();
