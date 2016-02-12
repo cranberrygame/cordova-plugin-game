@@ -52,6 +52,8 @@ Achievement
 		Added show leaderboards method.
 	1.0.113
 		Fixed crash issue when submit score after logout.
+	1.0.115
+		Refixed crash issue when submit score after logout.
 ```
 # Install plugin #
 

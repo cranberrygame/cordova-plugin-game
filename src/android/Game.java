@@ -587,7 +587,7 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 		try {
 			Games.Leaderboards.submitScoreImmediate(getGameHelper().getApiClient(), leaderboardId, score).setResultCallback(new ResultCallbackSubmitScoreResult());
 		}
-		catch(IllegalStateException ex) {
+		catch(SecurityException ex) {
 			Log.d(LOG_TAG, String.format("%s", ex.getMessage()));	
 		}		
 //*/
