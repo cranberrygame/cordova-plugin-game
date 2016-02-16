@@ -29,7 +29,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.google.android.gms.appstate.AppStateManager;
+////import com.google.android.gms.appstate.AppStateManager;//deprecated
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.Api.ApiOptions.NoOptions;
@@ -289,10 +289,10 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
             builder.addScope(Plus.SCOPE_PLUS_LOGIN);
         }
 
-        if (0 != (mRequestedClients & CLIENT_APPSTATE)) {
-            builder.addApi(AppStateManager.API);
-            builder.addScope(AppStateManager.SCOPE_APP_STATE);
-        }
+        //if (0 != (mRequestedClients & CLIENT_APPSTATE)) {//deprecated
+        //    builder.addApi(AppStateManager.API);
+        //    builder.addScope(AppStateManager.SCOPE_APP_STATE);
+        //}
 
         if (0 != (mRequestedClients & CLIENT_SNAPSHOT)) {
           builder.addScope(Drive.SCOPE_APPFOLDER);
