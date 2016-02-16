@@ -20,7 +20,7 @@ import android.content.Intent;
 import com.google.example.games.basegameutils.GameHelper;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.appstate.AppStateManager;
+//import com.google.android.gms.appstate.AppStateManager;//deprecated
 import android.view.Gravity;
 import com.google.android.gms.games.Games;//cranberrygame
 import android.content.IntentSender;
