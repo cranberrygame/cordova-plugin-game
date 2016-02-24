@@ -32,7 +32,7 @@
 		<dependency id="cordova-plugin-extras-google-play-services" />		
 		<dependency id="cordova-plugin-extras-android-support-library-v4" />
 -->		
-		<dependency id="cordova-plugin-extras-google-play-services-gradle" />
+		<dependency id="cordova-plugin-extras-google-play-services" />
 
 	    <config-file target="res/xml/config.xml" parent="/*">
 			<feature name="Game" >
