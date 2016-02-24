@@ -27,9 +27,12 @@
 		<dependency id="com.google.playservices@21.0.0" />		
 
 		<dependency id="android.support.v4@1.0.0" />
--->		
+-->
+<!--		
 		<dependency id="cordova-plugin-extras-google-play-services" />		
 		<dependency id="cordova-plugin-extras-android-support-library-v4" />
+-->		
+		<dependency id="cordova-plugin-extras-google-play-services-gradle" />
 
 	    <config-file target="res/xml/config.xml" parent="/*">
 			<feature name="Game" >
