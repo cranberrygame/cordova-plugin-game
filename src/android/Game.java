@@ -15,7 +15,8 @@ import org.apache.cordova.CordovaWebView;
 import android.app.Activity;
 import android.util.Log;
 //
-import com.google.android.gms.common.GooglePlayServicesUtil;
+//import com.google.android.gms.common.GooglePlayServicesUtil;//deprecated
+import com.google.android.gms.common.GoogleApiAvailability;//
 import android.content.Intent;
 import com.google.example.games.basegameutils.GameHelper;
 import com.google.android.gms.common.ConnectionResult;
@@ -64,6 +65,8 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 	private CallbackContext submitScoreCC;
 	private CallbackContext unlockAchievementCC;		
 	private CallbackContext incrementAchievementCC;
+	//
+	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000 ;//
 	
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
@@ -73,14 +76,32 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 	public boolean execute(String action, JSONArray args,CallbackContext callbackContext) throws JSONException {
 		PluginResult result = null;
 		
+/*		
+		//deprecated
         if (GooglePlayServicesUtil.isGooglePlayServicesAvailable(this.cordova.getActivity()) != 0) {
             Log.e(LOG_TAG, "Google Play Services are unavailable");
             callbackContext.error("Unavailable");
             return true;
-        } else {
+        } 
+        else {
         	Log.d(LOG_TAG, "** Google Play Services are available **");
         }
-	
+*/
+	    GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
+	    int res = googleAPI.isGooglePlayServicesAvailable(this.cordova.getActivity());
+	    if(res != ConnectionResult.SUCCESS) {
+	        //if(googleAPI.isUserResolvableError(result)) {
+	        //    googleAPI.getErrorDialog(this.cordova.getActivity(), res, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+	        //}
+
+            Log.e(LOG_TAG, "Google Play Services are unavailable");
+            callbackContext.error("Unavailable");
+            return true;
+	    }
+	    else {
+        	Log.d(LOG_TAG, "** Google Play Services are available **");
+        }	    
+	    
 		//args.length()
 		//args.getString(0)
 		//args.getString(1)
