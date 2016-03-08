@@ -50,7 +50,9 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
     static final String TAG = "GameHelper";
-
+	//
+	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000 ;//  
+	
     /** Listener for sign-in success or failure events. */
     public interface GameHelperListener {
         /**
