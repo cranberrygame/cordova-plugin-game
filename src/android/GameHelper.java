@@ -31,7 +31,8 @@ import android.util.Log;
 
 //import com.google.android.gms.appstate.AppStateManager;//deprecated
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
+//import com.google.android.gms.common.GooglePlayServicesUtil;//deprecated
+import com.google.android.gms.common.GoogleApiAvailability;//
 import com.google.android.gms.common.api.Api.ApiOptions.NoOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.drive.Drive;
@@ -946,23 +947,36 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
 
         switch (actResp) {
             case GamesActivityResultCodes.RESULT_APP_MISCONFIGURED:
-                errorDialog = makeSimpleDialog(activity, GameHelperUtils.getString(
-                        activity, GameHelperUtils.R_APP_MISCONFIGURED));
+                //errorDialog = makeSimpleDialog(activity, GameHelperUtils.getString(activity, GameHelperUtils.R_APP_MISCONFIGURED));//cranberrygame
+            	//https://developers.google.com/android/reference/com/google/android/gms/common/ConnectionResult#constants//cranberrygame
+                errorDialog = makeSimpleDialog(activity, GameHelperUtils.getString(activity, GameHelperUtils.R_APP_MISCONFIGURED) + " " + GameHelperUtils.errorCodeToString(errorCode));//cranberrygame
                 break;
-            case GamesActivityResultCodes.RESULT_SIGN_IN_FAILED:
-                errorDialog = makeSimpleDialog(activity, GameHelperUtils.getString(
-                        activity, GameHelperUtils.R_SIGN_IN_FAILED));
+            case GamesActivityResultCodes.RESULT_SIGN_IN_FAILED://cranberrygame
+                //errorDialog = makeSimpleDialog(activity, GameHelperUtils.getString(activity, GameHelperUtils.R_SIGN_IN_FAILED));//cranberrygame
+                errorDialog = makeSimpleDialog(activity, GameHelperUtils.getString(activity, GameHelperUtils.R_SIGN_IN_FAILED) + " " + GameHelperUtils.errorCodeToString(errorCode));//cranberrygame
                 break;
-            case GamesActivityResultCodes.RESULT_LICENSE_FAILED:
-                errorDialog = makeSimpleDialog(activity, GameHelperUtils.getString(
-                        activity, GameHelperUtils.R_LICENSE_FAILED));
+            case GamesActivityResultCodes.RESULT_LICENSE_FAILED://cranberrygame
+                //errorDialog = makeSimpleDialog(activity, GameHelperUtils.getString(activity, GameHelperUtils.R_LICENSE_FAILED));//cranberrygame
+                errorDialog = makeSimpleDialog(activity, GameHelperUtils.getString(activity, GameHelperUtils.R_LICENSE_FAILED) + " " + GameHelperUtils.errorCodeToString(errorCode));//cranberrygame
                 break;
             default:
+/*
+            	//deprecated
                 // No meaningful Activity response code, so generate default Google
                 // Play services dialog
                 errorDialog = GooglePlayServicesUtil.getErrorDialog(errorCode,
                         activity, RC_UNUSED, null);
+*/                
+        	    GoogleApiAvailability googleAPI = GoogleApiAvailability.getInstance();
+        	    int res = googleAPI.isGooglePlayServicesAvailable(activity);
+        	    if(res != ConnectionResult.SUCCESS) {
+        	        if(googleAPI.isUserResolvableError(res)) {
+                	    errorDialog = googleAPI.getErrorDialog(activity, res, PLAY_SERVICES_RESOLUTION_REQUEST);
+        	        }
+        	    }        	    
+      	    
                 if (errorDialog == null) {
+                	
                     // get fallback dialog
                     Log.e("GameHelper",
                             "No standard error dialog available. Making fallback dialog.");
@@ -972,7 +986,7 @@ public class GameHelper implements GoogleApiClient.ConnectionCallbacks,
                                     GameHelperUtils.R_UNKNOWN_ERROR)
                                     + " "
                                     + GameHelperUtils.errorCodeToString(errorCode));
-                }
+                }                
         }
 
         errorDialog.show();
