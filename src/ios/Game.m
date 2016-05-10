@@ -33,76 +33,62 @@
 }
 
 - (void)login:(CDVInvokedUrlCommand *)command {
+    NSLog(@"login");
     
+    if (loginTried) {
+        NSLog(@"loginTried");
+        
+        if([GKLocalPlayer localPlayer].authenticated){
+            NSString *playerID = [GKLocalPlayer localPlayer].playerID;
+            NSString *displayName = [GKLocalPlayer localPlayer].displayName;
+            NSDictionary* playerDetail = @{@"playerId":playerID, @"playerDisplayName":displayName};
+        
+            CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:playerDetail];
+            //[pr setKeepCallbackAsBool:YES];
+            [self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+            //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+            //[pr setKeepCallbackAsBool:YES];
+            //[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+        }
+        else {
+            //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+            //[pr setKeepCallbackAsBool:YES];
+            //[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+            CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"not logined"];
+            //[pr setKeepCallbackAsBool:YES];
+            [self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
+        }
+        return;
+    }
+
     //[self.commandDelegate runInBackground:^{//cranberrygame
-        [[GKLocalPlayer localPlayer] setAuthenticateHandler: ^(UIViewController *viewcontroller, NSError *error) {
-/*
-            //already logged in
-            if ([GKLocalPlayer localPlayer].authenticated) {
-			
-				NSString *playerID = [GKLocalPlayer localPlayer].playerID;
-				NSString *displayName = [GKLocalPlayer localPlayer].displayName;
-				
-				NSDictionary* playerDetail = @{
-					@"playerId":playerID,
-					@"playerDisplayName":displayName
-				};
-						
-				CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:playerDetail];
-				//[pr setKeepCallbackAsBool:YES];
-				[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
-				//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-				//[pr setKeepCallbackAsBool:YES];
-				//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
-            }
-            else if (viewcontroller != nil) {
-                CDVViewController *vc = (CDVViewController *)[super viewController];
-                [vc presentViewController:viewcontroller animated:YES completion:^{
-                }];
-            }
-            else {
-                // Called the second time with result
-                if (error != nil) {	
-					//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-					//[pr setKeepCallbackAsBool:YES];
-					//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
-					CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[error localizedDescription]];
-					//[pr setKeepCallbackAsBool:YES];
-					[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
-                }
-                else {
-					NSString *playerID = [GKLocalPlayer localPlayer].playerID;
-					NSString *displayName = [GKLocalPlayer localPlayer].displayName;
-					
-					NSDictionary* playerDetail = @{
-						@"playerId":playerID,
-						@"playerDisplayName":displayName
-					};
-							
-					CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:playerDetail];		
-					//[pr setKeepCallbackAsBool:YES];
-					[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
-					//CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-					//[pr setKeepCallbackAsBool:YES];
-					//[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];	
-                }
-            }
-*/
-///*
+        //[[GKLocalPlayer localPlayer] setAuthenticateHandler: ^(UIViewController *viewController, NSError *error) {
+        [GKLocalPlayer localPlayer].authenticateHandler = ^(UIViewController *viewController, NSError *error) {
+            NSLog(@"setAuthenticateHandler");
+            loginTried = TRUE;
+
             //It turns out that you need to go to Settings>Game Center and manually enable Sandbox.
             //http://stackoverflow.com/questions/25916055/application-is-not-recognized-by-game-center-after-building-with-xcode-6-0-1
-            if (viewcontroller != nil) {
+            // If it's needed display the login view controller.
+            if (viewController != nil) {
+                NSLog(@"viewController != nil");
+                
                 
                 //UIAlertView *alert1 = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"1" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 //[alert1 show];
                 
                 CDVViewController *vc = (CDVViewController *)[super viewController];
-                [vc presentViewController:viewcontroller animated:YES completion:^{
+                [vc presentViewController:viewController animated:YES completion:^{
                 }];
+                
             }
+            
             else {
-                //already logged in
+                NSLog(@"viewController == nil");
+                
+                // If the player is already authenticated then indicate that the Game Center features can be used.
                 if ([GKLocalPlayer localPlayer].authenticated) {
+                    NSLog(@"authenticated");
                     
                     //UIAlertView *alert2 = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"2" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     //[alert2 show];
@@ -123,6 +109,7 @@
                     //[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
                 }
                 else {
+                    NSLog(@"not authenticated");
                     
                     //UIAlertView *alert3 = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"3" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     //[alert3 show];
@@ -141,26 +128,10 @@
                         //[pr setKeepCallbackAsBool:YES];
                         [self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
                     }
-                    else {
-                        NSString *playerID = [GKLocalPlayer localPlayer].playerID;
-                        NSString *displayName = [GKLocalPlayer localPlayer].displayName;
-                        
-                        NSDictionary* playerDetail = @{
-                                                       @"playerId":playerID,
-                                                       @"playerDisplayName":displayName
-                                                       };
-                        
-                        CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:playerDetail];
-                        //[pr setKeepCallbackAsBool:YES];
-                        [self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
-                        //CDVPluginResult* pr = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-                        //[pr setKeepCallbackAsBool:YES];
-                        //[self.commandDelegate sendPluginResult:pr callbackId:command.callbackId];
-                    }
                 }
             }
-//*/
-        }];
+        //}];
+        };
     //}];//cranberrygame
 }
 

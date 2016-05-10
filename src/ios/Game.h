@@ -21,7 +21,9 @@
 #import <Cordova/CDVPlugin.h>
 #import <GameKit/GameKit.h>
 
-@interface Game : CDVPlugin <GKLeaderboardViewControllerDelegate,GKAchievementViewControllerDelegate,GKGameCenterControllerDelegate>
+@interface Game : CDVPlugin <GKLeaderboardViewControllerDelegate,GKAchievementViewControllerDelegate,GKGameCenterControllerDelegate> {
+    BOOL loginTried;
+}
 
 - (void)setUp:(CDVInvokedUrlCommand *)command;
 - (void)login:(CDVInvokedUrlCommand *)command;
