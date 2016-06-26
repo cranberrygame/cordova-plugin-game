@@ -22,7 +22,10 @@
     <!-- android -->
     <platform name="android">
 		<preference name="APP_ID" />	
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 	    <config-file target="res/xml/config.xml" parent="/*">
 			<feature name="Game" >
 				<param name="android-package" value="com.cranberrygame.cordova.plugin.game.Game"/>
@@ -59,7 +62,11 @@
 		<source-file src="src/android/google-play-services.jar" target-dir="libs" />
 		<source-file src="src/android/version.xml" target-dir="res/values" />
 -->		
+<<<<<<< HEAD
 		<!-- cranberrygame end -->		
+=======
+		<!-- cranberrygame end -->
+>>>>>>> origin/master
 		
 <!--
 		<dependency id="com.google.playservices" url="https://github.com/MobileChromeApps/google-play-services" commit="00f511a8ce332d4586f067240460bfe978ace2ae" />
@@ -71,7 +78,11 @@
 		<dependency id="cordova-plugin-extras-google-play-services" />		
 		<dependency id="cordova-plugin-extras-android-support-library-v4" />
 -->		
+<<<<<<< HEAD
 		<dependency id="cordova-plugin-extras-google-play-services" url="https://github.com/cranberrygame/cordova-plugin-extras-google-play-services" />
+=======
+		<dependency id="cordova-plugin-extras-google-play-services" url="https://github.com/cranberrygame/cordova-plugin-extras-google-play-services" />		
+>>>>>>> origin/master
     </platform>
 	
     <!-- ios -->
