@@ -32,8 +32,7 @@
 		<dependency id="cordova-plugin-extras-google-play-services" />		
 		<dependency id="cordova-plugin-extras-android-support-library-v4" />
 -->		
-		<dependency id="cordova-plugin-extras-google-play-services" />
-
+		<dependency id="cordova-plugin-extras-google-play-services" url="https://github.com/cranberrygame/cordova-plugin-extras-google-play-services" />
 	    <config-file target="res/xml/config.xml" parent="/*">
 			<feature name="Game" >
 				<param name="android-package" value="com.cranberrygame.cordova.plugin.game.Game"/>
