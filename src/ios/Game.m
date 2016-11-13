@@ -343,6 +343,7 @@
 		if (achievement)
 		{
 			achievement.percentComplete = 100;
+			achievement.showsCompletionBanner = YES;
 			
 			[achievement reportAchievementWithCompletionHandler: ^(NSError *error)
 			{
