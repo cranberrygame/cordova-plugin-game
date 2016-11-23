@@ -9,7 +9,8 @@ module.exports = {
 		function (error) {
 		}, "Game", "setUp", []);
     },
-	login: function (tag) {
+	login: function (userInitiated, tag) {
+		userInitiated = !!userInitiated
 		var self = this;
 		cordova.exec(function (result) {
 			var playerDetail = result;
@@ -22,7 +23,7 @@ module.exports = {
 			self.tag = tag;		
 			if (self.onLoginFailed)			
 				self.onLoginFailed();
-		}, "Game", "login", []);
+		}, "Game", "login", [userInitiated]);
     },
 	logout: function () {
 		var self = this;
