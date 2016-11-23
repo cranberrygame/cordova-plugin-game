@@ -480,10 +480,12 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 		return mHelper;		
 	}	
 	private void _login(){
+		cordova.setActivityResultCallback(this);
 		//getGameHelper().beginUserInitiatedSignIn();		
 		getGameHelper().onStart(this.cordova.getActivity());
 	}
-	private void _logout(){		
+	private void _logout(){
+		cordova.setActivityResultCallback(this);
 		//getGameHelper().signOut();
 		getGameHelper().onStop();
 	}
@@ -615,6 +617,7 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 	}	
 	
 	private void _showLeaderboard(String leaderboardId){
+		cordova.setActivityResultCallback(this);
 		try {
 			//show a specific leaderboard
 			this.cordova.getActivity().startActivityForResult(Games.Leaderboards.getLeaderboardIntent(getGameHelper().getApiClient(), leaderboardId), 0);
@@ -625,6 +628,7 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 	}
 
 	private void _showLeaderboards(){
+		cordova.setActivityResultCallback(this);
 		try {
 			//show all leaderboards
 			this.cordova.getActivity().startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(getGameHelper().getApiClient()), 0);
@@ -739,6 +743,7 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 	}
 	
 	private void _showAchievements(){
+		cordova.setActivityResultCallback(this);
 		this.cordova.getActivity().startActivityForResult(Games.Achievements.getAchievementsIntent(getGameHelper().getApiClient()), 0);		
 	}
 
