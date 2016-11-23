@@ -480,10 +480,12 @@ public class Game extends CordovaPlugin implements GameHelper.GameHelperListener
 		return mHelper;		
 	}	
 	private void _login(){
+		cordova.setActivityResultCallback(this);
 		//getGameHelper().beginUserInitiatedSignIn();		
 		getGameHelper().onStart(this.cordova.getActivity());
 	}
-	private void _logout(){		
+	private void _logout(){
+		cordova.setActivityResultCallback(this);
 		//getGameHelper().signOut();
 		getGameHelper().onStop();
 	}
